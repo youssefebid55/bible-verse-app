@@ -401,24 +401,28 @@ function generatePuzzle(verse, difficulty) {
   return { verse, displayWords, dragWords: shuffle(blankedWords), blankIndices, placed: {}, totalBlanks: blankIndices.length };
 }
 
-function WordBank({ words, onDragStart, placed }) {
+function WordBank({ words, onDragStart, placed, onTap, selectedIndex }) {
   const available = words.filter((_, i) => !placed[i]);
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", minHeight: 56, padding: "16px 12px", background: "rgba(139,90,43,0.06)", borderRadius: 16, border: "2px dashed rgba(139,90,43,0.2)" }}>
       {available.length === 0 && <span style={{ color: "rgba(139,90,43,0.4)", fontStyle: "italic", fontFamily: "'EB Garamond', serif", fontSize: 17 }}>All words placed!</span>}
-      {words.map((word, i) => (
+      {words.map((word, i) => {
+        const isSelected = selectedIndex === i;
+        return (
         <div key={`bank-${i}`} draggable={!placed[i]}
           onDragStart={(e) => { e.dataTransfer.setData("text/plain", JSON.stringify({ word, bankIndex: i })); onDragStart(i); }}
-          style={{ display: placed[i] ? "none" : "inline-flex", padding: "8px 18px", borderRadius: 10, background: "linear-gradient(135deg, #f5e6c8 0%, #edd9b5 100%)", border: "1.5px solid rgba(139,90,43,0.35)", fontFamily: "'EB Garamond', serif", fontSize: 18, fontWeight: 500, color: "#5a3a1a", cursor: "grab", userSelect: "none", boxShadow: "0 2px 8px rgba(139,90,43,0.12)", transition: "transform 0.15s, box-shadow 0.15s" }}
-          onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px) scale(1.04)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(139,90,43,0.22)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(139,90,43,0.12)"; }}
+          onClick={() => onTap(i)}
+          style={{ display: placed[i] ? "none" : "inline-flex", padding: "8px 18px", borderRadius: 10, background: isSelected ? "linear-gradient(135deg, #8b6930, #6a4f20)" : "linear-gradient(135deg, #f5e6c8 0%, #edd9b5 100%)", border: isSelected ? "2px solid #3e2409" : "1.5px solid rgba(139,90,43,0.35)", fontFamily: "'EB Garamond', serif", fontSize: 18, fontWeight: 500, color: isSelected ? "#fdf6e3" : "#5a3a1a", cursor: "pointer", userSelect: "none", boxShadow: isSelected ? "0 4px 16px rgba(139,90,43,0.35)" : "0 2px 8px rgba(139,90,43,0.12)", transition: "all 0.15s", transform: isSelected ? "scale(1.08)" : "none" }}
+          onMouseEnter={(e) => { if (!isSelected) { e.currentTarget.style.transform = "translateY(-2px) scale(1.04)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(139,90,43,0.22)"; }}}
+          onMouseLeave={(e) => { if (!isSelected) { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(139,90,43,0.12)"; }}}
         >{word}</div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
-function VerseDisplay({ puzzle, onDrop, onRemove, wrongSlot, correctSlots }) {
+function VerseDisplay({ puzzle, onDrop, onRemove, wrongSlot, correctSlots, onTapSlot, hasSelection }) {
   const [hoveredSlot, setHoveredSlot] = useState(null);
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "6px 8px", alignItems: "center", lineHeight: 2.4, padding: "20px 8px", justifyContent: "center" }}>
@@ -428,22 +432,23 @@ function VerseDisplay({ puzzle, onDrop, onRemove, wrongSlot, correctSlots }) {
         const isCorrect = correctSlots.has(w.index);
         const isWrong = wrongSlot === w.index;
         const isHovered = hoveredSlot === w.index;
+        const isReady = hasSelection && !placedWord && !isCorrect;
         return (
           <span key={i}
             onDragOver={(e) => { e.preventDefault(); setHoveredSlot(w.index); }}
             onDragLeave={() => setHoveredSlot(null)}
             onDrop={(e) => { e.preventDefault(); setHoveredSlot(null); try { const data = JSON.parse(e.dataTransfer.getData("text/plain")); onDrop(w.index, data); } catch {} }}
-            onClick={() => { if (placedWord && !isCorrect) onRemove(w.index); }}
+            onClick={() => onTapSlot(w.index)}
             style={{
               display: "inline-flex", alignItems: "center", justifyContent: "center",
               minWidth: Math.max(60, w.answer.length * 11), height: 40, borderRadius: 10, padding: "4px 14px",
               fontFamily: "'EB Garamond', serif", fontSize: 19, fontWeight: 500,
               transition: "all 0.25s cubic-bezier(.4,0,.2,1)",
-              cursor: placedWord && !isCorrect ? "pointer" : "default",
+              cursor: (isReady || (placedWord && !isCorrect)) ? "pointer" : "default",
               ...(isCorrect ? { background: "linear-gradient(135deg, #d4edda 0%, #b8dfca 100%)", border: "2px solid #6aae7a", color: "#2d6a3f", boxShadow: "0 2px 10px rgba(106,174,122,0.25)" }
                 : isWrong ? { background: "linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%)", border: "2px solid #dc7a84", color: "#842029", animation: "shake 0.4s ease-in-out" }
                 : placedWord ? { background: "linear-gradient(135deg, #f5e6c8 0%, #edd9b5 100%)", border: "2px solid rgba(139,90,43,0.4)", color: "#5a3a1a", boxShadow: "0 2px 8px rgba(139,90,43,0.15)" }
-                : { background: isHovered ? "rgba(139,90,43,0.12)" : "rgba(139,90,43,0.05)", border: `2px ${isHovered ? "solid" : "dashed"} rgba(139,90,43,${isHovered ? 0.5 : 0.25})`, color: "transparent" }),
+                : { background: (isHovered || isReady) ? "rgba(139,90,43,0.15)" : "rgba(139,90,43,0.05)", border: `2px ${(isHovered || isReady) ? "solid" : "dashed"} rgba(139,90,43,${(isHovered || isReady) ? 0.5 : 0.25})`, color: "transparent", animation: isReady ? "pulse 1.5s ease-in-out infinite" : "none" }),
             }}
           >{placedWord || "\u00A0"}</span>
         );
@@ -467,6 +472,7 @@ export default function BibleVerseDragDrop() {
   const [usedVerses, setUsedVerses] = useState([]);
   const [verseCount, setVerseCount] = useState(15);
   const [showHint, setShowHint] = useState(false);
+  const [selectedBank, setSelectedBank] = useState(null);
 
   const getFilteredVerses = (f) => f === "OT" ? OT_VERSES : f === "NT" ? NT_VERSES : ALL_VERSES;
 
@@ -484,7 +490,7 @@ export default function BibleVerseDragDrop() {
 
   const loadVerse = (verse, diff) => {
     const p = generatePuzzle(verse, diff || difficulty);
-    setPuzzle(p); setBankPlaced({}); setCorrectSlots(new Set()); setWrongSlot(null); setCompleted(false); setShowHint(false);
+    setPuzzle(p); setBankPlaced({}); setCorrectSlots(new Set()); setWrongSlot(null); setCompleted(false); setShowHint(false); setSelectedBank(null);
   };
 
   const handleDrop = (slotIndex, data) => {
@@ -516,6 +522,22 @@ export default function BibleVerseDragDrop() {
     const bankIdx = puzzle.dragWords.findIndex((w, i) => w === word && bankPlaced[i]);
     setPuzzle((p) => { const r = { ...p.placed }; delete r[slotIndex]; return { ...p, placed: r }; });
     if (bankIdx !== -1) setBankPlaced((bp) => { const r = { ...bp }; delete r[bankIdx]; return r; });
+    setSelectedBank(null);
+  };
+
+  const handleTapBank = (bankIndex) => {
+    if (bankPlaced[bankIndex]) return;
+    setSelectedBank(selectedBank === bankIndex ? null : bankIndex);
+  };
+
+  const handleTapSlot = (slotIndex) => {
+    if (!puzzle) return;
+    const placedWord = puzzle.placed[slotIndex];
+    if (placedWord && !correctSlots.has(slotIndex)) { handleRemove(slotIndex); return; }
+    if (selectedBank === null || selectedBank === undefined) return;
+    if (correctSlots.has(slotIndex) || puzzle.placed[slotIndex]) return;
+    handleDrop(slotIndex, { word: puzzle.dragWords[selectedBank], bankIndex: selectedBank });
+    setSelectedBank(null);
   };
 
   const nextVerse = () => {
@@ -534,6 +556,7 @@ export default function BibleVerseDragDrop() {
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(139,90,43,0.1); } 50% { box-shadow: 0 0 40px rgba(139,90,43,0.2); } }
         @keyframes celebrateIn { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 60% { transform: scale(1.05) translateY(-4px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        @keyframes pulse { 0%, 100% { border-color: rgba(139,90,43,0.5); } 50% { border-color: rgba(139,90,43,0.2); } }
         .cross-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 0h4v18h18v4H22v18h-4V22H0v-4h18V0z' fill='%235a3a1a'/%3E%3C/svg%3E"); }
       `}</style>
       <div className="cross-pattern" />
@@ -603,7 +626,7 @@ export default function BibleVerseDragDrop() {
           <div style={{ textAlign: "center", marginBottom: 12, fontFamily: "'Cinzel', serif", fontSize: 19, fontWeight: 600, color: "#5a3a1a", letterSpacing: 1 }}>{puzzle.verse.ref}</div>
 
           <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "12px 16px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", animation: completed ? "glow 1.5s ease-in-out infinite" : "none" }}>
-            <VerseDisplay puzzle={puzzle} onDrop={handleDrop} onRemove={handleRemove} wrongSlot={wrongSlot} correctSlots={correctSlots} />
+            <VerseDisplay puzzle={puzzle} onDrop={handleDrop} onRemove={handleRemove} wrongSlot={wrongSlot} correctSlots={correctSlots} onTapSlot={handleTapSlot} hasSelection={selectedBank !== null} />
           </div>
 
           {!completed && showHint && (
@@ -627,10 +650,10 @@ export default function BibleVerseDragDrop() {
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, padding: "0 4px" }}>
                 <button onClick={() => setShowHint(!showHint)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050", padding: "4px 8px", borderRadius: 6, textDecoration: "underline", textDecorationStyle: "dotted" }}>{showHint ? "Hide Hint" : "Show Hint"}</button>
-                <span style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, textTransform: "uppercase" }}>Drag words to fill blanks</span>
+                <span style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, textTransform: "uppercase" }}>Tap a word, then tap a blank</span>
                 <button onClick={nextVerse} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050", padding: "4px 8px", borderRadius: 6, textDecoration: "underline", textDecorationStyle: "dotted" }}>Skip →</button>
               </div>
-              <WordBank words={puzzle.dragWords} onDragStart={() => {}} placed={bankPlaced} />
+              <WordBank words={puzzle.dragWords} onDragStart={() => {}} placed={bankPlaced} onTap={handleTapBank} selectedIndex={selectedBank} />
             </div>
           )}
         </div>
