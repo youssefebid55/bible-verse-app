@@ -1,4 +1,45 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+/* ============================================================
+   SHARED STYLES & UTILS
+   ============================================================ */
+const FONTS_LINK = "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap";
+
+const GLOBAL_CSS = `
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(139,90,43,0.1); } 50% { box-shadow: 0 0 40px rgba(139,90,43,0.2); } }
+  @keyframes celebrateIn { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 60% { transform: scale(1.05) translateY(-4px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+  @keyframes pulse { 0%, 100% { border-color: rgba(139,90,43,0.5); } 50% { border-color: rgba(139,90,43,0.2); } }
+  @keyframes revealIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes countIn { from { transform: scale(1.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .cross-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 0h4v18h18v4H22v18h-4V22H0v-4h18V0z' fill='%235a3a1a'/%3E%3C/svg%3E"); }
+  * { -webkit-tap-highlight-color: transparent; }
+`;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function AppShell({ children }) {
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative", overflow: "hidden" }}>
+      <link href={FONTS_LINK} rel="stylesheet" />
+      <style>{GLOBAL_CSS}</style>
+      <div className="cross-pattern" />
+      {children}
+    </div>
+  );
+}
+
+function BackButton({ onClick }) {
+  return <button onClick={onClick} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#8b6930", padding: "6px 12px", borderRadius: 8 }}>← Back</button>;
+}
 
 const OT_VERSES = [
   { ref: "Genesis 1:1", text: "In the beginning God made the heaven and the earth", testament: "OT" },
@@ -362,6 +403,869 @@ const NT_VERSES = [
 
 const ALL_VERSES = [...OT_VERSES, ...NT_VERSES];
 
+/* ============================================================
+   WHO SAID IT - DATA
+   ============================================================ */
+const WHO_SAID_IT_DATA = [
+  // CHRIST / JESUS
+  { quote: "Before Abraham was, I AM", speaker: "Christ", ref: "John 8:58" },
+  { quote: "I am the way, the truth, and the life. No one comes to the Father except through Me", speaker: "Christ", ref: "John 14:6" },
+  { quote: "I am the resurrection and the life", speaker: "Christ", ref: "John 11:25" },
+  { quote: "Come to Me, all you who labor and are heavy laden, and I will give you rest", speaker: "Christ", ref: "Matthew 11:28" },
+  { quote: "I am the light of the world", speaker: "Christ", ref: "John 8:12" },
+  { quote: "It is finished", speaker: "Christ", ref: "John 19:30" },
+  { quote: "I am the vine, you are the branches", speaker: "Christ", ref: "John 15:5" },
+  { quote: "Love your enemies, bless those who curse you", speaker: "Christ", ref: "Matthew 5:44" },
+  { quote: "For where two or three are gathered together in My name, I am there in the midst of them", speaker: "Christ", ref: "Matthew 18:20" },
+  { quote: "I am the bread of life", speaker: "Christ", ref: "John 6:35" },
+  { quote: "Father, forgive them, for they do not know what they do", speaker: "Christ", ref: "Luke 23:34" },
+  { quote: "You must be born again", speaker: "Christ", ref: "John 3:7" },
+  { quote: "Render to Caesar the things that are Caesar's, and to God the things that are God's", speaker: "Christ", ref: "Mark 12:17" },
+  { quote: "I am the Good Shepherd. The Good Shepherd gives His life for the sheep", speaker: "Christ", ref: "John 10:11" },
+  { quote: "Let the little children come to Me, and do not forbid them", speaker: "Christ", ref: "Matthew 19:14" },
+  { quote: "Go and sin no more", speaker: "Christ", ref: "John 8:11" },
+  { quote: "Peace I leave with you, My peace I give to you", speaker: "Christ", ref: "John 14:27" },
+  { quote: "I am the door. If anyone enters by Me, he will be saved", speaker: "Christ", ref: "John 10:9" },
+  { quote: "Take, eat; this is My body", speaker: "Christ", ref: "Matthew 26:26" },
+  { quote: "The Son of Man did not come to be served, but to serve", speaker: "Christ", ref: "Matthew 20:28" },
+  // MOSES
+  { quote: "Who am I that I should go to Pharaoh?", speaker: "Moses", ref: "Exodus 3:11" },
+  { quote: "Let my people go, that they may hold a feast to Me in the wilderness", speaker: "Moses", ref: "Exodus 5:1" },
+  { quote: "Stand still, and see the salvation of the Lord", speaker: "Moses", ref: "Exodus 14:13" },
+  { quote: "What shall I do with this people? They are almost ready to stone me", speaker: "Moses", ref: "Exodus 17:4" },
+  { quote: "Oh, these people have committed a great sin, and have made for themselves a god of gold", speaker: "Moses", ref: "Exodus 32:31" },
+  { quote: "Please, show me Your glory", speaker: "Moses", ref: "Exodus 33:18" },
+  { quote: "Hear, O Israel: The Lord our God, the Lord is one", speaker: "Moses", ref: "Deuteronomy 6:4" },
+  { quote: "Choose life, that both you and your descendants may live", speaker: "Moses", ref: "Deuteronomy 30:19" },
+  // DAVID
+  { quote: "The Lord is my shepherd; I shall not want", speaker: "David", ref: "Psalm 23:1" },
+  { quote: "Create in me a clean heart, O God", speaker: "David", ref: "Psalm 51:10" },
+  { quote: "The Lord is my light and my salvation; whom shall I fear?", speaker: "David", ref: "Psalm 27:1" },
+  { quote: "You come to me with a sword, a spear, and a javelin. But I come to you in the name of the Lord of hosts", speaker: "David", ref: "1 Samuel 17:45" },
+  { quote: "How long, O Lord? Will You forget me forever?", speaker: "David", ref: "Psalm 13:1" },
+  { quote: "I have sinned against the Lord", speaker: "David", ref: "2 Samuel 12:13" },
+  { quote: "Bless the Lord, O my soul; and all that is within me, bless His holy name", speaker: "David", ref: "Psalm 103:1" },
+  { quote: "As the deer pants for the water brooks, so pants my soul for You, O God", speaker: "David", ref: "Psalm 42:1" },
+  // SOLOMON
+  { quote: "Vanity of vanities, all is vanity", speaker: "Solomon", ref: "Ecclesiastes 1:2" },
+  { quote: "Trust in the Lord with all your heart, and lean not on your own understanding", speaker: "Solomon", ref: "Proverbs 3:5" },
+  { quote: "The fear of the Lord is the beginning of wisdom", speaker: "Solomon", ref: "Proverbs 9:10" },
+  { quote: "To everything there is a season, a time for every purpose under heaven", speaker: "Solomon", ref: "Ecclesiastes 3:1" },
+  { quote: "A friend loves at all times, and a brother is born for adversity", speaker: "Solomon", ref: "Proverbs 17:17" },
+  { quote: "Train up a child in the way he should go, and when he is old he will not depart from it", speaker: "Solomon", ref: "Proverbs 22:6" },
+  { quote: "Iron sharpens iron, so a man sharpens the countenance of his friend", speaker: "Solomon", ref: "Proverbs 27:17" },
+  { quote: "Give me now wisdom and knowledge", speaker: "Solomon", ref: "2 Chronicles 1:10" },
+  // PAUL
+  { quote: "For to me, to live is Christ, and to die is gain", speaker: "Paul", ref: "Philippians 1:21" },
+  { quote: "I can do all things through Christ who strengthens me", speaker: "Paul", ref: "Philippians 4:13" },
+  { quote: "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord", speaker: "Paul", ref: "Romans 6:23" },
+  { quote: "I have fought the good fight, I have finished the race, I have kept the faith", speaker: "Paul", ref: "2 Timothy 4:7" },
+  { quote: "If God is for us, who can be against us?", speaker: "Paul", ref: "Romans 8:31" },
+  { quote: "And now abide faith, hope, love, these three; but the greatest of these is love", speaker: "Paul", ref: "1 Corinthians 13:13" },
+  { quote: "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God", speaker: "Paul", ref: "Ephesians 2:8" },
+  { quote: "I have been crucified with Christ; it is no longer I who live, but Christ lives in me", speaker: "Paul", ref: "Galatians 2:20" },
+  { quote: "Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God", speaker: "Paul", ref: "Philippians 4:6" },
+  { quote: "For all have sinned and fall short of the glory of God", speaker: "Paul", ref: "Romans 3:23" },
+  { quote: "We are more than conquerors through Him who loved us", speaker: "Paul", ref: "Romans 8:37" },
+  { quote: "God has not given us a spirit of fear, but of power and of love and of a sound mind", speaker: "Paul", ref: "2 Timothy 1:7" },
+  // PETER
+  { quote: "You are the Christ, the Son of the living God", speaker: "Peter", ref: "Matthew 16:16" },
+  { quote: "Lord, to whom shall we go? You have the words of eternal life", speaker: "Peter", ref: "John 6:68" },
+  { quote: "Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk", speaker: "Peter", ref: "Acts 3:6" },
+  { quote: "Casting all your care upon Him, for He cares for you", speaker: "Peter", ref: "1 Peter 5:7" },
+  { quote: "Lord, if it is You, command me to come to You on the water", speaker: "Peter", ref: "Matthew 14:28" },
+  { quote: "Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved", speaker: "Peter", ref: "Acts 4:12" },
+  // JAMES
+  { quote: "Faith without works is dead", speaker: "James", ref: "James 2:26" },
+  { quote: "If any of you lacks wisdom, let him ask of God, who gives to all liberally", speaker: "James", ref: "James 1:5" },
+  { quote: "Submit to God. Resist the devil and he will flee from you", speaker: "James", ref: "James 4:7" },
+  { quote: "Draw near to God and He will draw near to you", speaker: "James", ref: "James 4:8" },
+  { quote: "Count it all joy when you fall into various trials", speaker: "James", ref: "James 1:2" },
+  { quote: "Every good gift and every perfect gift is from above", speaker: "James", ref: "James 1:17" },
+  { quote: "Be doers of the word, and not hearers only", speaker: "James", ref: "James 1:22" },
+  // ISAIAH
+  { quote: "Here am I! Send me", speaker: "Isaiah", ref: "Isaiah 6:8" },
+  { quote: "For unto us a Child is born, unto us a Son is given", speaker: "Isaiah", ref: "Isaiah 9:6" },
+  { quote: "But those who wait on the Lord shall renew their strength; they shall mount up with wings like eagles", speaker: "Isaiah", ref: "Isaiah 40:31" },
+  { quote: "Behold, the virgin shall conceive and bear a Son, and shall call His name Immanuel", speaker: "Isaiah", ref: "Isaiah 7:14" },
+  { quote: "He was wounded for our transgressions, He was bruised for our iniquities", speaker: "Isaiah", ref: "Isaiah 53:5" },
+  // GOD THE FATHER
+  { quote: "Let there be light", speaker: "God", ref: "Genesis 1:3" },
+  { quote: "It is not good that man should be alone", speaker: "God", ref: "Genesis 2:18" },
+  { quote: "I AM WHO I AM", speaker: "God", ref: "Exodus 3:14" },
+  { quote: "Be still, and know that I am God", speaker: "God", ref: "Psalm 46:10" },
+  { quote: "For I know the plans I have for you, plans of peace and not of evil, to give you a future and a hope", speaker: "God", ref: "Jeremiah 29:11" },
+  { quote: "This is My beloved Son, in whom I am well pleased", speaker: "God", ref: "Matthew 3:17" },
+  { quote: "Fear not, for I am with you; be not dismayed, for I am your God", speaker: "God", ref: "Isaiah 41:10" },
+  // JOHN
+  { quote: "In the beginning was the Word, and the Word was with God, and the Word was God", speaker: "John", ref: "John 1:1" },
+  { quote: "Beloved, let us love one another, for love is of God", speaker: "John", ref: "1 John 4:7" },
+  { quote: "God is love", speaker: "John", ref: "1 John 4:8" },
+  { quote: "He who does not love does not know God, for God is love", speaker: "John", ref: "1 John 4:8" },
+  { quote: "Behold! The Lamb of God who takes away the sin of the world!", speaker: "John the Baptist", ref: "John 1:29" },
+  { quote: "He must increase, but I must decrease", speaker: "John the Baptist", ref: "John 3:30" },
+];
+
+const SPEAKERS = ["Christ", "Moses", "David", "Solomon", "Paul", "Peter", "James", "Isaiah", "God", "John", "John the Baptist"];
+
+
+/* ============================================================
+   GUESS THE SAINT - DATA
+   ============================================================ */
+const SAINTS_DATA = [
+  {
+    name: "St. Mark the Apostle",
+    clues: [
+      "I wrote one of the four Gospels",
+      "I traveled with St. Paul and St. Barnabas on missionary journeys",
+      "My Gospel is considered the shortest of the four",
+      "I founded the Church of Alexandria in Egypt",
+      "A lion is my symbol"
+    ]
+  },
+  {
+    name: "St. George",
+    clues: [
+      "I was a soldier in the Roman army",
+      "I am one of the most celebrated military saints",
+      "I was martyred during the persecution of Diocletian",
+      "I am known for enduring seven years of torture",
+      "I am often depicted slaying a dragon"
+    ]
+  },
+  {
+    name: "St. Mina (Menas)",
+    clues: [
+      "I was an Egyptian soldier in the Roman army",
+      "I left the army to live as a hermit in the desert",
+      "I publicly declared my Christian faith before a crowd",
+      "My body was carried by a camel that stopped and would not move",
+      "A famous monastery in Mariout bears my name, and I am called 'the Wonder Worker'"
+    ]
+  },
+  {
+    name: "St. Anthony the Great",
+    clues: [
+      "I was born in Upper Egypt to wealthy Christian parents",
+      "I gave away all my possessions after hearing a Gospel reading",
+      "I lived alone in the desert for many years battling demons",
+      "Many came to me for spiritual guidance and I organized them into communities",
+      "I am called the Father of All Monks"
+    ]
+  },
+  {
+    name: "St. Moses the Black",
+    clues: [
+      "Before my conversion I was a gang leader and a thief",
+      "I fled to a monastery in Scetis to hide from authorities",
+      "The monks' way of life transformed me and I became one of them",
+      "I was ordained as a priest and became known for great humility",
+      "I was originally from Ethiopia and was martyred by Berbers"
+    ]
+  },
+  {
+    name: "St. Athanasius the Apostolic",
+    clues: [
+      "I served as Pope of Alexandria for 45 years",
+      "I was exiled five times for defending the faith",
+      "I wrote a famous book about a desert monk's life",
+      "I stood against an entire empire defending one theological word",
+      "I am called the Defender of the Faith for fighting Arianism at the Council of Nicaea"
+    ]
+  },
+  {
+    name: "Pope Kyrillos VI",
+    clues: [
+      "I was known for my deep prayer life, sometimes praying all night",
+      "I lived in a windmill in Old Cairo before becoming Pope",
+      "I built the great Cathedral of St. Mark in Cairo",
+      "Many miracles have been attributed to my intercession",
+      "I was the 116th Pope of Alexandria and was close friends with Emperor Haile Selassie"
+    ]
+  },
+  {
+    name: "St. Marina the Martyr",
+    clues: [
+      "I was a young woman from Antioch of Pisidia",
+      "My own father turned me in to the authorities for being Christian",
+      "I was tortured severely but angels healed my wounds",
+      "I defeated a demon who appeared to me in prison",
+      "I was martyred at age 15 during the reign of Diocletian"
+    ]
+  },
+  {
+    name: "St. Demiana",
+    clues: [
+      "My father was a governor in Egypt",
+      "I chose a life of virginity and prayer over marriage",
+      "I lived with 40 other virgins in a palace my father built for me",
+      "I encouraged my father to remain faithful when he was pressured to worship idols",
+      "I and my 40 companions were all martyred together"
+    ]
+  },
+  {
+    name: "Anba Abraam (Bishop of Fayoum)",
+    clues: [
+      "I was known for extreme generosity to the poor",
+      "I gave away everything the diocese had to those in need",
+      "I performed many miracles during my lifetime",
+      "I was a bishop in Egypt in the late 19th and early 20th century",
+      "I am called the Friend of the Poor and served in Fayoum"
+    ]
+  },
+  {
+    name: "St. Paul the First Hermit",
+    clues: [
+      "I fled to the desert during a time of persecution",
+      "A raven brought me bread every day",
+      "I lived in a cave near a palm tree and a spring for decades",
+      "Another famous monk visited me near the end of my life",
+      "I am considered the first Christian hermit, and St. Anthony found me at age 113"
+    ]
+  },
+  {
+    name: "St. Macarius the Great",
+    clues: [
+      "I was originally a camel trader from Upper Egypt",
+      "I lived in the desert of Scetis for over 60 years",
+      "I was known for extraordinary humility and gentleness",
+      "I raised a dead man to prove the truth to a heretic",
+      "A famous monastery in Wadi El Natrun bears my name"
+    ]
+  },
+  {
+    name: "St. Bishoy",
+    clues: [
+      "An angel appeared to my mother and told her I was chosen",
+      "I lived in the desert of Scetis with the other monks",
+      "I was known for extreme asceticism, tying my hair to the ceiling to stay awake in prayer",
+      "Christ appeared to me and I washed His feet",
+      "My body remains incorrupt and is kept in my monastery in Wadi El Natrun"
+    ]
+  },
+  {
+    name: "Pope Shenouda III",
+    clues: [
+      "Before becoming Pope I was a monk named Father Antonios El-Syriani",
+      "I was also a Sunday School teacher and poet before monasticism",
+      "I was exiled by President Sadat to a monastery",
+      "I led the Coptic Church for over 40 years and greatly expanded its presence worldwide",
+      "I was the 117th Pope of Alexandria and was known as the Teacher of Generations"
+    ]
+  },
+  {
+    name: "St. Philopateer Mercurius (Abu Seifein)",
+    clues: [
+      "I was a soldier in the Roman army who became a commander",
+      "An angel gave me a luminous sword to use in battle",
+      "I refused to offer incense to pagan gods after a military victory",
+      "I was tortured and martyred for my faith",
+      "I am known by the Arabic name Abu Seifein meaning Father of Two Swords"
+    ]
+  },
+  {
+    name: "St. Simon the Tanner",
+    clues: [
+      "I lived in Cairo in the 10th century during the Fatimid Caliphate",
+      "I was a simple craftsman who worked with leather",
+      "The Caliph challenged the Pope to prove a verse about faith moving mountains",
+      "Through my prayers and fasting, a miracle occurred",
+      "The Mokattam Mountain visibly moved three times, and a church there honors me"
+    ]
+  },
+  {
+    name: "St. Verena",
+    clues: [
+      "I was born in Upper Egypt in the Theban region",
+      "I traveled to Europe following the Theban Legion",
+      "I taught local people about hygiene and caring for the sick",
+      "I lived as a hermit in Switzerland",
+      "I am the patron saint of Zurich and am depicted carrying a water jug and comb"
+    ]
+  },
+  {
+    name: "St. Shenouda the Archimandrite",
+    clues: [
+      "I became a monk at a very young age under my uncle's guidance",
+      "I led the White Monastery in Upper Egypt with thousands of monks and nuns",
+      "I was known for strict discipline and fiery defense of the faith",
+      "I attended the Council of Ephesus with St. Cyril",
+      "I lived to be over 100 years old and am called the Archimandrite"
+    ]
+  },
+  {
+    name: "St. Cyril the Great",
+    clues: [
+      "I was the nephew of Pope Theophilus of Alexandria",
+      "I was known as a brilliant theologian and prolific writer",
+      "I fought against the heresy that divided Christ into two persons",
+      "I presided over a major ecumenical council in 431 AD",
+      "I am called the Pillar of Faith and defender of the title Theotokos at the Council of Ephesus"
+    ]
+  },
+  {
+    name: "St. Mary (the Theotokos)",
+    clues: [
+      "An angel appeared to me with news that changed human history",
+      "I visited my relative Elizabeth while we were both expecting",
+      "I pondered many things in my heart",
+      "I was present at the Cross and entrusted to a beloved disciple",
+      "I am called Theotokos, the Mother of God, and the Coptic Church celebrates many feasts in my honor"
+    ]
+  },
+  {
+    name: "St. Karas the Anchorite",
+    clues: [
+      "I was the son of a king but chose the monastic life",
+      "I lived alone in the deep desert for many years",
+      "I wore no clothes and my hair grew to cover my body",
+      "An angel brought me Holy Communion in the wilderness",
+      "A monk found me near the end of my life and told my story"
+    ]
+  },
+  {
+    name: "St. Abanoub",
+    clues: [
+      "I was only 12 years old when I was martyred",
+      "I lived during the persecution of Diocletian in Egypt",
+      "I boldly confessed Christ before the governor",
+      "I endured many tortures but never denied my faith",
+      "I am beloved by Coptic children and known as the child martyr of Samanoud"
+    ]
+  },
+  {
+    name: "St. Maurice",
+    clues: [
+      "I was a commander in the Roman army from Egypt",
+      "I led a legion of Christian soldiers from Thebes",
+      "My legion was ordered to sacrifice to Roman gods before battle",
+      "We refused to worship idols even under threat of death",
+      "I and the entire Theban Legion were martyred in Switzerland"
+    ]
+  },
+  {
+    name: "St. Samuel the Confessor",
+    clues: [
+      "I was a monk at the monastery of St. Macarius in Scetis",
+      "I was beaten and lost an eye for defending the Orthodox faith",
+      "I was sent into exile by those who held heretical beliefs",
+      "I founded a monastery that still stands in the Fayoum",
+      "I am called the Confessor and my monastery is El-Qalamoun"
+    ]
+  },
+  {
+    name: "St. John Chrysostom",
+    clues: [
+      "I was a priest in Antioch before being made a bishop",
+      "I was famous for my powerful preaching and homilies",
+      "I was exiled twice for criticizing the powerful",
+      "My Paschal homily is read every year at the Resurrection feast",
+      "My name means 'Golden Mouth'"
+    ]
+  },
+];
+
+
+/* ============================================================
+   BIBLE TRIVIA - DATA
+   ============================================================ */
+const TRIVIA_DATA = [
+  { q: "How many days did God take to create the world?", a: "6", options: ["5", "6", "7", "8"] },
+  { q: "What is the first book of the Bible?", a: "Genesis", options: ["Exodus", "Genesis", "Psalms", "Matthew"] },
+  { q: "How many plagues did God send on Egypt?", a: "10", options: ["7", "9", "10", "12"] },
+  { q: "Who built the ark?", a: "Noah", options: ["Moses", "Noah", "Abraham", "David"] },
+  { q: "How many apostles did Jesus choose?", a: "12", options: ["7", "10", "12", "14"] },
+  { q: "What was the first miracle of Jesus?", a: "Turning water into wine", options: ["Healing a blind man", "Walking on water", "Turning water into wine", "Feeding 5000"] },
+  { q: "Who was swallowed by a great fish?", a: "Jonah", options: ["Elijah", "Jonah", "Daniel", "Jeremiah"] },
+  { q: "How many books are in the Bible (Orthodox canon)?", a: "73", options: ["66", "73", "77", "81"] },
+  { q: "What river was Jesus baptized in?", a: "Jordan", options: ["Nile", "Jordan", "Euphrates", "Tigris"] },
+  { q: "Who baptized Jesus?", a: "John the Baptist", options: ["Peter", "John the Baptist", "Andrew", "James"] },
+  { q: "Where was Jesus born?", a: "Bethlehem", options: ["Nazareth", "Jerusalem", "Bethlehem", "Capernaum"] },
+  { q: "How many brothers did Joseph (son of Jacob) have?", a: "11", options: ["7", "10", "11", "12"] },
+  { q: "What did God use to speak to Moses in the desert?", a: "A burning bush", options: ["A cloud", "A burning bush", "A dove", "An angel"] },
+  { q: "Who killed Goliath?", a: "David", options: ["Saul", "David", "Jonathan", "Samuel"] },
+  { q: "How many loaves and fish did Jesus use to feed the 5,000?", a: "5 loaves and 2 fish", options: ["3 loaves and 3 fish", "5 loaves and 2 fish", "7 loaves and 5 fish", "4 loaves and 2 fish"] },
+  { q: "What is the last book of the Bible?", a: "Revelation", options: ["Jude", "3 John", "Revelation", "Acts"] },
+  { q: "Which disciple betrayed Jesus?", a: "Judas Iscariot", options: ["Peter", "Thomas", "Judas Iscariot", "James"] },
+  { q: "How many days was Jesus in the tomb?", a: "3", options: ["1", "2", "3", "4"] },
+  { q: "Who was the first king of Israel?", a: "Saul", options: ["David", "Saul", "Solomon", "Samuel"] },
+  { q: "What is the shortest verse in the Bible?", a: "Jesus wept", options: ["God is love", "Jesus wept", "Rejoice always", "Pray continually"] },
+  { q: "What were the names of Adam and Eve's first two sons?", a: "Cain and Abel", options: ["Cain and Abel", "Jacob and Esau", "Shem and Ham", "Isaac and Ishmael"] },
+  { q: "Where did God give Moses the Ten Commandments?", a: "Mount Sinai", options: ["Mount Sinai", "Mount Carmel", "Mount Zion", "Mount Tabor"] },
+  { q: "Who interpreted Pharaoh's dreams?", a: "Joseph", options: ["Moses", "Daniel", "Joseph", "Samuel"] },
+  { q: "How many days and nights did it rain during the flood?", a: "40", options: ["7", "12", "30", "40"] },
+  { q: "What did Esau sell to Jacob for a bowl of stew?", a: "His birthright", options: ["His donkey", "His birthright", "His land", "His sword"] },
+  { q: "Who was thrown into a den of lions?", a: "Daniel", options: ["David", "Jonah", "Daniel", "Elijah"] },
+  { q: "What city did Joshua and the Israelites march around for 7 days?", a: "Jericho", options: ["Jerusalem", "Jericho", "Bethel", "Ai"] },
+  { q: "Which angel appeared to Mary?", a: "Gabriel", options: ["Michael", "Gabriel", "Raphael", "Uriel"] },
+  { q: "Who was the oldest person in the Bible?", a: "Methuselah", options: ["Noah", "Adam", "Methuselah", "Enoch"] },
+  { q: "Where did the Holy Family flee to escape King Herod?", a: "Egypt", options: ["Syria", "Jordan", "Egypt", "Lebanon"] },
+  { q: "What is the longest book of the Bible?", a: "Psalms", options: ["Isaiah", "Psalms", "Genesis", "Jeremiah"] },
+  { q: "How many Gospels are there?", a: "4", options: ["3", "4", "5", "7"] },
+  { q: "Who denied Jesus three times?", a: "Peter", options: ["James", "John", "Peter", "Thomas"] },
+  { q: "What fruit is traditionally associated with the fall of man?", a: "The Bible doesn't specify", options: ["Apple", "Fig", "Pomegranate", "The Bible doesn't specify"] },
+  { q: "Which sea did Moses part?", a: "The Red Sea", options: ["The Dead Sea", "The Red Sea", "The Sea of Galilee", "The Mediterranean"] },
+  { q: "Who wrote most of the Psalms?", a: "David", options: ["Solomon", "Moses", "David", "Asaph"] },
+  { q: "What mountain did Moses see the Promised Land from?", a: "Mount Nebo", options: ["Mount Sinai", "Mount Nebo", "Mount Carmel", "Mount Hermon"] },
+  { q: "Who was the first martyr in the New Testament?", a: "St. Stephen", options: ["St. James", "St. Stephen", "St. Peter", "St. Paul"] },
+  { q: "How many sons did Jacob have?", a: "12", options: ["10", "11", "12", "13"] },
+  { q: "Which apostle was a tax collector?", a: "Matthew", options: ["Luke", "Matthew", "Mark", "John"] },
+  { q: "What was Paul's name before his conversion?", a: "Saul", options: ["Simon", "Saul", "Stephen", "Silas"] },
+  { q: "Where did Jesus perform His first miracle?", a: "Cana", options: ["Capernaum", "Jerusalem", "Cana", "Bethany"] },
+  { q: "Who replaced Judas as the 12th apostle?", a: "Matthias", options: ["Paul", "Barnabas", "Matthias", "Timothy"] },
+  { q: "How many days did Jesus fast in the wilderness?", a: "40", options: ["7", "30", "40", "50"] },
+  { q: "Who was Moses' sister?", a: "Miriam", options: ["Deborah", "Ruth", "Miriam", "Naomi"] },
+  { q: "What was the name of Abraham's wife?", a: "Sarah", options: ["Rachel", "Rebecca", "Sarah", "Leah"] },
+  { q: "Which prophet was taken to heaven in a chariot of fire?", a: "Elijah", options: ["Enoch", "Elijah", "Elisha", "Moses"] },
+  { q: "What gift did the Magi NOT bring to Jesus?", a: "Silver", options: ["Gold", "Frankincense", "Myrrh", "Silver"] },
+  { q: "Who was Ruth's mother-in-law?", a: "Naomi", options: ["Sarah", "Naomi", "Hannah", "Deborah"] },
+  { q: "Who led the Israelites into the Promised Land after Moses?", a: "Joshua", options: ["Aaron", "Caleb", "Joshua", "Gideon"] },
+  { q: "What did Jesus ride into Jerusalem on Palm Sunday?", a: "A donkey", options: ["A horse", "A donkey", "A camel", "A chariot"] },
+  { q: "Where did Jesus grow up?", a: "Nazareth", options: ["Bethlehem", "Jerusalem", "Nazareth", "Egypt"] },
+  { q: "How many tribes of Israel were there?", a: "12", options: ["7", "10", "12", "14"] },
+  { q: "Which apostle is known as 'the beloved disciple'?", a: "John", options: ["Peter", "John", "James", "Andrew"] },
+  { q: "What instrument did David play?", a: "Harp", options: ["Flute", "Trumpet", "Harp", "Drum"] },
+  { q: "Who was the mother of Samuel?", a: "Hannah", options: ["Sarah", "Hannah", "Rachel", "Miriam"] },
+  { q: "How many stones did David pick up to fight Goliath?", a: "5", options: ["1", "3", "5", "7"] },
+  { q: "What language was most of the New Testament written in?", a: "Greek", options: ["Hebrew", "Aramaic", "Latin", "Greek"] },
+  { q: "Who was the first person to see the risen Christ?", a: "Mary Magdalene", options: ["Peter", "Mary Magdalene", "John", "The Virgin Mary"] },
+  { q: "Where was St. Paul when he wrote many of his epistles?", a: "In prison", options: ["In the temple", "In prison", "In a monastery", "On a ship"] },
+  { q: "Which Ecumenical Council affirmed that Christ is fully God and fully man?", a: "Council of Chalcedon/Nicaea", options: ["Council of Nicaea", "Council of Ephesus", "Council of Chalcedon/Nicaea", "Council of Constantinople"] },
+  { q: "What is the Coptic calendar based on?", a: "The Egyptian calendar of martyrs", options: ["The Roman calendar", "The Egyptian calendar of martyrs", "The Jewish calendar", "The Julian calendar"] },
+  { q: "What does 'Theotokos' mean?", a: "Mother of God / God-bearer", options: ["Holy Virgin", "Mother of God / God-bearer", "Queen of Saints", "Mother of the Church"] },
+  { q: "In which country did monasticism originate?", a: "Egypt", options: ["Israel", "Syria", "Egypt", "Greece"] },
+  { q: "How many sacraments does the Coptic Orthodox Church have?", a: "7", options: ["3", "5", "7", "9"] },
+  { q: "What is the name of the Coptic New Year?", a: "Nayrouz", options: ["Nayrouz", "Kiahk", "Toba", "Bashans"] },
+];
+
+
+/* ============================================================
+   GAME 2: WHO SAID IT
+   ============================================================ */
+function WhoSaidItGame({ onBack }) {
+  const [questions, setQuestions] = useState([]);
+  const [qi, setQi] = useState(0);
+  const [score, setScore] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [done, setDone] = useState(false);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
+  const NUM_Q = 20;
+
+  useEffect(() => {
+    const shuffled = shuffle(WHO_SAID_IT_DATA).slice(0, NUM_Q);
+    const withOptions = shuffled.map(q => {
+      const wrong = shuffle(SPEAKERS.filter(s => s !== q.speaker)).slice(0, 3);
+      return { ...q, options: shuffle([q.speaker, ...wrong]) };
+    });
+    setQuestions(withOptions);
+  }, []);
+
+  const handlePick = (opt) => {
+    if (showResult) return;
+    setSelected(opt);
+    setShowResult(true);
+    setTotal(t => t + 1);
+    const correct = opt === questions[qi].speaker;
+    if (correct) {
+      setScore(s => s + 1);
+      setStreak(s => { const n = s + 1; setBestStreak(b => Math.max(b, n)); return n; });
+    } else {
+      setStreak(0);
+    }
+    setTimeout(() => {
+      if (qi + 1 >= questions.length) { setDone(true); }
+      else { setQi(qi + 1); setSelected(null); setShowResult(false); }
+    }, 1500);
+  };
+
+  if (!questions.length) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
+
+  const accuracy = total > 0 ? Math.round((score / total) * 100) : 0;
+  const cur = questions[qi];
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <BackButton onClick={onBack} />
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>WHO SAID IT?</span>
+          <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>{qi + 1}/{questions.length}</span>
+        </div>
+
+        {!done ? (
+          <>
+            <div style={{ display: "flex", justifyContent: "center", gap: 28, marginBottom: 20, padding: "8px 0", borderTop: "1px solid rgba(139,90,43,0.12)", borderBottom: "1px solid rgba(139,90,43,0.12)" }}>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 11, color: "#a08050" }}>Accuracy</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: streak >= 3 ? "#6aae7a" : "#3e2409" }}>{streak}{streak >= 3 ? " 🔥" : ""}</div><div style={{ fontSize: 11, color: "#a08050" }}>Streak</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{score}</div><div style={{ fontSize: 11, color: "#a08050" }}>Correct</div></div>
+            </div>
+
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "28px 24px", marginBottom: 24, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", textAlign: "center" }}>
+              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 22, fontWeight: 500, color: "#3e2409", lineHeight: 1.5, fontStyle: "italic", marginBottom: 12 }}>
+                "{cur.quote}"
+              </div>
+              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050" }}>{cur.ref}</div>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              {cur.options.map((opt, i) => {
+                const isCorrect = showResult && opt === cur.speaker;
+                const isWrong = showResult && opt === selected && opt !== cur.speaker;
+                return (
+                  <button key={i} onClick={() => handlePick(opt)} style={{
+                    padding: "16px 12px", borderRadius: 14, border: "none", cursor: showResult ? "default" : "pointer",
+                    fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600,
+                    color: isCorrect ? "#fdf6e3" : isWrong ? "#fdf6e3" : "#3e2409",
+                    background: isCorrect ? "linear-gradient(135deg, #6aae7a, #4d9060)" : isWrong ? "linear-gradient(135deg, #dc7a84, #c0606a)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
+                    boxShadow: isCorrect ? "0 4px 16px rgba(106,174,122,0.3)" : isWrong ? "0 4px 16px rgba(220,122,132,0.3)" : "0 3px 12px rgba(139,90,43,0.12)",
+                    transition: "all 0.2s",
+                    transform: isCorrect ? "scale(1.05)" : isWrong ? "scale(0.95)" : "none",
+                    animation: isWrong ? "shake 0.4s ease-in-out" : "none",
+                  }}>{opt}</button>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
+            <div style={{ fontSize: 52, marginBottom: 12 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Complete!</h2>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}/{total}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{bestStreak}</div><div style={{ fontSize: 13, color: "#a08050" }}>Best Streak</div></div>
+              </div>
+            </div>
+            <button onClick={onBack} style={{ padding: "14px 36px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>BACK TO MENU</button>
+          </div>
+        )}
+      </div>
+    </AppShell>
+  );
+}
+
+/* ============================================================
+   GAME 3: GUESS THE SAINT
+   ============================================================ */
+function GuessTheSaintGame({ onBack }) {
+  const [saints, setSaints] = useState([]);
+  const [si, setSi] = useState(0);
+  const [revealedClues, setRevealedClues] = useState(1);
+  const [options, setOptions] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [score, setScore] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [done, setDone] = useState(false);
+  const NUM_SAINTS = 15;
+
+  useEffect(() => {
+    const shuffled = shuffle(SAINTS_DATA).slice(0, NUM_SAINTS);
+    setSaints(shuffled);
+    if (shuffled.length) genOptions(shuffled, 0);
+  }, []);
+
+  const genOptions = (pool, idx) => {
+    const correct = pool[idx].name;
+    const allNames = SAINTS_DATA.map(s => s.name);
+    const wrong = shuffle(allNames.filter(n => n !== correct)).slice(0, 3);
+    setOptions(shuffle([correct, ...wrong]));
+  };
+
+  const handleReveal = () => {
+    if (revealedClues < saints[si].clues.length) setRevealedClues(r => r + 1);
+  };
+
+  const handlePick = (opt) => {
+    if (showResult) return;
+    setSelected(opt);
+    setShowResult(true);
+    const correct = opt === saints[si].name;
+    if (correct) {
+      const points = Math.max(1, 6 - revealedClues);
+      setScore(s => s + 1);
+      setTotalPoints(tp => tp + points);
+    }
+    setTimeout(() => {
+      if (si + 1 >= saints.length) { setDone(true); }
+      else {
+        const next = si + 1;
+        setSi(next);
+        setRevealedClues(1);
+        setSelected(null);
+        setShowResult(false);
+        genOptions(saints, next);
+      }
+    }, 2000);
+  };
+
+  if (!saints.length) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
+
+  const cur = saints[si];
+  const maxPoints = NUM_SAINTS * 5;
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <BackButton onClick={onBack} />
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>GUESS THE SAINT</span>
+          <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>{si + 1}/{saints.length}</span>
+        </div>
+
+        {!done ? (
+          <>
+            <div style={{ display: "flex", justifyContent: "center", gap: 28, marginBottom: 20, padding: "8px 0", borderTop: "1px solid rgba(139,90,43,0.12)", borderBottom: "1px solid rgba(139,90,43,0.12)" }}>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{totalPoints}</div><div style={{ fontSize: 11, color: "#a08050" }}>Points</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{score}</div><div style={{ fontSize: 11, color: "#a08050" }}>Correct</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: revealedClues <= 2 ? "#6aae7a" : "#3e2409" }}>{Math.max(1, 6 - revealedClues)}</div><div style={{ fontSize: 11, color: "#a08050" }}>Points if correct</div></div>
+            </div>
+
+            {/* Clues */}
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)" }}>
+              <div style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 14, textTransform: "uppercase", textAlign: "center" }}>Clues</div>
+              {cur.clues.slice(0, revealedClues).map((clue, i) => (
+                <div key={i} style={{ padding: "10px 0", borderBottom: i < revealedClues - 1 ? "1px solid rgba(139,90,43,0.08)" : "none", fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#3e2409", lineHeight: 1.5, animation: "revealIn 0.4s ease-out" }}>
+                  <span style={{ color: "#8b6930", fontWeight: 600, marginRight: 8 }}>{i + 1}.</span>{clue}
+                </div>
+              ))}
+              {revealedClues < cur.clues.length && !showResult && (
+                <button onClick={handleReveal} style={{ marginTop: 14, width: "100%", padding: "10px", borderRadius: 10, border: "1.5px dashed rgba(139,90,43,0.3)", background: "rgba(139,90,43,0.04)", cursor: "pointer", fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>
+                  Reveal next clue (-1 point) →
+                </button>
+              )}
+            </div>
+
+            {/* Options */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {options.map((opt, i) => {
+                const isCorrect = showResult && opt === cur.name;
+                const isWrong = showResult && opt === selected && opt !== cur.name;
+                return (
+                  <button key={i} onClick={() => handlePick(opt)} style={{
+                    padding: "14px 18px", borderRadius: 14, border: "none", cursor: showResult ? "default" : "pointer",
+                    fontFamily: "'EB Garamond', serif", fontSize: 17, fontWeight: 500, textAlign: "left",
+                    color: isCorrect ? "#fdf6e3" : isWrong ? "#fdf6e3" : "#3e2409",
+                    background: isCorrect ? "linear-gradient(135deg, #6aae7a, #4d9060)" : isWrong ? "linear-gradient(135deg, #dc7a84, #c0606a)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
+                    boxShadow: isCorrect ? "0 4px 16px rgba(106,174,122,0.3)" : "0 3px 12px rgba(139,90,43,0.1)",
+                    transition: "all 0.2s",
+                    transform: isCorrect ? "scale(1.02)" : isWrong ? "scale(0.98)" : "none",
+                    animation: isWrong ? "shake 0.4s ease-in-out" : "none",
+                  }}>{opt}</button>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
+            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= NUM_SAINTS * 0.9 ? "🏆" : score >= NUM_SAINTS * 0.7 ? "⭐" : "📖"}</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Complete!</h2>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}/{saints.length}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{totalPoints}</div><div style={{ fontSize: 13, color: "#a08050" }}>Points</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#a08050" }}>{maxPoints}</div><div style={{ fontSize: 13, color: "#a08050" }}>Max Possible</div></div>
+              </div>
+            </div>
+            <div style={{ fontStyle: "italic", fontSize: 16, color: "#8b6930", marginBottom: 24, lineHeight: 1.6 }}>Fewer clues = more points. The saints intercede for us!</div>
+            <button onClick={onBack} style={{ padding: "14px 36px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>BACK TO MENU</button>
+          </div>
+        )}
+      </div>
+    </AppShell>
+  );
+}
+
+/* ============================================================
+   GAME 4: BIBLE TRIVIA (RAPID FIRE)
+   ============================================================ */
+function BibleTriviaGame({ onBack }) {
+  const [questions, setQuestions] = useState([]);
+  const [qi, setQi] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [done, setDone] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(60);
+  const [started, setStarted] = useState(false);
+  const [streak, setStreak] = useState(0);
+  const [bestStreak, setBestStreak] = useState(0);
+  const [answered, setAnswered] = useState(0);
+
+  useEffect(() => {
+    setQuestions(shuffle(TRIVIA_DATA));
+  }, []);
+
+  useEffect(() => {
+    if (!started || done) return;
+    if (timeLeft <= 0) { setDone(true); return; }
+    const t = setTimeout(() => setTimeLeft(tl => tl - 1), 1000);
+    return () => clearTimeout(t);
+  }, [timeLeft, started, done]);
+
+  const handleStart = () => setStarted(true);
+
+  const handlePick = (opt) => {
+    if (showResult || done) return;
+    setSelected(opt);
+    setShowResult(true);
+    setAnswered(a => a + 1);
+    const correct = opt === questions[qi].a;
+    if (correct) {
+      setScore(s => s + 1);
+      setStreak(s => { const n = s + 1; setBestStreak(b => Math.max(b, n)); return n; });
+    } else { setStreak(0); }
+    setTimeout(() => {
+      if (qi + 1 >= questions.length) { setDone(true); }
+      else { setQi(qi + 1); setSelected(null); setShowResult(false); }
+    }, 800);
+  };
+
+  if (!questions.length) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
+
+  const accuracy = answered > 0 ? Math.round((score / answered) * 100) : 0;
+  const cur = questions[qi];
+  const timerColor = timeLeft <= 10 ? "#dc7a84" : timeLeft <= 20 ? "#d4a843" : "#6aae7a";
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <BackButton onClick={onBack} />
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>BIBLE TRIVIA</span>
+          {started && !done && <span style={{ fontFamily: "'Cinzel', serif", fontSize: 22, fontWeight: 700, color: timerColor, animation: timeLeft <= 10 ? "countIn 1s ease-in-out infinite" : "none" }}>{timeLeft}s</span>}
+        </div>
+
+        {!started ? (
+          <div style={{ textAlign: "center", padding: "60px 20px" }}>
+            <div style={{ fontSize: 52, marginBottom: 16 }}>⚡</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 24, fontWeight: 700, color: "#3e2409", margin: "0 0 8px" }}>Rapid Fire</h2>
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#8b6930", marginBottom: 32, lineHeight: 1.5 }}>Answer as many Bible trivia questions as you can in 60 seconds!</p>
+            <button onClick={handleStart} style={{ padding: "16px 48px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 18, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 20px rgba(106,174,122,0.3)" }}>START</button>
+          </div>
+        ) : !done ? (
+          <>
+            <div style={{ display: "flex", justifyContent: "center", gap: 28, marginBottom: 20, padding: "8px 0", borderTop: "1px solid rgba(139,90,43,0.12)", borderBottom: "1px solid rgba(139,90,43,0.12)" }}>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{score}</div><div style={{ fontSize: 11, color: "#a08050" }}>Correct</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: streak >= 3 ? "#6aae7a" : "#3e2409" }}>{streak}{streak >= 3 ? " 🔥" : ""}</div><div style={{ fontSize: 11, color: "#a08050" }}>Streak</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{answered}</div><div style={{ fontSize: 11, color: "#a08050" }}>Answered</div></div>
+            </div>
+
+            {/* Timer bar */}
+            <div style={{ width: "100%", height: 6, background: "rgba(139,90,43,0.1)", borderRadius: 3, marginBottom: 20, overflow: "hidden" }}>
+              <div style={{ width: `${(timeLeft / 60) * 100}%`, height: "100%", background: timerColor, borderRadius: 3, transition: "width 1s linear" }} />
+            </div>
+
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", textAlign: "center" }}>
+              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 20, fontWeight: 500, color: "#3e2409", lineHeight: 1.5 }}>{cur.q}</div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {cur.options.map((opt, i) => {
+                const isCorrect = showResult && opt === cur.a;
+                const isWrong = showResult && opt === selected && opt !== cur.a;
+                return (
+                  <button key={i} onClick={() => handlePick(opt)} style={{
+                    padding: "14px 18px", borderRadius: 14, border: "none", cursor: showResult ? "default" : "pointer",
+                    fontFamily: "'EB Garamond', serif", fontSize: 17, fontWeight: 500, textAlign: "left",
+                    color: isCorrect ? "#fdf6e3" : isWrong ? "#fdf6e3" : "#3e2409",
+                    background: isCorrect ? "linear-gradient(135deg, #6aae7a, #4d9060)" : isWrong ? "linear-gradient(135deg, #dc7a84, #c0606a)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
+                    transition: "all 0.15s",
+                    transform: isCorrect ? "scale(1.02)" : isWrong ? "scale(0.98)" : "none",
+                  }}>{opt}</button>
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
+            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= 15 ? "🏆" : score >= 10 ? "⭐" : "📖"}</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Time's Up!</h2>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: 28 }}>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{bestStreak}</div><div style={{ fontSize: 13, color: "#a08050" }}>Best Streak</div></div>
+                <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{answered}</div><div style={{ fontSize: 13, color: "#a08050" }}>Answered</div></div>
+              </div>
+            </div>
+            <button onClick={onBack} style={{ padding: "14px 36px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>BACK TO MENU</button>
+          </div>
+        )}
+      </div>
+    </AppShell>
+  );
+}
+
+
+/* ============================================================
+   HOME SCREEN
+   ============================================================ */
+function HomeScreen({ onSelectGame }) {
+  const games = [
+    { id: "verses", icon: "📖", title: "Verse by Verse", desc: "Memorize Scripture with drag & drop", color: "#6aae7a", count: "354 verses" },
+    { id: "whosaid", icon: "💬", title: "Who Said It?", desc: "Guess who spoke this Bible quote", color: "#d4a843", count: `${WHO_SAID_IT_DATA.length} quotes` },
+    { id: "saints", icon: "☦", title: "Guess the Saint", desc: "Identify Coptic saints from clues", color: "#c07a4a", count: `${SAINTS_DATA.length} saints` },
+    { id: "trivia", icon: "⚡", title: "Bible Trivia", desc: "Rapid fire — 60 seconds on the clock", color: "#8b6930", count: `${TRIVIA_DATA.length} questions` },
+  ];
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 540, width: "100%", padding: "36px 24px", animation: "fadeInUp 0.6s ease-out" }}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div style={{ fontSize: 52, marginBottom: 8, filter: "grayscale(0.2)" }}>✝</div>
+          <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 28, fontWeight: 700, color: "#3e2409", margin: "0 0 4px", letterSpacing: 2 }}>BIBLE GAMES</h1>
+          <p style={{ fontSize: 16, color: "#8b6930", fontStyle: "italic", margin: 0 }}>Learn, play, and grow in faith</p>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          {games.map((game, i) => (
+            <button
+              key={game.id}
+              onClick={() => onSelectGame(game.id)}
+              style={{
+                display: "flex", alignItems: "center", gap: 16,
+                padding: "20px 20px", borderRadius: 18, border: "none", cursor: "pointer",
+                background: "rgba(255,255,255,0.5)",
+                boxShadow: "0 4px 20px rgba(139,90,43,0.1)",
+                transition: "transform 0.2s, box-shadow 0.2s",
+                textAlign: "left", width: "100%",
+                animation: `fadeInUp ${0.3 + i * 0.1}s ease-out`,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.18)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 20px rgba(139,90,43,0.1)"; }}
+            >
+              <div style={{
+                width: 56, height: 56, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 28, background: `linear-gradient(135deg, ${game.color}22, ${game.color}11)`,
+                border: `2px solid ${game.color}33`, flexShrink: 0,
+              }}>{game.icon}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 16, fontWeight: 600, color: "#3e2409", marginBottom: 2 }}>{game.title}</div>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#8b6930", marginBottom: 2 }}>{game.desc}</div>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#a08050" }}>{game.count}</div>
+              </div>
+              <div style={{ fontSize: 18, color: "#c0a070" }}>→</div>
+            </button>
+          ))}
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: 28, fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050", fontStyle: "italic" }}>
+          ☦ Coptic Orthodox Edition
+        </div>
+      </div>
+    </AppShell>
+  );
+}
+
+
+/* ============================================================
+   GAME 1: VERSE BY VERSE (existing, adapted)
+   ============================================================ */
 const DIFFICULTIES = {
   easy: { label: "Easy", desc: "Fill in a few blanks", ratio: 0.25 },
   medium: { label: "Medium", desc: "Fill in many blanks", ratio: 0.5 },
@@ -373,15 +1277,6 @@ const FILTERS = {
   OT: { label: "Old Testament (LXX)", icon: "\u{1F4DC}" },
   NT: { label: "New Testament (NKJV)", icon: "\u271D" },
 };
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 function generatePuzzle(verse, difficulty) {
   const words = verse.text.split(" ");
@@ -413,8 +1308,6 @@ function WordBank({ words, onDragStart, placed, onTap, selectedIndex }) {
           onDragStart={(e) => { e.dataTransfer.setData("text/plain", JSON.stringify({ word, bankIndex: i })); onDragStart(i); }}
           onClick={() => onTap(i)}
           style={{ display: placed[i] ? "none" : "inline-flex", padding: "8px 18px", borderRadius: 10, background: isSelected ? "linear-gradient(135deg, #8b6930, #6a4f20)" : "linear-gradient(135deg, #f5e6c8 0%, #edd9b5 100%)", border: isSelected ? "2px solid #3e2409" : "1.5px solid rgba(139,90,43,0.35)", fontFamily: "'EB Garamond', serif", fontSize: 18, fontWeight: 500, color: isSelected ? "#fdf6e3" : "#5a3a1a", cursor: "pointer", userSelect: "none", boxShadow: isSelected ? "0 4px 16px rgba(139,90,43,0.35)" : "0 2px 8px rgba(139,90,43,0.12)", transition: "all 0.15s", transform: isSelected ? "scale(1.08)" : "none" }}
-          onMouseEnter={(e) => { if (!isSelected) { e.currentTarget.style.transform = "translateY(-2px) scale(1.04)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(139,90,43,0.22)"; }}}
-          onMouseLeave={(e) => { if (!isSelected) { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(139,90,43,0.12)"; }}}
         >{word}</div>
         );
       })}
@@ -457,7 +1350,7 @@ function VerseDisplay({ puzzle, onDrop, onRemove, wrongSlot, correctSlots, onTap
   );
 }
 
-export default function BibleVerseDragDrop() {
+function VerseByVerseGame({ onBack }) {
   const [screen, setScreen] = useState("menu");
   const [difficulty, setDifficulty] = useState("easy");
   const [filter, setFilter] = useState("all");
@@ -480,12 +1373,8 @@ export default function BibleVerseDragDrop() {
     setDifficulty(diff);
     const pool = getFilteredVerses(filter);
     const shuffled = shuffle(pool).slice(0, Math.min(verseCount, pool.length));
-    setUsedVerses(shuffled);
-    setVerseIndex(0);
-    setScore({ correct: 0, total: 0 });
-    setStreak(0);
-    loadVerse(shuffled[0], diff);
-    setScreen("play");
+    setUsedVerses(shuffled); setVerseIndex(0); setScore({ correct: 0, total: 0 }); setStreak(0);
+    loadVerse(shuffled[0], diff); setScreen("play");
   };
 
   const loadVerse = (verse, diff) => {
@@ -500,19 +1389,14 @@ export default function BibleVerseDragDrop() {
     const isCorrect = data.word === blank.answer;
     const newPlaced = { ...puzzle.placed, [slotIndex]: data.word };
     const newBankPlaced = { ...bankPlaced, [data.bankIndex]: true };
-    setPuzzle({ ...puzzle, placed: newPlaced });
-    setBankPlaced(newBankPlaced);
+    setPuzzle({ ...puzzle, placed: newPlaced }); setBankPlaced(newBankPlaced);
     if (isCorrect) {
-      const newCorrect = new Set(correctSlots); newCorrect.add(slotIndex); setCorrectSlots(newCorrect);
-      setScore((s) => ({ correct: s.correct + 1, total: s.total + 1 })); setStreak((s) => s + 1);
-      if (newCorrect.size === puzzle.totalBlanks) setTimeout(() => setCompleted(true), 500);
+      const nc = new Set(correctSlots); nc.add(slotIndex); setCorrectSlots(nc);
+      setScore(s => ({ correct: s.correct + 1, total: s.total + 1 })); setStreak(s => s + 1);
+      if (nc.size === puzzle.totalBlanks) setTimeout(() => setCompleted(true), 500);
     } else {
-      setWrongSlot(slotIndex); setScore((s) => ({ ...s, total: s.total + 1 })); setStreak(0);
-      setTimeout(() => {
-        setWrongSlot(null);
-        setPuzzle((p) => { const r = { ...p.placed }; delete r[slotIndex]; return { ...p, placed: r }; });
-        setBankPlaced((bp) => { const r = { ...bp }; delete r[data.bankIndex]; return r; });
-      }, 600);
+      setWrongSlot(slotIndex); setScore(s => ({ ...s, total: s.total + 1 })); setStreak(0);
+      setTimeout(() => { setWrongSlot(null); setPuzzle(p => { const r = { ...p.placed }; delete r[slotIndex]; return { ...p, placed: r }; }); setBankPlaced(bp => { const r = { ...bp }; delete r[data.bankIndex]; return r; }); }, 600);
     }
   };
 
@@ -520,15 +1404,12 @@ export default function BibleVerseDragDrop() {
     if (correctSlots.has(slotIndex)) return;
     const word = puzzle.placed[slotIndex]; if (!word) return;
     const bankIdx = puzzle.dragWords.findIndex((w, i) => w === word && bankPlaced[i]);
-    setPuzzle((p) => { const r = { ...p.placed }; delete r[slotIndex]; return { ...p, placed: r }; });
-    if (bankIdx !== -1) setBankPlaced((bp) => { const r = { ...bp }; delete r[bankIdx]; return r; });
+    setPuzzle(p => { const r = { ...p.placed }; delete r[slotIndex]; return { ...p, placed: r }; });
+    if (bankIdx !== -1) setBankPlaced(bp => { const r = { ...bp }; delete r[bankIdx]; return r; });
     setSelectedBank(null);
   };
 
-  const handleTapBank = (bankIndex) => {
-    if (bankPlaced[bankIndex]) return;
-    setSelectedBank(selectedBank === bankIndex ? null : bankIndex);
-  };
+  const handleTapBank = (bankIndex) => { if (bankPlaced[bankIndex]) return; setSelectedBank(selectedBank === bankIndex ? null : bankIndex); };
 
   const handleTapSlot = (slotIndex) => {
     if (!puzzle) return;
@@ -536,8 +1417,7 @@ export default function BibleVerseDragDrop() {
     if (placedWord && !correctSlots.has(slotIndex)) { handleRemove(slotIndex); return; }
     if (selectedBank === null || selectedBank === undefined) return;
     if (correctSlots.has(slotIndex) || puzzle.placed[slotIndex]) return;
-    handleDrop(slotIndex, { word: puzzle.dragWords[selectedBank], bankIndex: selectedBank });
-    setSelectedBank(null);
+    handleDrop(slotIndex, { word: puzzle.dragWords[selectedBank], bankIndex: selectedBank }); setSelectedBank(null);
   };
 
   const nextVerse = () => {
@@ -549,25 +1429,16 @@ export default function BibleVerseDragDrop() {
   const accuracy = score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative", overflow: "hidden" }}>
-      <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      <style>{`
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(139,90,43,0.1); } 50% { box-shadow: 0 0 40px rgba(139,90,43,0.2); } }
-        @keyframes celebrateIn { 0% { opacity: 0; transform: scale(0.8) translateY(20px); } 60% { transform: scale(1.05) translateY(-4px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-        @keyframes pulse { 0%, 100% { border-color: rgba(139,90,43,0.5); } 50% { border-color: rgba(139,90,43,0.2); } }
-        .cross-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 0h4v18h18v4H22v18h-4V22H0v-4h18V0z' fill='%235a3a1a'/%3E%3C/svg%3E"); }
-      `}</style>
-      <div className="cross-pattern" />
-
+    <AppShell>
       {screen === "menu" && (
-        <div style={{ maxWidth: 540, width: "100%", padding: "32px 24px", textAlign: "center", animation: "fadeInUp 0.6s ease-out" }}>
-          <div style={{ marginBottom: 8 }}><span style={{ fontSize: 48, filter: "grayscale(0.3)" }}>✝</span></div>
-          <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 30, fontWeight: 700, color: "#3e2409", margin: "0 0 4px", letterSpacing: 2 }}>VERSE BY VERSE</h1>
-          <p style={{ fontSize: 17, color: "#8b6930", margin: "0 0 28px", fontStyle: "italic" }}>Memorize Scripture through play</p>
+        <div style={{ maxWidth: 540, width: "100%", padding: "24px 24px", animation: "fadeInUp 0.6s ease-out" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+            <BackButton onClick={onBack} />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, color: "#3e2409", letterSpacing: 2 }}>VERSE BY VERSE</span>
+            <div style={{ width: 60 }} />
+          </div>
 
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 20, textAlign: "center" }}>
             <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>Select Testament</div>
             <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap" }}>
               {Object.entries(FILTERS).map(([key, val]) => (
@@ -576,28 +1447,24 @@ export default function BibleVerseDragDrop() {
                 </button>
               ))}
             </div>
-            <div style={{ fontSize: 13, color: "#a08050", marginTop: 8 }}>
-              {filter === "all" ? `${ALL_VERSES.length} verses` : filter === "OT" ? `${OT_VERSES.length} verses (Septuagint)` : `${NT_VERSES.length} verses (NKJV)`}
-            </div>
+            <div style={{ fontSize: 13, color: "#a08050", marginTop: 8 }}>{filter === "all" ? `${ALL_VERSES.length} verses` : filter === "OT" ? `${OT_VERSES.length} verses (LXX)` : `${NT_VERSES.length} verses (NKJV)`}</div>
           </div>
 
-          <div style={{ marginBottom: 24 }}>
+          <div style={{ marginBottom: 24, textAlign: "center" }}>
             <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>Verses per session</div>
             <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
-              {[5, 10, 15, 25, 50].map((n) => (
-                <button key={n} onClick={() => setVerseCount(n)} style={{ width: 44, height: 44, borderRadius: 12, border: "none", cursor: "pointer", background: verseCount === n ? "linear-gradient(135deg, #8b6930, #6a4f20)" : "rgba(139,90,43,0.08)", color: verseCount === n ? "#fdf6e3" : "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 16, fontWeight: 600, transition: "all 0.2s", boxShadow: verseCount === n ? "0 3px 12px rgba(139,90,43,0.25)" : "none" }}>
-                  {n}
-                </button>
+              {[5, 10, 15, 25, 50].map(n => (
+                <button key={n} onClick={() => setVerseCount(n)} style={{ width: 44, height: 44, borderRadius: 12, border: "none", cursor: "pointer", background: verseCount === n ? "linear-gradient(135deg, #8b6930, #6a4f20)" : "rgba(139,90,43,0.08)", color: verseCount === n ? "#fdf6e3" : "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 16, fontWeight: 600, transition: "all 0.2s", boxShadow: verseCount === n ? "0 3px 12px rgba(139,90,43,0.25)" : "none" }}>{n}</button>
               ))}
             </div>
           </div>
 
-          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>Choose Difficulty</div>
+          <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase", textAlign: "center" }}>Choose Difficulty</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {Object.entries(DIFFICULTIES).map(([key, val]) => (
               <button key={key} onClick={() => startGame(key)} style={{ padding: "18px 24px", borderRadius: 16, border: "none", cursor: "pointer", background: key === "easy" ? "linear-gradient(135deg, #d4edda, #b8dfca)" : key === "medium" ? "linear-gradient(135deg, #f5e6c8, #edd9b5)" : "linear-gradient(135deg, #f0d0b0, #e0b890)", boxShadow: "0 4px 20px rgba(139,90,43,0.12)", transition: "transform 0.2s, box-shadow 0.2s", textAlign: "left" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.2)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 20px rgba(139,90,43,0.12)"; }}>
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 20px rgba(139,90,43,0.12)"; }}>
                 <div style={{ fontFamily: "'Cinzel', serif", fontSize: 17, fontWeight: 600, color: "#3e2409", marginBottom: 2 }}>{val.label}</div>
                 <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#8b6930" }}>{val.desc}</div>
               </button>
@@ -614,38 +1481,27 @@ export default function BibleVerseDragDrop() {
               <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#a08050", background: "rgba(139,90,43,0.08)", padding: "4px 10px", borderRadius: 8 }}>{puzzle.verse.testament === "OT" ? "LXX" : "NKJV"}</span>
               <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>{DIFFICULTIES[difficulty].label}</span>
             </div>
-            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>{verseIndex + 1} / {usedVerses.length}</div>
+            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>{verseIndex + 1}/{usedVerses.length}</span>
           </div>
-
           <div style={{ display: "flex", justifyContent: "center", gap: 28, marginBottom: 20, padding: "8px 0", borderTop: "1px solid rgba(139,90,43,0.12)", borderBottom: "1px solid rgba(139,90,43,0.12)" }}>
             <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 11, color: "#a08050" }}>Accuracy</div></div>
             <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: streak >= 3 ? "#6aae7a" : "#3e2409" }}>{streak}{streak >= 3 ? " 🔥" : ""}</div><div style={{ fontSize: 11, color: "#a08050" }}>Streak</div></div>
             <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{correctSlots.size}/{puzzle.totalBlanks}</div><div style={{ fontSize: 11, color: "#a08050" }}>Placed</div></div>
           </div>
-
           <div style={{ textAlign: "center", marginBottom: 12, fontFamily: "'Cinzel', serif", fontSize: 19, fontWeight: 600, color: "#5a3a1a", letterSpacing: 1 }}>{puzzle.verse.ref}</div>
-
           <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "12px 16px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", animation: completed ? "glow 1.5s ease-in-out infinite" : "none" }}>
             <VerseDisplay puzzle={puzzle} onDrop={handleDrop} onRemove={handleRemove} wrongSlot={wrongSlot} correctSlots={correctSlots} onTapSlot={handleTapSlot} hasSelection={selectedBank !== null} />
           </div>
-
-          {!completed && showHint && (
-            <div style={{ textAlign: "center", marginBottom: 16, padding: "12px 16px", background: "rgba(106,174,122,0.08)", borderRadius: 12, border: "1px solid rgba(106,174,122,0.2)", fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#2d6a3f", fontStyle: "italic", lineHeight: 1.6 }}>
-              {puzzle.verse.text}
-            </div>
-          )}
-
+          {!completed && showHint && <div style={{ textAlign: "center", marginBottom: 16, padding: "12px 16px", background: "rgba(106,174,122,0.08)", borderRadius: 12, border: "1px solid rgba(106,174,122,0.2)", fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#2d6a3f", fontStyle: "italic", lineHeight: 1.6 }}>{puzzle.verse.text}</div>}
           {completed && (
             <div style={{ textAlign: "center", padding: "20px 16px", marginBottom: 16, background: "linear-gradient(135deg, rgba(106,174,122,0.12), rgba(106,174,122,0.05))", borderRadius: 20, border: "2px solid rgba(106,174,122,0.3)", animation: "celebrateIn 0.5s ease-out" }}>
               <div style={{ fontSize: 32, marginBottom: 6 }}>✨</div>
               <div style={{ fontFamily: "'Cinzel', serif", fontSize: 20, fontWeight: 600, color: "#2d6a3f", marginBottom: 12 }}>Verse Complete!</div>
-              <button onClick={nextVerse} style={{ padding: "12px 32px", borderRadius: 12, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 16px rgba(106,174,122,0.3)", transition: "transform 0.2s" }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"} onMouseLeave={(e) => e.currentTarget.style.transform = ""}>
-                {verseIndex + 1 < usedVerses.length ? "NEXT VERSE \u2192" : "VIEW RESULTS"}
+              <button onClick={nextVerse} style={{ padding: "12px 32px", borderRadius: 12, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 16px rgba(106,174,122,0.3)" }}>
+                {verseIndex + 1 < usedVerses.length ? "NEXT VERSE →" : "VIEW RESULTS"}
               </button>
             </div>
           )}
-
           {!completed && (
             <div>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10, padding: "0 4px" }}>
@@ -661,9 +1517,9 @@ export default function BibleVerseDragDrop() {
 
       {screen === "results" && (
         <div style={{ maxWidth: 480, width: "100%", padding: "40px 24px", textAlign: "center", animation: "fadeInUp 0.6s ease-out" }}>
-          <div style={{ fontSize: 52, marginBottom: 12 }}>{accuracy >= 90 ? "\u{1F3C6}" : accuracy >= 70 ? "\u2B50" : "\u{1F4D6}"}</div>
-          <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px", letterSpacing: 1 }}>Session Complete</h2>
-          <p style={{ fontSize: 16, color: "#8b6930", marginBottom: 28 }}>{DIFFICULTIES[difficulty].label} Mode · {filter === "all" ? "All Scripture" : filter === "OT" ? "Old Testament (LXX)" : "New Testament (NKJV)"}</p>
+          <div style={{ fontSize: 52, marginBottom: 12 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
+          <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Session Complete</h2>
+          <p style={{ fontSize: 16, color: "#8b6930", marginBottom: 28 }}>{DIFFICULTIES[difficulty].label} Mode · {filter === "all" ? "All Scripture" : filter === "OT" ? "OT (LXX)" : "NT (NKJV)"}</p>
           <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", marginBottom: 28, border: "1px solid rgba(139,90,43,0.1)" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
@@ -671,15 +1527,26 @@ export default function BibleVerseDragDrop() {
               <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{usedVerses.length}</div><div style={{ fontSize: 13, color: "#a08050" }}>Verses</div></div>
             </div>
           </div>
-          <div style={{ fontStyle: "italic", fontSize: 17, color: "#8b6930", marginBottom: 28, lineHeight: 1.6, padding: "0 12px" }}>
-            {accuracy >= 90 ? "\"Your word I have hidden in my heart\" \u2014 Psalm 119:11" : accuracy >= 70 ? "\"Study to show thyself approved\" \u2014 2 Timothy 2:15" : "\"Line upon line, precept upon precept\" \u2014 Isaiah 28:10"}
-          </div>
-          <button onClick={() => setScreen("menu")} style={{ padding: "14px 36px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)", transition: "transform 0.2s" }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"} onMouseLeave={(e) => e.currentTarget.style.transform = ""}>
-            PLAY AGAIN
-          </button>
+          <button onClick={onBack} style={{ padding: "14px 36px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, cursor: "pointer", letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>BACK TO MENU</button>
         </div>
       )}
-    </div>
+    </AppShell>
   );
+}
+
+/* ============================================================
+   MAIN APP - ROUTER
+   ============================================================ */
+export default function App() {
+  const [currentGame, setCurrentGame] = useState("home");
+
+  const goHome = () => setCurrentGame("home");
+
+  switch (currentGame) {
+    case "verses": return <VerseByVerseGame onBack={goHome} />;
+    case "whosaid": return <WhoSaidItGame onBack={goHome} />;
+    case "saints": return <GuessTheSaintGame onBack={goHome} />;
+    case "trivia": return <BibleTriviaGame onBack={goHome} />;
+    default: return <HomeScreen onSelectGame={setCurrentGame} />;
+  }
 }
