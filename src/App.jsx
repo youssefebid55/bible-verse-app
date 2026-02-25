@@ -406,368 +406,342 @@ const ALL_VERSES = [...OT_VERSES, ...NT_VERSES];
 /* ============================================================
    WHO SAID IT - DATA
    ============================================================ */
+
+/* ============================================================
+   WHO SAID IT - DATA (no references, includes Church Fathers)
+   ============================================================ */
 const WHO_SAID_IT_DATA = [
-  // CHRIST / JESUS
-  { quote: "Before Abraham was, I AM", speaker: "Christ", ref: "John 8:58" },
-  { quote: "I am the way, the truth, and the life. No one comes to the Father except through Me", speaker: "Christ", ref: "John 14:6" },
-  { quote: "I am the resurrection and the life", speaker: "Christ", ref: "John 11:25" },
-  { quote: "Come to Me, all you who labor and are heavy laden, and I will give you rest", speaker: "Christ", ref: "Matthew 11:28" },
-  { quote: "I am the light of the world", speaker: "Christ", ref: "John 8:12" },
-  { quote: "It is finished", speaker: "Christ", ref: "John 19:30" },
-  { quote: "I am the vine, you are the branches", speaker: "Christ", ref: "John 15:5" },
-  { quote: "Love your enemies, bless those who curse you", speaker: "Christ", ref: "Matthew 5:44" },
-  { quote: "For where two or three are gathered together in My name, I am there in the midst of them", speaker: "Christ", ref: "Matthew 18:20" },
-  { quote: "I am the bread of life", speaker: "Christ", ref: "John 6:35" },
-  { quote: "Father, forgive them, for they do not know what they do", speaker: "Christ", ref: "Luke 23:34" },
-  { quote: "You must be born again", speaker: "Christ", ref: "John 3:7" },
-  { quote: "Render to Caesar the things that are Caesar's, and to God the things that are God's", speaker: "Christ", ref: "Mark 12:17" },
-  { quote: "I am the Good Shepherd. The Good Shepherd gives His life for the sheep", speaker: "Christ", ref: "John 10:11" },
-  { quote: "Let the little children come to Me, and do not forbid them", speaker: "Christ", ref: "Matthew 19:14" },
-  { quote: "Go and sin no more", speaker: "Christ", ref: "John 8:11" },
-  { quote: "Peace I leave with you, My peace I give to you", speaker: "Christ", ref: "John 14:27" },
-  { quote: "I am the door. If anyone enters by Me, he will be saved", speaker: "Christ", ref: "John 10:9" },
-  { quote: "Take, eat; this is My body", speaker: "Christ", ref: "Matthew 26:26" },
-  { quote: "The Son of Man did not come to be served, but to serve", speaker: "Christ", ref: "Matthew 20:28" },
+  // CHRIST
+  { quote: "Before Abraham was, I AM", speaker: "Christ" },
+  { quote: "I am the way, the truth, and the life. No one comes to the Father except through Me", speaker: "Christ" },
+  { quote: "I am the resurrection and the life", speaker: "Christ" },
+  { quote: "Come to Me, all you who labor and are heavy laden, and I will give you rest", speaker: "Christ" },
+  { quote: "I am the light of the world", speaker: "Christ" },
+  { quote: "It is finished", speaker: "Christ" },
+  { quote: "I am the vine, you are the branches", speaker: "Christ" },
+  { quote: "Love your enemies, bless those who curse you", speaker: "Christ" },
+  { quote: "For where two or three are gathered together in My name, I am there in the midst of them", speaker: "Christ" },
+  { quote: "I am the bread of life", speaker: "Christ" },
+  { quote: "Father, forgive them, for they do not know what they do", speaker: "Christ" },
+  { quote: "You must be born again", speaker: "Christ" },
+  { quote: "Render to Caesar the things that are Caesar's, and to God the things that are God's", speaker: "Christ" },
+  { quote: "I am the Good Shepherd. The Good Shepherd gives His life for the sheep", speaker: "Christ" },
+  { quote: "Let the little children come to Me, and do not forbid them", speaker: "Christ" },
+  { quote: "Go and sin no more", speaker: "Christ" },
+  { quote: "Peace I leave with you, My peace I give to you", speaker: "Christ" },
+  { quote: "I am the door. If anyone enters by Me, he will be saved", speaker: "Christ" },
+  { quote: "Take, eat; this is My body", speaker: "Christ" },
+  { quote: "The Son of Man did not come to be served, but to serve", speaker: "Christ" },
+  { quote: "He who is without sin among you, let him throw a stone at her first", speaker: "Christ" },
+  { quote: "My kingdom is not of this world", speaker: "Christ" },
+  { quote: "I am the Alpha and the Omega, the Beginning and the End", speaker: "Christ" },
+  { quote: "Blessed are the pure in heart, for they shall see God", speaker: "Christ" },
   // MOSES
-  { quote: "Who am I that I should go to Pharaoh?", speaker: "Moses", ref: "Exodus 3:11" },
-  { quote: "Let my people go, that they may hold a feast to Me in the wilderness", speaker: "Moses", ref: "Exodus 5:1" },
-  { quote: "Stand still, and see the salvation of the Lord", speaker: "Moses", ref: "Exodus 14:13" },
-  { quote: "What shall I do with this people? They are almost ready to stone me", speaker: "Moses", ref: "Exodus 17:4" },
-  { quote: "Oh, these people have committed a great sin, and have made for themselves a god of gold", speaker: "Moses", ref: "Exodus 32:31" },
-  { quote: "Please, show me Your glory", speaker: "Moses", ref: "Exodus 33:18" },
-  { quote: "Hear, O Israel: The Lord our God, the Lord is one", speaker: "Moses", ref: "Deuteronomy 6:4" },
-  { quote: "Choose life, that both you and your descendants may live", speaker: "Moses", ref: "Deuteronomy 30:19" },
+  { quote: "Who am I that I should go to Pharaoh?", speaker: "Moses" },
+  { quote: "Let my people go, that they may hold a feast to Me in the wilderness", speaker: "Moses" },
+  { quote: "Stand still, and see the salvation of the Lord", speaker: "Moses" },
+  { quote: "What shall I do with this people? They are almost ready to stone me", speaker: "Moses" },
+  { quote: "Oh, these people have committed a great sin, and have made for themselves a god of gold", speaker: "Moses" },
+  { quote: "Please, show me Your glory", speaker: "Moses" },
+  { quote: "Hear, O Israel: The Lord our God, the Lord is one", speaker: "Moses" },
+  { quote: "Choose life, that both you and your descendants may live", speaker: "Moses" },
   // DAVID
-  { quote: "The Lord is my shepherd; I shall not want", speaker: "David", ref: "Psalm 23:1" },
-  { quote: "Create in me a clean heart, O God", speaker: "David", ref: "Psalm 51:10" },
-  { quote: "The Lord is my light and my salvation; whom shall I fear?", speaker: "David", ref: "Psalm 27:1" },
-  { quote: "You come to me with a sword, a spear, and a javelin. But I come to you in the name of the Lord of hosts", speaker: "David", ref: "1 Samuel 17:45" },
-  { quote: "How long, O Lord? Will You forget me forever?", speaker: "David", ref: "Psalm 13:1" },
-  { quote: "I have sinned against the Lord", speaker: "David", ref: "2 Samuel 12:13" },
-  { quote: "Bless the Lord, O my soul; and all that is within me, bless His holy name", speaker: "David", ref: "Psalm 103:1" },
-  { quote: "As the deer pants for the water brooks, so pants my soul for You, O God", speaker: "David", ref: "Psalm 42:1" },
+  { quote: "The Lord is my shepherd; I shall not want", speaker: "David" },
+  { quote: "Create in me a clean heart, O God", speaker: "David" },
+  { quote: "The Lord is my light and my salvation; whom shall I fear?", speaker: "David" },
+  { quote: "You come to me with a sword, a spear, and a javelin. But I come to you in the name of the Lord of hosts", speaker: "David" },
+  { quote: "How long, O Lord? Will You forget me forever?", speaker: "David" },
+  { quote: "I have sinned against the Lord", speaker: "David" },
+  { quote: "Bless the Lord, O my soul; and all that is within me, bless His holy name", speaker: "David" },
+  { quote: "As the deer pants for the water brooks, so pants my soul for You, O God", speaker: "David" },
+  { quote: "The earth is the Lord's, and all its fullness, the world and those who dwell therein", speaker: "David" },
   // SOLOMON
-  { quote: "Vanity of vanities, all is vanity", speaker: "Solomon", ref: "Ecclesiastes 1:2" },
-  { quote: "Trust in the Lord with all your heart, and lean not on your own understanding", speaker: "Solomon", ref: "Proverbs 3:5" },
-  { quote: "The fear of the Lord is the beginning of wisdom", speaker: "Solomon", ref: "Proverbs 9:10" },
-  { quote: "To everything there is a season, a time for every purpose under heaven", speaker: "Solomon", ref: "Ecclesiastes 3:1" },
-  { quote: "A friend loves at all times, and a brother is born for adversity", speaker: "Solomon", ref: "Proverbs 17:17" },
-  { quote: "Train up a child in the way he should go, and when he is old he will not depart from it", speaker: "Solomon", ref: "Proverbs 22:6" },
-  { quote: "Iron sharpens iron, so a man sharpens the countenance of his friend", speaker: "Solomon", ref: "Proverbs 27:17" },
-  { quote: "Give me now wisdom and knowledge", speaker: "Solomon", ref: "2 Chronicles 1:10" },
+  { quote: "Vanity of vanities, all is vanity", speaker: "Solomon" },
+  { quote: "Trust in the Lord with all your heart, and lean not on your own understanding", speaker: "Solomon" },
+  { quote: "The fear of the Lord is the beginning of wisdom", speaker: "Solomon" },
+  { quote: "To everything there is a season, a time for every purpose under heaven", speaker: "Solomon" },
+  { quote: "A friend loves at all times, and a brother is born for adversity", speaker: "Solomon" },
+  { quote: "Train up a child in the way he should go, and when he is old he will not depart from it", speaker: "Solomon" },
+  { quote: "Iron sharpens iron, so a man sharpens the countenance of his friend", speaker: "Solomon" },
+  { quote: "Give me now wisdom and knowledge", speaker: "Solomon" },
+  { quote: "Guard your heart with all diligence, for out of it spring the issues of life", speaker: "Solomon" },
   // PAUL
-  { quote: "For to me, to live is Christ, and to die is gain", speaker: "Paul", ref: "Philippians 1:21" },
-  { quote: "I can do all things through Christ who strengthens me", speaker: "Paul", ref: "Philippians 4:13" },
-  { quote: "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord", speaker: "Paul", ref: "Romans 6:23" },
-  { quote: "I have fought the good fight, I have finished the race, I have kept the faith", speaker: "Paul", ref: "2 Timothy 4:7" },
-  { quote: "If God is for us, who can be against us?", speaker: "Paul", ref: "Romans 8:31" },
-  { quote: "And now abide faith, hope, love, these three; but the greatest of these is love", speaker: "Paul", ref: "1 Corinthians 13:13" },
-  { quote: "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God", speaker: "Paul", ref: "Ephesians 2:8" },
-  { quote: "I have been crucified with Christ; it is no longer I who live, but Christ lives in me", speaker: "Paul", ref: "Galatians 2:20" },
-  { quote: "Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God", speaker: "Paul", ref: "Philippians 4:6" },
-  { quote: "For all have sinned and fall short of the glory of God", speaker: "Paul", ref: "Romans 3:23" },
-  { quote: "We are more than conquerors through Him who loved us", speaker: "Paul", ref: "Romans 8:37" },
-  { quote: "God has not given us a spirit of fear, but of power and of love and of a sound mind", speaker: "Paul", ref: "2 Timothy 1:7" },
+  { quote: "For to me, to live is Christ, and to die is gain", speaker: "Paul" },
+  { quote: "I can do all things through Christ who strengthens me", speaker: "Paul" },
+  { quote: "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord", speaker: "Paul" },
+  { quote: "I have fought the good fight, I have finished the race, I have kept the faith", speaker: "Paul" },
+  { quote: "If God is for us, who can be against us?", speaker: "Paul" },
+  { quote: "And now abide faith, hope, love, these three; but the greatest of these is love", speaker: "Paul" },
+  { quote: "For by grace you have been saved through faith, and that not of yourselves; it is the gift of God", speaker: "Paul" },
+  { quote: "I have been crucified with Christ; it is no longer I who live, but Christ lives in me", speaker: "Paul" },
+  { quote: "Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God", speaker: "Paul" },
+  { quote: "For all have sinned and fall short of the glory of God", speaker: "Paul" },
+  { quote: "We are more than conquerors through Him who loved us", speaker: "Paul" },
+  { quote: "God has not given us a spirit of fear, but of power and of love and of a sound mind", speaker: "Paul" },
+  { quote: "Do not be conformed to this world, but be transformed by the renewing of your mind", speaker: "Paul" },
+  { quote: "For me to live is Christ, and to die is gain", speaker: "Paul" },
   // PETER
-  { quote: "You are the Christ, the Son of the living God", speaker: "Peter", ref: "Matthew 16:16" },
-  { quote: "Lord, to whom shall we go? You have the words of eternal life", speaker: "Peter", ref: "John 6:68" },
-  { quote: "Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk", speaker: "Peter", ref: "Acts 3:6" },
-  { quote: "Casting all your care upon Him, for He cares for you", speaker: "Peter", ref: "1 Peter 5:7" },
-  { quote: "Lord, if it is You, command me to come to You on the water", speaker: "Peter", ref: "Matthew 14:28" },
-  { quote: "Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved", speaker: "Peter", ref: "Acts 4:12" },
+  { quote: "You are the Christ, the Son of the living God", speaker: "Peter" },
+  { quote: "Lord, to whom shall we go? You have the words of eternal life", speaker: "Peter" },
+  { quote: "Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk", speaker: "Peter" },
+  { quote: "Casting all your care upon Him, for He cares for you", speaker: "Peter" },
+  { quote: "Lord, if it is You, command me to come to You on the water", speaker: "Peter" },
+  { quote: "Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved", speaker: "Peter" },
   // JAMES
-  { quote: "Faith without works is dead", speaker: "James", ref: "James 2:26" },
-  { quote: "If any of you lacks wisdom, let him ask of God, who gives to all liberally", speaker: "James", ref: "James 1:5" },
-  { quote: "Submit to God. Resist the devil and he will flee from you", speaker: "James", ref: "James 4:7" },
-  { quote: "Draw near to God and He will draw near to you", speaker: "James", ref: "James 4:8" },
-  { quote: "Count it all joy when you fall into various trials", speaker: "James", ref: "James 1:2" },
-  { quote: "Every good gift and every perfect gift is from above", speaker: "James", ref: "James 1:17" },
-  { quote: "Be doers of the word, and not hearers only", speaker: "James", ref: "James 1:22" },
+  { quote: "Faith without works is dead", speaker: "James" },
+  { quote: "If any of you lacks wisdom, let him ask of God, who gives to all liberally", speaker: "James" },
+  { quote: "Submit to God. Resist the devil and he will flee from you", speaker: "James" },
+  { quote: "Draw near to God and He will draw near to you", speaker: "James" },
+  { quote: "Count it all joy when you fall into various trials", speaker: "James" },
+  { quote: "Every good gift and every perfect gift is from above", speaker: "James" },
+  { quote: "Be doers of the word, and not hearers only", speaker: "James" },
   // ISAIAH
-  { quote: "Here am I! Send me", speaker: "Isaiah", ref: "Isaiah 6:8" },
-  { quote: "For unto us a Child is born, unto us a Son is given", speaker: "Isaiah", ref: "Isaiah 9:6" },
-  { quote: "But those who wait on the Lord shall renew their strength; they shall mount up with wings like eagles", speaker: "Isaiah", ref: "Isaiah 40:31" },
-  { quote: "Behold, the virgin shall conceive and bear a Son, and shall call His name Immanuel", speaker: "Isaiah", ref: "Isaiah 7:14" },
-  { quote: "He was wounded for our transgressions, He was bruised for our iniquities", speaker: "Isaiah", ref: "Isaiah 53:5" },
+  { quote: "Here am I! Send me", speaker: "Isaiah" },
+  { quote: "For unto us a Child is born, unto us a Son is given", speaker: "Isaiah" },
+  { quote: "But those who wait on the Lord shall renew their strength; they shall mount up with wings like eagles", speaker: "Isaiah" },
+  { quote: "Behold, the virgin shall conceive and bear a Son, and shall call His name Immanuel", speaker: "Isaiah" },
+  { quote: "He was wounded for our transgressions, He was bruised for our iniquities", speaker: "Isaiah" },
   // GOD THE FATHER
-  { quote: "Let there be light", speaker: "God", ref: "Genesis 1:3" },
-  { quote: "It is not good that man should be alone", speaker: "God", ref: "Genesis 2:18" },
-  { quote: "I AM WHO I AM", speaker: "God", ref: "Exodus 3:14" },
-  { quote: "Be still, and know that I am God", speaker: "God", ref: "Psalm 46:10" },
-  { quote: "For I know the plans I have for you, plans of peace and not of evil, to give you a future and a hope", speaker: "God", ref: "Jeremiah 29:11" },
-  { quote: "This is My beloved Son, in whom I am well pleased", speaker: "God", ref: "Matthew 3:17" },
-  { quote: "Fear not, for I am with you; be not dismayed, for I am your God", speaker: "God", ref: "Isaiah 41:10" },
+  { quote: "Let there be light", speaker: "God" },
+  { quote: "It is not good that man should be alone", speaker: "God" },
+  { quote: "I AM WHO I AM", speaker: "God" },
+  { quote: "Be still, and know that I am God", speaker: "God" },
+  { quote: "For I know the plans I have for you, plans of peace and not of evil, to give you a future and a hope", speaker: "God" },
+  { quote: "This is My beloved Son, in whom I am well pleased", speaker: "God" },
+  { quote: "Fear not, for I am with you; be not dismayed, for I am your God", speaker: "God" },
   // JOHN
-  { quote: "In the beginning was the Word, and the Word was with God, and the Word was God", speaker: "John", ref: "John 1:1" },
-  { quote: "Beloved, let us love one another, for love is of God", speaker: "John", ref: "1 John 4:7" },
-  { quote: "God is love", speaker: "John", ref: "1 John 4:8" },
-  { quote: "He who does not love does not know God, for God is love", speaker: "John", ref: "1 John 4:8" },
-  { quote: "Behold! The Lamb of God who takes away the sin of the world!", speaker: "John the Baptist", ref: "John 1:29" },
-  { quote: "He must increase, but I must decrease", speaker: "John the Baptist", ref: "John 3:30" },
+  { quote: "In the beginning was the Word, and the Word was with God, and the Word was God", speaker: "John" },
+  { quote: "Beloved, let us love one another, for love is of God", speaker: "John" },
+  { quote: "God is love", speaker: "John" },
+  // JOHN THE BAPTIST
+  { quote: "Behold! The Lamb of God who takes away the sin of the world!", speaker: "John the Baptist" },
+  { quote: "He must increase, but I must decrease", speaker: "John the Baptist" },
+  // CHURCH FATHERS
+  { quote: "The Son of God became man so that we might become God", speaker: "St. Athanasius" },
+  { quote: "The unexamined life is the unspiritual life, and such a life is not worth living", speaker: "St. Athanasius" },
+  { quote: "You cannot put straight in others what is warped in yourself", speaker: "St. Athanasius" },
+  { quote: "The Word was not degraded by receiving a body, rather He deified what He put on", speaker: "St. Athanasius" },
+  { quote: "He became what we are that He might make us what He is", speaker: "St. Athanasius" },
+  { quote: "For the Son of God became man so that the sons of men might become sons of God", speaker: "St. Cyril of Alexandria" },
+  { quote: "We do not worship a creature, but rather the Lord of creation, the incarnate Word of God", speaker: "St. Cyril of Alexandria" },
+  { quote: "The mystery of the Incarnation of the Word contains in itself the whole meaning of all the symbols and all the enigmas of Scripture", speaker: "St. Cyril of Alexandria" },
+  { quote: "Let us not be ashamed to confess the Crucified. Let the cross be our seal", speaker: "St. Cyril of Jerusalem" },
+  { quote: "No one heals himself by wounding another", speaker: "St. Ambrose" },
+  { quote: "The bee is more honored than other animals, not because she labors, but because she labors for others", speaker: "St. John Chrysostom" },
+  { quote: "Prayer is the place of refuge for every worry, a foundation for cheerfulness, a source of constant happiness, a protection against sadness", speaker: "St. John Chrysostom" },
+  { quote: "If you cannot find Christ in the beggar at the church door, you will not find Him in the chalice", speaker: "St. John Chrysostom" },
+  { quote: "A comprehended God is no God", speaker: "St. John Chrysostom" },
+  { quote: "Not to share our own wealth with the poor is theft from the poor and deprivation of their means of life", speaker: "St. John Chrysostom" },
+  { quote: "Strive to enter through the narrow gate of fasting, for through the wide gate of pleasure comes every sin", speaker: "St. Basil the Great" },
+  { quote: "A dog is better than I am, for he has love and does not judge", speaker: "St. Basil the Great" },
+  { quote: "The bread which you do not use is the bread of the hungry", speaker: "St. Basil the Great" },
+  { quote: "Troubles are usually the brooms and shovels that smooth the road to a good man's fortune", speaker: "St. Basil the Great" },
+  { quote: "Who weeps for the serpent of worldly pleasure, having learned that it leads to destruction?", speaker: "St. Gregory the Theologian" },
+  { quote: "Recognize what great worth has been conferred on you. Consider your calling", speaker: "St. Gregory the Theologian" },
+  { quote: "I withdrew from the world before I learned to be among people, and I know not how to teach others before I have been taught myself", speaker: "St. Gregory the Theologian" },
+  { quote: "Sit in your cell, and your cell will teach you everything", speaker: "St. Anthony the Great" },
+  { quote: "I no longer fear God, but I love Him", speaker: "St. Anthony the Great" },
+  { quote: "I saw the snares that the enemy spreads out over the world, and I said groaning: What can get through such snares? Then I heard a voice saying to me: Humility", speaker: "St. Anthony the Great" },
+  { quote: "If a man treats a matter with humility, God will not stop revealing things to him until the end", speaker: "St. Moses the Black" },
+  { quote: "Go, sit in your cell, and your cell will teach you everything", speaker: "Abba Moses" },
+  { quote: "A brother in Scetis committed a fault. A council was called to which Abba Moses was invited, but he refused to go", speaker: "Abba Moses" },
+  { quote: "If you are silent, you will have peace wherever you live", speaker: "Abba Poemen" },
+  { quote: "Teach your mouth to say what is in your heart", speaker: "Abba Poemen" },
+  { quote: "The nature of water is soft, that of stone is hard; but if a bottle is hung above the stone, the water will wear away the stone. So it is with the word of God", speaker: "Abba Poemen" },
+  { quote: "Do not give your heart to that which does not satisfy your heart", speaker: "Abba Poemen" },
+  { quote: "Possess nothing that you would not freely and gladly give to anyone who needed it more than you", speaker: "St. Macarius the Great" },
+  { quote: "If you find that there is no struggle in prayer, you should be concerned, for you may have already walked through the wrong door", speaker: "St. Macarius the Great" },
+  { quote: "Our hearts are restless until they rest in You", speaker: "St. Augustine" },
+  { quote: "You have made us for Yourself, O Lord, and our hearts are restless until they rest in You", speaker: "St. Augustine" },
+  { quote: "The world is a book, and those who do not travel read only one page", speaker: "St. Augustine" },
+  { quote: "Pray as though everything depended on God. Work as though everything depended on you", speaker: "St. Augustine" },
+  { quote: "Late have I loved You, Beauty so ancient and so new, late have I loved You", speaker: "St. Augustine" },
+  { quote: "Since you cannot do good to all, you are to pay special attention to those who are closest to you", speaker: "St. Augustine" },
+  { quote: "God provides the wind, but man must raise the sails", speaker: "St. Augustine" },
+  { quote: "He who made you without your consent does not justify you without your consent", speaker: "St. Augustine" },
+  { quote: "The glory of God is the living man; and the life of man consists in beholding God", speaker: "St. Irenaeus" },
+  { quote: "Be concerned about one thing: your salvation. This is all that matters in life", speaker: "Pope Shenouda III" },
+  { quote: "Repentance is not just remorse; it is a commitment to change", speaker: "Pope Shenouda III" },
+  { quote: "If you want to be free, learn to live simply", speaker: "Pope Shenouda III" },
+  { quote: "The person who talks too much usually says little that is meaningful", speaker: "Pope Shenouda III" },
+  { quote: "Do not be disturbed by the thoughts that come to you during prayer. Simply turn your attention back to God", speaker: "Pope Shenouda III" },
+  { quote: "The Church is not a museum for saints but a hospital for sinners", speaker: "Pope Shenouda III" },
+  { quote: "We learn more from our mistakes than from our successes", speaker: "Pope Shenouda III" },
+  { quote: "The first drink from the cup of natural sciences will make you an atheist, but at the bottom of the cup, God is waiting", speaker: "St. Clement of Alexandria" },
+  { quote: "It is far better to be happy than to have a demon dwelling in you", speaker: "Abba Pambo" },
+  { quote: "As long as a person is running, he should have no confidence in himself. Even though he is near the finish, he should still be cautious", speaker: "St. Severus of Antioch" },
+  { quote: "Prayer without ceasing is not a ritual of words but the constant awareness of God's presence", speaker: "Origen" },
+  // ADDITIONAL DESERT FATHERS & CHURCH FATHERS
+  { quote: "I saw the snares that the enemy spreads out over the world and I said groaning What can get through such snares? Then I heard a voice saying Humility", speaker: "St. Anthony the Great" },
+  { quote: "He who sits in solitude and is quiet has escaped from three wars: hearing, speaking, and seeing", speaker: "St. Anthony the Great" },
+  { quote: "Whoever has not experienced temptation cannot enter into the Kingdom of Heaven", speaker: "St. Anthony the Great" },
+  { quote: "I no longer fear God, I love Him", speaker: "St. Anthony the Great" },
+  { quote: "Silence is the great revelation", speaker: "St. Arsenius" },
+  { quote: "I have often been sorry for having spoken, but never for having held my tongue", speaker: "St. Arsenius" },
+  { quote: "A dog is better than I am, for a dog has love and does not judge", speaker: "Abba Moses" },
+  { quote: "Go and sit in your cell, and your cell will teach you everything", speaker: "Abba Moses" },
+  { quote: "The nature of water is soft, the nature of stone is hard. But if a bottle is hung above the stone letting the water drip on it, it wears away the stone", speaker: "Abba Poemen" },
+  { quote: "Teach your mouth to say that which is in your heart", speaker: "Abba Poemen" },
+  { quote: "If a man settles in a certain place and does not bring forth the fruit of that place, the place itself casts him out", speaker: "Abba Poemen" },
+  { quote: "If you have a heart, you can be saved", speaker: "Abba Pambo" },
+  { quote: "God became man so that man might become god", speaker: "St. Athanasius" },
+  { quote: "He was not first a common man and then became God. He was God and then became man so that He might make us gods", speaker: "St. Athanasius" },
+  { quote: "We do not worship a creature. Far be the thought. We worship the Lord of creation incarnate the Word of God", speaker: "St. Athanasius" },
+  { quote: "Not by the nails was He held to the cross, but by love", speaker: "St. Augustine" },
+  { quote: "Late have I loved You, Beauty so old and so new", speaker: "St. Augustine" },
+  { quote: "If you believe what you like in the Gospel and reject what you do not like, it is not the Gospel you believe but yourself", speaker: "St. Augustine" },
+  { quote: "The glory of God is man fully alive", speaker: "St. Irenaeus" },
+  { quote: "The blood of the martyrs is the seed of the Church", speaker: "Tertullian" },
+  { quote: "The principal purpose of fasting is not the body's affliction but the soul's benefit", speaker: "St. Basil the Great" },
+  { quote: "A tree is known by its fruit; a man by his deeds. A good deed is never lost", speaker: "St. Basil the Great" },
+  { quote: "The one who sows courtesy reaps friendship, and the one who plants kindness gathers love", speaker: "St. Basil the Great" },
+  { quote: "Faithfulness in small things is a big thing", speaker: "St. John Chrysostom" },
+  { quote: "The bee is more honored than other animals, not because she labors, but because she labors for others", speaker: "St. John Chrysostom" },
+  { quote: "God accepts our desires as though they were of great value. He longs ardently for us to desire and love Him", speaker: "St. John Chrysostom" },
+  { quote: "No one heals himself by wounding another", speaker: "St. Ambrose" },
+  { quote: "Christ turns all our sunsets into dawns", speaker: "St. Clement of Alexandria" },
+  { quote: "A meek person is one who finds excuses for those who annoy him", speaker: "Pope Shenouda III" },
+  { quote: "Love that is not tested is not real love", speaker: "Pope Shenouda III" },
+  { quote: "Humility is not thinking less of yourself; it is thinking of yourself less", speaker: "Pope Shenouda III" },
+  { quote: "Do not argue with thoughts; rather direct your mind to something spiritual", speaker: "Pope Shenouda III" },
+  { quote: "The Word of God became man that you also may learn from a man how a man becomes god", speaker: "St. Clement of Alexandria" },
+  { quote: "What you are is God's gift to you. What you become is your gift to God", speaker: "St. Shenouda the Archimandrite" },
+  { quote: "Fasting is the soul of prayer; mercy is the lifeblood of fasting", speaker: "St. Peter Chrysologus" },
+  { quote: "He who loves God will love prayer also. He who loves prayer will guard silence", speaker: "St. Nilus of Sinai" },
+  { quote: "The ladder of divine ascent has thirty steps but the first step is renunciation", speaker: "St. John Climacus" },
 ];
 
-const SPEAKERS = ["Christ", "Moses", "David", "Solomon", "Paul", "Peter", "James", "Isaiah", "God", "John", "John the Baptist"];
+const SPEAKERS = ["Christ", "Moses", "David", "Solomon", "Paul", "Peter", "James", "Isaiah", "God", "John", "John the Baptist", "St. Athanasius", "St. Cyril of Alexandria", "St. Cyril of Jerusalem", "St. John Chrysostom", "St. Basil the Great", "St. Gregory the Theologian", "St. Anthony the Great", "Abba Moses", "Abba Poemen", "St. Macarius the Great", "St. Augustine", "St. Irenaeus", "Pope Shenouda III", "St. Clement of Alexandria", "St. Ambrose", "Abba Pambo", "St. Severus of Antioch", "Origen", "St. Arsenius", "Tertullian", "St. Peter Chrysologus", "St. Nilus of Sinai", "St. John Climacus", "St. Shenouda the Archimandrite"];
 
 
 /* ============================================================
-   GUESS THE SAINT - DATA
+   GUESS THE SAINT - DATA (from the Synaxarium, with blurbs)
    ============================================================ */
 const SAINTS_DATA = [
-  {
-    name: "St. Mark the Apostle",
-    clues: [
-      "I wrote one of the four Gospels",
-      "I traveled with St. Paul and St. Barnabas on missionary journeys",
-      "My Gospel is considered the shortest of the four",
-      "I founded the Church of Alexandria in Egypt",
-      "A lion is my symbol"
-    ]
-  },
-  {
-    name: "St. George",
-    clues: [
-      "I was a soldier in the Roman army",
-      "I am one of the most celebrated military saints",
-      "I was martyred during the persecution of Diocletian",
-      "I am known for enduring seven years of torture",
-      "I am often depicted slaying a dragon"
-    ]
-  },
-  {
-    name: "St. Mina (Menas)",
-    clues: [
-      "I was an Egyptian soldier in the Roman army",
-      "I left the army to live as a hermit in the desert",
-      "I publicly declared my Christian faith before a crowd",
-      "My body was carried by a camel that stopped and would not move",
-      "A famous monastery in Mariout bears my name, and I am called 'the Wonder Worker'"
-    ]
-  },
-  {
-    name: "St. Anthony the Great",
-    clues: [
-      "I was born in Upper Egypt to wealthy Christian parents",
-      "I gave away all my possessions after hearing a Gospel reading",
-      "I lived alone in the desert for many years battling demons",
-      "Many came to me for spiritual guidance and I organized them into communities",
-      "I am called the Father of All Monks"
-    ]
-  },
-  {
-    name: "St. Moses the Black",
-    clues: [
-      "Before my conversion I was a gang leader and a thief",
-      "I fled to a monastery in Scetis to hide from authorities",
-      "The monks' way of life transformed me and I became one of them",
-      "I was ordained as a priest and became known for great humility",
-      "I was originally from Ethiopia and was martyred by Berbers"
-    ]
-  },
-  {
-    name: "St. Athanasius the Apostolic",
-    clues: [
-      "I served as Pope of Alexandria for 45 years",
-      "I was exiled five times for defending the faith",
-      "I wrote a famous book about a desert monk's life",
-      "I stood against an entire empire defending one theological word",
-      "I am called the Defender of the Faith for fighting Arianism at the Council of Nicaea"
-    ]
-  },
-  {
-    name: "Pope Kyrillos VI",
-    clues: [
-      "I was known for my deep prayer life, sometimes praying all night",
-      "I lived in a windmill in Old Cairo before becoming Pope",
-      "I built the great Cathedral of St. Mark in Cairo",
-      "Many miracles have been attributed to my intercession",
-      "I was the 116th Pope of Alexandria and was close friends with Emperor Haile Selassie"
-    ]
-  },
-  {
-    name: "St. Marina the Martyr",
-    clues: [
-      "I was a young woman from Antioch of Pisidia",
-      "My own father turned me in to the authorities for being Christian",
-      "I was tortured severely but angels healed my wounds",
-      "I defeated a demon who appeared to me in prison",
-      "I was martyred at age 15 during the reign of Diocletian"
-    ]
-  },
-  {
-    name: "St. Demiana",
-    clues: [
-      "My father was a governor in Egypt",
-      "I chose a life of virginity and prayer over marriage",
-      "I lived with 40 other virgins in a palace my father built for me",
-      "I encouraged my father to remain faithful when he was pressured to worship idols",
-      "I and my 40 companions were all martyred together"
-    ]
-  },
-  {
-    name: "Anba Abraam (Bishop of Fayoum)",
-    clues: [
-      "I was known for extreme generosity to the poor",
-      "I gave away everything the diocese had to those in need",
-      "I performed many miracles during my lifetime",
-      "I was a bishop in Egypt in the late 19th and early 20th century",
-      "I am called the Friend of the Poor and served in Fayoum"
-    ]
-  },
-  {
-    name: "St. Paul the First Hermit",
-    clues: [
-      "I fled to the desert during a time of persecution",
-      "A raven brought me bread every day",
-      "I lived in a cave near a palm tree and a spring for decades",
-      "Another famous monk visited me near the end of my life",
-      "I am considered the first Christian hermit, and St. Anthony found me at age 113"
-    ]
-  },
-  {
-    name: "St. Macarius the Great",
-    clues: [
-      "I was originally a camel trader from Upper Egypt",
-      "I lived in the desert of Scetis for over 60 years",
-      "I was known for extraordinary humility and gentleness",
-      "I raised a dead man to prove the truth to a heretic",
-      "A famous monastery in Wadi El Natrun bears my name"
-    ]
-  },
-  {
-    name: "St. Bishoy",
-    clues: [
-      "An angel appeared to my mother and told her I was chosen",
-      "I lived in the desert of Scetis with the other monks",
-      "I was known for extreme asceticism, tying my hair to the ceiling to stay awake in prayer",
-      "Christ appeared to me and I washed His feet",
-      "My body remains incorrupt and is kept in my monastery in Wadi El Natrun"
-    ]
-  },
-  {
-    name: "Pope Shenouda III",
-    clues: [
-      "Before becoming Pope I was a monk named Father Antonios El-Syriani",
-      "I was also a Sunday School teacher and poet before monasticism",
-      "I was exiled by President Sadat to a monastery",
-      "I led the Coptic Church for over 40 years and greatly expanded its presence worldwide",
-      "I was the 117th Pope of Alexandria and was known as the Teacher of Generations"
-    ]
-  },
-  {
-    name: "St. Philopateer Mercurius (Abu Seifein)",
-    clues: [
-      "I was a soldier in the Roman army who became a commander",
-      "An angel gave me a luminous sword to use in battle",
-      "I refused to offer incense to pagan gods after a military victory",
-      "I was tortured and martyred for my faith",
-      "I am known by the Arabic name Abu Seifein meaning Father of Two Swords"
-    ]
-  },
-  {
-    name: "St. Simon the Tanner",
-    clues: [
-      "I lived in Cairo in the 10th century during the Fatimid Caliphate",
-      "I was a simple craftsman who worked with leather",
-      "The Caliph challenged the Pope to prove a verse about faith moving mountains",
-      "Through my prayers and fasting, a miracle occurred",
-      "The Mokattam Mountain visibly moved three times, and a church there honors me"
-    ]
-  },
-  {
-    name: "St. Verena",
-    clues: [
-      "I was born in Upper Egypt in the Theban region",
-      "I traveled to Europe following the Theban Legion",
-      "I taught local people about hygiene and caring for the sick",
-      "I lived as a hermit in Switzerland",
-      "I am the patron saint of Zurich and am depicted carrying a water jug and comb"
-    ]
-  },
-  {
-    name: "St. Shenouda the Archimandrite",
-    clues: [
-      "I became a monk at a very young age under my uncle's guidance",
-      "I led the White Monastery in Upper Egypt with thousands of monks and nuns",
-      "I was known for strict discipline and fiery defense of the faith",
-      "I attended the Council of Ephesus with St. Cyril",
-      "I lived to be over 100 years old and am called the Archimandrite"
-    ]
-  },
-  {
-    name: "St. Cyril the Great",
-    clues: [
-      "I was the nephew of Pope Theophilus of Alexandria",
-      "I was known as a brilliant theologian and prolific writer",
-      "I fought against the heresy that divided Christ into two persons",
-      "I presided over a major ecumenical council in 431 AD",
-      "I am called the Pillar of Faith and defender of the title Theotokos at the Council of Ephesus"
-    ]
-  },
-  {
-    name: "St. Mary (the Theotokos)",
-    clues: [
-      "An angel appeared to me with news that changed human history",
-      "I visited my relative Elizabeth while we were both expecting",
-      "I pondered many things in my heart",
-      "I was present at the Cross and entrusted to a beloved disciple",
-      "I am called Theotokos, the Mother of God, and the Coptic Church celebrates many feasts in my honor"
-    ]
-  },
-  {
-    name: "St. Karas the Anchorite",
-    clues: [
-      "I was the son of a king but chose the monastic life",
-      "I lived alone in the deep desert for many years",
-      "I wore no clothes and my hair grew to cover my body",
-      "An angel brought me Holy Communion in the wilderness",
-      "A monk found me near the end of my life and told my story"
-    ]
-  },
-  {
-    name: "St. Abanoub",
-    clues: [
-      "I was only 12 years old when I was martyred",
-      "I lived during the persecution of Diocletian in Egypt",
-      "I boldly confessed Christ before the governor",
-      "I endured many tortures but never denied my faith",
-      "I am beloved by Coptic children and known as the child martyr of Samanoud"
-    ]
-  },
-  {
-    name: "St. Maurice",
-    clues: [
-      "I was a commander in the Roman army from Egypt",
-      "I led a legion of Christian soldiers from Thebes",
-      "My legion was ordered to sacrifice to Roman gods before battle",
-      "We refused to worship idols even under threat of death",
-      "I and the entire Theban Legion were martyred in Switzerland"
-    ]
-  },
-  {
-    name: "St. Samuel the Confessor",
-    clues: [
-      "I was a monk at the monastery of St. Macarius in Scetis",
-      "I was beaten and lost an eye for defending the Orthodox faith",
-      "I was sent into exile by those who held heretical beliefs",
-      "I founded a monastery that still stands in the Fayoum",
-      "I am called the Confessor and my monastery is El-Qalamoun"
-    ]
-  },
-  {
-    name: "St. John Chrysostom",
-    clues: [
-      "I was a priest in Antioch before being made a bishop",
-      "I was famous for my powerful preaching and homilies",
-      "I was exiled twice for criticizing the powerful",
-      "My Paschal homily is read every year at the Resurrection feast",
-      "My name means 'Golden Mouth'"
-    ]
-  },
+  // === APOSTLES & EVANGELISTS ===
+  { name: "St. Mark the Apostle", clues: ["I wrote one of the four Gospels", "I traveled with St. Paul and St. Barnabas on missionary journeys", "My Gospel is considered the shortest of the four", "I founded the Church of Alexandria in Egypt", "A lion is my symbol"] },
+  { name: "St. Peter the Apostle", clues: ["I was a fisherman before following Christ", "I walked on water but began to sink when I doubted", "I denied Christ three times before the rooster crowed", "Christ said upon me He would build His Church", "I was crucified upside down in Rome"] },
+  { name: "St. Paul the Apostle", clues: ["Before my conversion I persecuted Christians", "I was blinded by a light on a road", "I wrote more epistles than any other apostle", "I was shipwrecked multiple times during my missionary journeys", "My name was Saul before my encounter with Christ on the road to Damascus"] },
+  { name: "St. Thomas the Apostle", clues: ["I said I would not believe unless I saw the nail marks", "Christ appeared to me and told me to stop doubting", "I traveled the farthest east of all the apostles", "I preached the Gospel in India", "I am often called Didymus, meaning the Twin"] },
+  { name: "St. Andrew the Apostle", clues: ["I was the first disciple called by Christ", "I was the brother of another prominent apostle", "I brought a boy with five loaves and two fish to Jesus", "I preached in Greece and around the Black Sea", "I was crucified on an X-shaped cross"] },
+  { name: "St. Matthew the Apostle", clues: ["I had a profession despised by my people before following Christ", "I wrote the first Gospel in the New Testament", "Jesus saw me sitting at my workplace and said Follow Me", "My Gospel emphasizes Jesus as the fulfillment of prophecy", "I was a tax collector in Capernaum"] },
+  { name: "St. Luke the Evangelist", clues: ["I was not one of the twelve apostles", "I was a physician by profession", "I wrote two books of the New Testament", "I was a companion of St. Paul on his journeys", "I wrote the longest Gospel and the Acts of the Apostles"] },
+  { name: "St. Bartholomew the Apostle", clues: ["I am also known by another name in the Gospel of John", "I was skeptical when first told about Jesus of Nazareth", "Philip brought me to meet Jesus", "Jesus said of me that I was an Israelite in whom there is no deceit", "I am also called Nathanael"] },
+  { name: "St. James the Great", clues: ["I was one of the inner circle of three disciples closest to Christ", "I was the brother of the beloved disciple John", "I witnessed the Transfiguration on Mount Tabor", "I was the first apostle to be martyred", "King Herod Agrippa had me killed by the sword"] },
+  { name: "St. Philip the Apostle", clues: ["I was from Bethsaida, the same city as Peter and Andrew", "I brought Nathanael to meet Jesus", "I asked Jesus to show us the Father", "I was involved in the feeding of the five thousand", "Jesus tested me by asking where to buy bread for the crowd"] },
+  // === POPES OF ALEXANDRIA ===
+  { name: "St. Athanasius the Apostolic", clues: ["I served as Pope of Alexandria for 45 years", "I was exiled five times for defending the faith", "I wrote a famous biography of a desert monk", "I stood against an entire empire defending one theological word", "I am called the Defender of the Faith for fighting Arianism at the Council of Nicaea"] },
+  { name: "St. Cyril the Great", clues: ["I was the nephew of Pope Theophilus of Alexandria", "I was known as a brilliant theologian and prolific writer", "I fought against a heresy that divided Christ into two persons", "I presided over a major ecumenical council in 431 AD", "I am called the Pillar of Faith and defender of the title Theotokos at the Council of Ephesus"] },
+  { name: "Pope Kyrillos VI", clues: ["I was known for my deep prayer life sometimes praying all night", "I lived in a windmill in Old Cairo before becoming Pope", "I built the great Cathedral of St. Mark in Cairo", "Many miracles have been attributed to my intercession", "I was the 116th Pope of Alexandria"] },
+  { name: "Pope Shenouda III", clues: ["Before becoming Pope I was a monk named Father Antonios El-Syriani", "I was a Sunday School teacher and poet before monasticism", "I was exiled by President Sadat to a monastery", "I led the Coptic Church for over 40 years expanding its presence worldwide", "I was the 117th Pope of Alexandria called the Teacher of Generations"] },
+  { name: "St. Dioscorus of Alexandria", clues: ["I was the successor of St. Cyril as Pope of Alexandria", "I defended the Orthodox faith at a council in 449 AD", "I was deposed and exiled at a later council I did not accept", "I suffered greatly for refusing to accept a controversial definition of faith", "I am revered as a confessor who upheld Miaphysite Christology at Chalcedon"] },
+  { name: "St. Timothy of Alexandria", clues: ["I was a disciple of a famous apostle who wrote letters to me", "Two epistles in the New Testament bear my name", "I was instructed to guard the faith and be an example to believers", "I was made bishop of Ephesus at a young age", "St. Paul called me his true son in the faith"] },
+  { name: "St. Peter the Seal of Martyrs", clues: ["I was the 17th Pope of Alexandria", "I established canons for those who lapsed during persecution", "An angel told me someone would try to take my position", "I was the last martyr of the great persecution in Alexandria", "I am called the Seal of Martyrs because the persecution ended after my death"] },
+  { name: "Pope Theophilus of Alexandria", clues: ["I was the uncle of a famous Alexandrian Pope", "I destroyed the Serapeum temple in Alexandria", "I was involved in controversies with the monks of the desert", "I presided over the condemnation of Origenism", "My nephew St. Cyril succeeded me as Pope of Alexandria"] },
+  // === DESERT FATHERS & MONKS ===
+  { name: "St. Anthony the Great", clues: ["I was born in Upper Egypt to wealthy Christian parents", "I gave away all my possessions after hearing a Gospel reading", "I lived alone in the desert for many years battling demons", "Many came to me for guidance and I organized them into communities", "I am called the Father of All Monks"] },
+  { name: "St. Paul the First Hermit", clues: ["I fled to the desert during a time of persecution", "A raven brought me bread every day", "I lived in a cave near a palm tree and a spring for decades", "Another famous monk visited me near the end of my life", "I am considered the first Christian hermit and St. Anthony found me at age 113"] },
+  { name: "St. Macarius the Great", clues: ["I was originally a camel trader from Upper Egypt", "I lived in the desert of Scetis for over 60 years", "I was known for extraordinary humility and gentleness", "I raised a dead man to prove the truth to a heretic", "A famous monastery in Wadi El Natrun bears my name"] },
+  { name: "St. Moses the Black", clues: ["Before my conversion I was a gang leader and thief", "I fled to a monastery in Scetis to hide from authorities", "The monks way of life transformed me completely", "I was ordained as a priest known for great humility", "I was originally from Ethiopia and was martyred by Berbers"] },
+  { name: "St. Bishoy", clues: ["An angel appeared to my mother and told her I was chosen", "I lived in the desert of Scetis with the other monks", "I was known for extreme asceticism tying my hair to the ceiling to stay awake in prayer", "Christ appeared to me and I washed His feet", "My body remains incorrupt at my monastery in Wadi El Natrun"] },
+  { name: "St. Shenouda the Archimandrite", clues: ["I became a monk at a very young age under my uncle Pgol", "I led the White Monastery in Upper Egypt with thousands of monks and nuns", "I was known for strict discipline and fiery defense of the faith", "I attended the Council of Ephesus with St. Cyril", "I lived to be over 100 years old and am called the Archimandrite"] },
+  { name: "St. Pachomius", clues: ["I was a pagan soldier before converting to Christianity", "The kindness of Christians I met while in the army inspired my conversion", "I established a rule of communal monastic life", "I organized monks into communities with shared meals and work", "I am called the Father of Cenobitic Monasticism"] },
+  { name: "St. Pishoy (Paisius) the Great", clues: ["I was one of the earliest monks of the desert", "I lived in extreme asceticism in the wilderness of Scetis", "I was known for long periods of fasting and prayer", "I was a contemporary of St. Macarius the Great", "Angels ministered to me in the deep desert"] },
+  { name: "St. John the Short (Colobos)", clues: ["I was given my name because of my small stature", "My spiritual father told me to water a dry stick daily and I obeyed", "After years of obedience the dry stick miraculously bore fruit", "I was one of the most famous Desert Fathers of Scetis", "My story of the obedience tree is one of the most beloved of the Desert Fathers"] },
+  { name: "St. Arsenius the Great", clues: ["I was a tutor to the sons of the Roman Emperor", "I left the imperial palace to become a monk in Egypt", "I was famous for saying I have often repented of speaking but never of silence", "I wept constantly for his sins despite his holy life", "I went from being teacher of emperors to a humble desert monk in Scetis"] },
+  { name: "St. Maximus and St. Domadius", clues: ["We were brothers and sons of a Roman emperor", "We left our royal life to become monks in the Egyptian desert", "We lived together in extreme asceticism in Scetis", "St. Macarius the Great was our spiritual father", "We are known as the two sons of the emperor who chose the desert over the throne"] },
+  { name: "St. Samuel the Confessor", clues: ["I was a monk at the monastery of St. Macarius in Scetis", "I was beaten and lost an eye for defending the Orthodox faith", "I was sent into exile for refusing heretical communion", "I founded a monastery that still stands in the Fayoum", "I am called the Confessor and my monastery is El-Qalamoun"] },
+  { name: "St. Karas the Anchorite", clues: ["I was the son of a king but chose the monastic life", "I lived alone in the deep desert for many years", "I wore no clothes and my hair grew to cover my body", "An angel brought me Holy Communion in the wilderness", "A monk found me near the end of my life and told my story"] },
+  { name: "Abba Poemen", clues: ["My name means shepherd in Greek", "I was one of the most quoted of the Desert Fathers", "I lived in the desert of Scetis in the 4th and 5th centuries", "My sayings fill many pages of the collections of desert wisdom", "I taught that silence and humility are greater than any miracle"] },
+  { name: "St. Isidore the Priest", clues: ["I was a priest and guestmaster at the monasteries of Scetis", "I was known for my extraordinary hospitality to visitors", "I never held anger against anyone even for a moment", "I served in the desert for many decades", "St. Palladius wrote about my virtues in his Lausiac History"] },
+  { name: "St. Paphnutius", clues: ["I was a monk and bishop in the Egyptian desert", "I suffered greatly during the persecution losing an eye", "I attended the Council of Nicaea as a confessor", "I argued against a proposed rule of mandatory clerical celibacy at the council", "My wounds from persecution gave me great authority among the other bishops"] },
+  // === MARTYRS ===
+  { name: "St. George", clues: ["I was a soldier in the Roman army", "I am one of the most celebrated military saints", "I was martyred during the persecution of Diocletian", "I am known for enduring seven years of torture", "I am often depicted slaying a dragon"] },
+  { name: "St. Mina (Menas)", clues: ["I was an Egyptian soldier in the Roman army", "I left the army to live as a hermit in the desert", "I publicly declared my Christian faith before a crowd", "My body was carried by a camel that stopped and would not move", "A famous monastery in Mariout bears my name and I am called the Wonder Worker"] },
+  { name: "St. Marina the Martyr", clues: ["I was a young woman from Antioch of Pisidia", "My own father turned me in to the authorities", "I was tortured severely but angels healed my wounds", "I defeated a demon who appeared to me in prison", "I was martyred at age 15 during the reign of Diocletian"] },
+  { name: "St. Demiana", clues: ["My father was a governor in Egypt", "I chose a life of virginity and prayer over marriage", "I lived with 40 other virgins in a palace my father built", "I encouraged my father to remain faithful when pressured to worship idols", "I and my 40 companions were all martyred together"] },
+  { name: "St. Philopateer Mercurius (Abu Seifein)", clues: ["I was a soldier in the Roman army who became a commander", "An angel gave me a luminous sword to use in battle", "I refused to offer incense to pagan gods after a military victory", "I was tortured and martyred for my faith", "I am known as Abu Seifein meaning Father of Two Swords"] },
+  { name: "St. Abanoub", clues: ["I was only 12 years old when I was martyred", "I lived during the persecution of Diocletian in Egypt", "I boldly confessed Christ before the governor", "I endured many tortures but never denied my faith", "I am beloved by Coptic children and known as the child martyr of Samanoud"] },
+  { name: "St. Maurice", clues: ["I was a commander in the Roman army from Egypt", "I led a legion of Christian soldiers from Thebes", "My legion was ordered to sacrifice to Roman gods before battle", "We refused to worship idols even under threat of death", "I and the entire Theban Legion were martyred in Switzerland"] },
+  { name: "St. Barbara", clues: ["My father locked me in a tower to keep me from the world", "I secretly became a Christian while in seclusion", "I asked for three windows in my tower to honor the Trinity", "My own father turned me over to the authorities for being Christian", "My father himself carried out my execution but was struck by lightning"] },
+  { name: "St. Catherine of Alexandria", clues: ["I was a learned princess of Alexandria", "I debated 50 pagan philosophers and converted them all", "I was condemned to die on a spiked wheel", "The wheel miraculously broke when I touched it", "I was finally beheaded and angels carried my body to Mount Sinai"] },
+  { name: "St. Cyprian and St. Justina", clues: ["One of us was a powerful sorcerer before conversion", "A young virgin's prayers defeated all magical attempts against her", "The sorcerer was so moved by the power of the Cross he converted", "We both became devoted Christians and were eventually ordained", "We were beheaded together on the same day"] },
+  { name: "St. Cosmas and St. Damian", clues: ["We were twin brothers who practiced medicine", "We treated the sick without ever accepting payment", "We are known as the Unmercenaries or Silverless Ones", "We used our medical practice as a way to share the faith", "We were martyred together during the Diocletian persecution"] },
+  { name: "St. Stephen the Protomartyr", clues: ["I was one of the first seven deacons chosen by the apostles", "I was known for performing great signs and wonders", "I gave a powerful speech recounting Israel's history before the council", "I saw the heavens opened and the Son of Man standing at God's right hand", "I was stoned to death becoming the first Christian martyr"] },
+  { name: "St. Ignatius of Antioch", clues: ["I was a bishop who was a disciple of the apostles", "I wrote seven famous letters while being taken to my execution", "I said I am the wheat of God and must be ground by the teeth of beasts", "I longed for martyrdom and asked the Roman Christians not to prevent it", "I was thrown to wild lions in the Colosseum in Rome"] },
+  { name: "St. Polycarp of Smyrna", clues: ["I was a disciple of the Apostle John", "I served as bishop for many decades", "When told to curse Christ I replied 86 years I have served Him and He never did me wrong", "I was burned at the stake but the flames would not touch me", "I was finally killed by a dagger and am one of the Apostolic Fathers"] },
+  { name: "St. Perpetua and St. Felicity", clues: ["We were martyred in North Africa in the early 3rd century", "One of us was a young noblewoman who kept a diary in prison", "The other was a pregnant slave who gave birth just days before execution", "We refused to sacrifice to the emperor despite intense pressure", "We were thrown to wild beasts in the arena of Carthage"] },
+  { name: "St. Victor (Boctor)", clues: ["I was an Egyptian soldier who refused to worship idols", "I endured many tortures in different cities across Egypt", "My mother Martham encouraged me during my sufferings", "I performed many miracles during my torture that converted thousands", "I am one of the most beloved soldier-martyrs in the Coptic Church"] },
+  { name: "St. Menas (Mina) of Akhmim", clues: ["I was a young man from Akhmim in Upper Egypt", "I was known for my piety from childhood", "I was arrested during the persecution of Diocletian", "I endured extreme tortures with great patience", "I am different from St. Mina the Wonder Worker of Mariout"] },
+  { name: "St. Clement of Rome", clues: ["I was the third or fourth Bishop of Rome", "I wrote an important letter to the Church in Corinth", "My letter is one of the earliest Christian documents outside the New Testament", "I was exiled to the mines and martyred by drowning", "An anchor is my symbol"] },
+  { name: "St. Cyprian of Carthage", clues: ["I was a famous bishop in North Africa", "I wrote extensively about Church unity", "I said he cannot have God for his father who does not have the Church for his mother", "I dealt with the crisis of Christians who lapsed during persecution", "I was beheaded during the Valerian persecution"] },
+  { name: "St. Justus (Yustus)", clues: ["I was a young child from Akhmim in Upper Egypt", "My father Theophilus and I were traveling when soldiers captured us", "Despite my young age I boldly professed my faith in Christ", "My father and I were both martyred", "I am one of the youngest martyrs commemorated in the Coptic Synaxarium"] },
+  { name: "St. Apakir (Abadir) and St. Irene", clues: ["We were brother and sister from a noble family", "Our mother raised us in the Christian faith", "We traveled to Alexandria to confess our faith during the persecution", "We endured many tortures and performed miracles", "We were martyred together and our story is well-known in Upper Egypt"] },
+  { name: "St. Dimyana and the 40 Virgins", clues: ["I was the daughter of Mark the governor of Burullus", "I consecrated my life to prayer and virginity", "40 virgins joined me in a life of worship", "When my father compromised his faith I urged him to repent", "All 41 of us were martyred when we refused to deny Christ"] },
+  { name: "St. Wanas (Owanes)", clues: ["I was a soldier in the Roman army in Egypt", "I refused to worship idols and declared my faith openly", "I was tortured in several Egyptian cities", "My story is recorded in the Coptic Synaxarium with many miracles", "I am venerated as a military saint in the Coptic tradition"] },
+  // === HOLY WOMEN ===
+  { name: "St. Mary (the Theotokos)", clues: ["An angel appeared to me with news that changed human history", "I visited my relative Elizabeth while we were both expecting", "I pondered many things in my heart", "I was present at the Cross and entrusted to a beloved disciple", "I am called Theotokos the Mother of God and the Coptic Church celebrates many feasts in my honor"] },
+  { name: "St. Mary Magdalene", clues: ["Jesus cast seven demons out of me", "I was among the women who supported Jesus' ministry", "I stood at the foot of the Cross", "I was the first to see the risen Christ on Easter morning", "Jesus told me to go tell the disciples He had risen"] },
+  { name: "St. Verena", clues: ["I was born in Upper Egypt in the Theban region", "I traveled to Europe following the Theban Legion", "I taught local people about hygiene and caring for the sick", "I lived as a hermit in Switzerland", "I am the patron saint of Zurich depicted carrying a water jug and comb"] },
+  { name: "St. Monica", clues: ["I prayed for decades for my wayward son to convert", "My tears and prayers were legendary in the early Church", "A bishop told me that the son of so many tears could not be lost", "My son eventually became one of the greatest Church Fathers", "I am the mother of St. Augustine of Hippo"] },
+  { name: "St. Mary of Egypt", clues: ["I lived a sinful life for many years in Alexandria", "I tried to enter the Church of the Holy Sepulchre but an invisible force stopped me", "I repented before an icon of the Theotokos", "I crossed the Jordan and lived in the desert for 47 years in repentance", "A monk named Zosimas found me and gave me communion before I died"] },
+  { name: "St. Sarah (Amma Sarah)", clues: ["I was one of the Desert Mothers of Egypt", "I lived beside a river for 60 years and never looked at it", "I fought against the demon of temptation for 13 years", "I told monks that I am a woman in nature but not in spirit", "I is one of the most quoted women in the sayings of the Desert Fathers and Mothers"] },
+  { name: "St. Syncletica", clues: ["I was a wealthy woman from Alexandria", "I gave away all my possessions and became an ascetic", "I gathered other women around me for a communal life of prayer", "My teachings are collected alongside the Desert Fathers", "I am considered one of the great Desert Mothers of Egypt"] },
+  { name: "St. Theodora of Alexandria", clues: ["I committed a sin and was filled with deep remorse", "I disguised myself as a man and entered a monastery to do penance", "I was falsely accused of fathering a child but accepted the blame in silence", "I raised the child as my own without revealing my identity", "My true gender was only discovered after my death"] },
+  { name: "St. Hilaria", clues: ["I was the daughter of Emperor Zeno", "I secretly left the palace to live as a monk in Egypt", "I disguised myself as a man and was known as Brother Hilarion", "My own father sent my sister to my monastery for healing not knowing who I was", "My identity was only revealed upon my death"] },
+  { name: "St. Anastasia", clues: ["I was a Roman woman who helped imprisoned Christians", "I visited the faithful in prison bringing them food and comfort", "I am called the Deliverer from Potions in some traditions", "I was martyred during the Diocletian persecution", "I am commemorated on December 25th in some calendars"] },
+  // === BISHOPS & CHURCH FATHERS ===
+  { name: "Anba Abraam (Bishop of Fayoum)", clues: ["I was known for extreme generosity to the poor", "I gave away everything the diocese had to those in need", "I performed many miracles during my lifetime", "I was a bishop in Egypt in the late 19th and early 20th century", "I am called the Friend of the Poor and served in Fayoum"] },
+  { name: "St. John Chrysostom", clues: ["I was a priest in Antioch before being made a bishop", "I was famous for my powerful preaching and homilies", "I was exiled twice for criticizing the powerful", "My Paschal homily is read every year at the Resurrection feast", "My name means Golden Mouth"] },
+  { name: "St. Basil the Great", clues: ["I was bishop of Caesarea in Cappadocia", "I wrote an influential rule for monastic life still used today", "I helped establish the doctrine of the Holy Trinity", "I was one of the three great Cappadocian Fathers", "The liturgy I composed is used in the Coptic Church throughout the year"] },
+  { name: "St. Gregory the Theologian", clues: ["I was one of the three Cappadocian Fathers", "I served briefly as Archbishop of Constantinople", "I delivered five famous orations on the nature of God", "I preferred the contemplative life to Church politics", "I am one of only three people given the title Theologian in the Orthodox tradition"] },
+  { name: "St. Severus of Antioch", clues: ["I was the Patriarch of Antioch in the 6th century", "I was exiled for my opposition to the Council of Chalcedon", "I spent many years in exile in Egypt", "I was a prolific writer of theological works and hymns", "I am one of the most important theologians in the Coptic Orthodox tradition"] },
+  { name: "St. Clement of Alexandria", clues: ["I headed the famous Catechetical School of Alexandria", "I wrote works helping educated Greeks understand Christianity", "I saw Greek philosophy as a preparation for the Gospel", "My student Origen succeeded me at the school", "I am one of the earliest Christian intellectuals bridging faith and philosophy"] },
+  { name: "Origen of Alexandria", clues: ["I was one of the most brilliant scholars of the early Church", "I led the Catechetical School of Alexandria", "I wrote thousands of works on Scripture and theology", "Some of my speculative ideas were later considered controversial", "I am known for creating the Hexapla a six-column comparison of Old Testament texts"] },
+  { name: "St. Didymus the Blind", clues: ["I lost my sight at age four but became a great scholar", "I was appointed to lead the Catechetical School of Alexandria", "I taught many famous students through lectures from memory", "I mastered theology philosophy and mathematics despite my blindness", "St. Athanasius appointed me to lead the school in Alexandria"] },
+  { name: "St. Ephrem the Syrian", clues: ["I was a deacon who never became a priest out of humility", "I wrote thousands of hymns and theological poems", "I used poetry and song to teach doctrine to the people", "I defended Orthodox teaching against various heresies", "I am called the Harp of the Holy Spirit"] },
+  { name: "St. Augustine of Hippo", clues: ["I lived a wild youth in North Africa before converting", "My mother prayed for my conversion for many years", "I wrote Confessions and The City of God", "I heard a voice saying Take and read which led to my conversion", "I became Bishop of Hippo in North Africa"] },
+  { name: "St. Jerome", clues: ["I was a scholar who lived in Bethlehem for many years", "I translated the Bible into Latin creating the Vulgate", "I was known for my fiery temperament and sharp writings", "I lived as a hermit in the Syrian desert for a time", "I am considered the greatest biblical scholar of the early Church"] },
+  { name: "St. Ambrose of Milan", clues: ["I was a Roman governor before being chosen as bishop", "I was not yet baptized when the people demanded I become their bishop", "I confronted Emperor Theodosius and demanded he repent", "I was instrumental in the conversion of a famous African theologian", "I introduced congregational hymn singing in the Western Church"] },
+  // === NOTABLE COPTIC SAINTS ===
+  { name: "St. Simon the Tanner", clues: ["I lived in Cairo in the 10th century during the Fatimid Caliphate", "I was a simple craftsman who worked with leather", "The Caliph challenged the Pope to prove a verse about faith moving mountains", "Through my prayers and fasting a miracle occurred", "The Mokattam Mountain visibly moved three times and a church there honors me"] },
+  { name: "St. Reweis (Rueis)", clues: ["I lived in the 19th century in Egypt", "I appeared to be a simple and foolish man to the world", "I lived a life of voluntary poverty and humility", "I had the gift of prophecy and performed many miracles", "I am known as a holy fool for Christ from the village of El-Bayadiya"] },
+  { name: "Archdeacon Habib Girgis", clues: ["I was a pioneer of Sunday School education in the Coptic Church", "I established the first organized religious education program for youth", "I founded the Clerical College in Cairo", "I was never ordained as a priest but held the rank of Archdeacon", "I am considered the father of the modern Coptic Sunday School movement"] },
+  { name: "St. Takla Haymanot", clues: ["I am the most beloved saint of the Ethiopian Church", "I was trained in Egypt before returning to my homeland", "I is said to have stood on one foot in prayer for seven years", "I helped spread Christianity throughout Ethiopia", "My name means Plant of Faith and I founded the monastery of Debre Libanos"] },
+  { name: "St. Frumentius", clues: ["I was shipwrecked on the coast of Africa as a young man", "I served in the royal court and taught the faith to the prince", "I traveled to Alexandria to ask for a bishop to be sent", "St. Athanasius consecrated me as the first bishop of my country", "I am called the Apostle of Ethiopia also known as Abba Selama"] },
+  { name: "St. Abraam the Syrian", clues: ["I was a wealthy merchant from Syria", "I gave away all my possessions to the poor", "I lived as a hermit in the Egyptian desert", "I was known for extreme generosity and love for the poor", "I am different from Anba Abraam Bishop of Fayoum"] },
+  { name: "St. John of Scetis", clues: ["I was a monk and hegumen in the monastery of St. Macarius", "I was known for my deep spiritual discernment", "I served as a spiritual father to many monks", "I lived during the difficult period of the desert monasteries", "My life is recorded in the Synaxarium as a model of monastic virtue"] },
+  { name: "St. Pijimi", clues: ["I was a soldier who became a monk and then a martyr", "I served in the Roman military before my conversion", "I left the army to live the monastic life in Egypt", "I was arrested during a persecution and refused to deny Christ", "I am commemorated as both a monastic and a military saint"] },
+  // === CONFESSORS & ASCETICS ===
+  { name: "St. Simeon the Stylite", clues: ["I was originally a shepherd in Syria", "I lived on top of a pillar for decades", "People came from far away to seek my counsel from below", "I inspired many imitators called stylites", "I spent 37 years on my pillar never coming down"] },
+  { name: "St. Onuphrius (Nofer)", clues: ["I lived in the deep desert of Egypt for 60 years", "My only clothing was my long hair and beard", "An angel brought me bread and water daily", "A monk named Paphnutius found me and recorded my story", "When I died palm trees bent over my body to form a grave"] },
+  { name: "St. Palaemon", clues: ["I was an elderly hermit in the Thebaid region of Egypt", "A young man came to me wanting to become a monk", "I warned him that the monastic life was extremely difficult", "I became the spiritual father and teacher of this young man", "My most famous disciple was St. Pachomius the father of cenobitic monasticism"] },
+  { name: "St. Amoun of Nitria", clues: ["I was forced into marriage but convinced my wife to live in celibacy", "After 18 years my wife and I separated to pursue the monastic life", "I founded one of the most important monastic centers in Egypt", "St. Athanasius wrote about me in his Life of St. Anthony", "I established the monastic settlement of Nitria in the Egyptian desert"] },
+  { name: "St. Pambo", clues: ["I was a disciple of St. Anthony the Great in the desert", "When I first came to learn a psalm I stopped at the first verse and spent years meditating on it", "I was known for never speaking hastily", "I worked with my hands weaving baskets to give to the poor", "When Melania the Elder visited me with silver I did not even look at it"] },
+  { name: "St. Apollo of Scetis", clues: ["I lived in the desert as a hermit from my youth", "I gathered a community of hundreds of monks around me", "I was known for my joyful spirit and insisted monks should always be glad", "I said Christians should always be cheerful because the Lord has saved them", "I lived in the Thebaid and my community practiced both solitary and communal life"] },
+  { name: "St. Serapion the Sindonite", clues: ["I owned nothing but a single linen cloth", "I sold even my copy of the Gospels to give to the poor", "When asked where my Gospel book was I said I sold the one that told me to sell everything", "I traveled everywhere with only my simple garment", "I am named the Sindonite after the sindon or linen cloth I wore"] },
+  // === LATER COPTIC SAINTS ===
+  { name: "Fr. Mikhail Ibrahim", clues: ["I was a priest martyred in the modern era", "I served in Upper Egypt and was known for my love of the poor", "I was killed for my faith in the 20th century", "My congregation deeply mourned my loss", "I am one of the modern Coptic martyrs commemorated by the Church"] },
+  { name: "Fr. Mattaous El-Makary", clues: ["I was a monk at St. Macarius Monastery", "I was known for a deep prayer life and spiritual gifts", "I spent most of my time in his cell in prayer and contemplation", "I had the gift of tears and wept frequently during prayer", "I am revered as one of the great modern Coptic monks of Wadi El Natrun"] },
+  { name: "Tamav Irene", clues: ["I was the spiritual mother of Pope Kyrillos VI", "I lived a life of extreme asceticism and prayer", "Many miracles were attributed to my intercessions", "I was a laywoman who lived a monastic-like life in the world", "I am one of the most revered modern Coptic holy women"] },
+  { name: "St. Abraam of Fayoum", clues: ["I served as bishop in the late 1800s in Egypt", "I sold church furnishings to feed the hungry", "I trusted completely in God's providence for daily needs", "Miracles of provision happened regularly in my ministry", "I am called the Bishop of the Poor"] },
+  // === EARLY MARTYRS & OTHERS ===
+  { name: "St. Thecla", clues: ["I was converted by hearing an apostle preach from a window", "I broke off my engagement to follow Christ", "I survived multiple attempts at execution", "I lived as a hermit for many years after my escapes", "I am called the first female martyr and Equal to the Apostles"] },
+  { name: "St. Menas the Musician", clues: ["I was a monk known for my beautiful voice and hymns", "I composed many Coptic hymns still sung today", "I served as a cantor in the Church", "My musical gifts were used to glorify God", "I am different from St. Mina the Wonder Worker"] },
+  { name: "St. Julius of Akfahs", clues: ["I lived during the Diocletian persecution in Egypt", "I traveled throughout Egypt writing the stories of martyrs", "I used my wealth to care for the bodies of martyrs", "I provided proper burial for thousands of Christian martyrs", "I am called the recorder of the acts of the martyrs"] },
+  { name: "St. Pisentius of Qift", clues: ["I was Bishop of Qift (Coptos) in Upper Egypt", "I was known for asceticism and spiritual visions", "I had encounters with demons and defeated them through prayer", "I was a scholar who spoke multiple languages", "I lived in the 6th-7th century and my homilies survive in Coptic"] },
+  { name: "St. Misael (Mikhail)", clues: ["I was a young monk at a Coptic monastery", "I was known for my innocence and purity from childhood", "I was martyred at a young age for refusing to deny Christ", "My relics became a source of healing for many", "My story is preserved in the Coptic Synaxarium as one of the pure youth martyrs"] },
+  { name: "St. Sarapamon of Scetis", clues: ["I was Bishop of Nikiu in Egypt", "I was known as the Veiled Bishop because I covered my face", "I covered my face so women would not see him and be tempted", "I was martyred during the Diocletian persecution", "I am one of the most unusual bishops in Coptic history"] },
+  { name: "St. Abaskhyroun the Soldier", clues: ["I was a soldier in the Roman army stationed in Egypt", "I witnessed other Christians being martyred and was moved", "I threw down my military belt and declared myself a Christian", "I endured terrible tortures for my sudden confession of faith", "I am commemorated as one of the brave military martyrs"] },
+  { name: "St. Winefride (Barnaba)", clues: ["I was an Egyptian monk who traveled to Ireland", "I helped spread monasticism in the British Isles", "Egyptian monastic traditions influenced Celtic Christianity through monks like me", "I lived during the age of missionary monks", "I represent the connection between Coptic and Celtic Christianity"] },
+  { name: "St. John the Hegumen", clues: ["I was abbot of a monastery in Scetis", "I was captured by Berber raiders along with other monks", "I was taken into slavery but continued to pray and fast", "I eventually converted my captors to Christianity", "My story shows the power of faith even in captivity"] },
+  { name: "St. Kyriakos (Cyriaque)", clues: ["I was a child martyr during the Diocletian persecution", "My mother Julitta brought me with her when she was arrested", "When the judge tried to comfort me I cried out that I was a Christian", "Despite my very young age I confessed Christ boldly", "I am one of the youngest martyrs in Christian history"] },
 ];
 
 
+
 /* ============================================================
-   BIBLE TRIVIA - DATA
+   BIBLE TRIVIA - DATA (expanded, includes Coptic questions)
    ============================================================ */
 const TRIVIA_DATA = [
   { q: "How many days did God take to create the world?", a: "6", options: ["5", "6", "7", "8"] },
@@ -781,7 +755,7 @@ const TRIVIA_DATA = [
   { q: "What river was Jesus baptized in?", a: "Jordan", options: ["Nile", "Jordan", "Euphrates", "Tigris"] },
   { q: "Who baptized Jesus?", a: "John the Baptist", options: ["Peter", "John the Baptist", "Andrew", "James"] },
   { q: "Where was Jesus born?", a: "Bethlehem", options: ["Nazareth", "Jerusalem", "Bethlehem", "Capernaum"] },
-  { q: "How many brothers did Joseph (son of Jacob) have?", a: "11", options: ["7", "10", "11", "12"] },
+  { q: "How many brothers did Joseph have?", a: "11", options: ["7", "10", "11", "12"] },
   { q: "What did God use to speak to Moses in the desert?", a: "A burning bush", options: ["A cloud", "A burning bush", "A dove", "An angel"] },
   { q: "Who killed Goliath?", a: "David", options: ["Saul", "David", "Jonathan", "Samuel"] },
   { q: "How many loaves and fish did Jesus use to feed the 5,000?", a: "5 loaves and 2 fish", options: ["3 loaves and 3 fish", "5 loaves and 2 fish", "7 loaves and 5 fish", "4 loaves and 2 fish"] },
@@ -790,57 +764,89 @@ const TRIVIA_DATA = [
   { q: "How many days was Jesus in the tomb?", a: "3", options: ["1", "2", "3", "4"] },
   { q: "Who was the first king of Israel?", a: "Saul", options: ["David", "Saul", "Solomon", "Samuel"] },
   { q: "What is the shortest verse in the Bible?", a: "Jesus wept", options: ["God is love", "Jesus wept", "Rejoice always", "Pray continually"] },
-  { q: "What were the names of Adam and Eve's first two sons?", a: "Cain and Abel", options: ["Cain and Abel", "Jacob and Esau", "Shem and Ham", "Isaac and Ishmael"] },
   { q: "Where did God give Moses the Ten Commandments?", a: "Mount Sinai", options: ["Mount Sinai", "Mount Carmel", "Mount Zion", "Mount Tabor"] },
   { q: "Who interpreted Pharaoh's dreams?", a: "Joseph", options: ["Moses", "Daniel", "Joseph", "Samuel"] },
   { q: "How many days and nights did it rain during the flood?", a: "40", options: ["7", "12", "30", "40"] },
-  { q: "What did Esau sell to Jacob for a bowl of stew?", a: "His birthright", options: ["His donkey", "His birthright", "His land", "His sword"] },
   { q: "Who was thrown into a den of lions?", a: "Daniel", options: ["David", "Jonah", "Daniel", "Elijah"] },
-  { q: "What city did Joshua and the Israelites march around for 7 days?", a: "Jericho", options: ["Jerusalem", "Jericho", "Bethel", "Ai"] },
+  { q: "What city walls fell after the Israelites marched around them?", a: "Jericho", options: ["Jerusalem", "Jericho", "Bethel", "Ai"] },
   { q: "Which angel appeared to Mary?", a: "Gabriel", options: ["Michael", "Gabriel", "Raphael", "Uriel"] },
   { q: "Who was the oldest person in the Bible?", a: "Methuselah", options: ["Noah", "Adam", "Methuselah", "Enoch"] },
   { q: "Where did the Holy Family flee to escape King Herod?", a: "Egypt", options: ["Syria", "Jordan", "Egypt", "Lebanon"] },
-  { q: "What is the longest book of the Bible?", a: "Psalms", options: ["Isaiah", "Psalms", "Genesis", "Jeremiah"] },
   { q: "How many Gospels are there?", a: "4", options: ["3", "4", "5", "7"] },
   { q: "Who denied Jesus three times?", a: "Peter", options: ["James", "John", "Peter", "Thomas"] },
-  { q: "What fruit is traditionally associated with the fall of man?", a: "The Bible doesn't specify", options: ["Apple", "Fig", "Pomegranate", "The Bible doesn't specify"] },
   { q: "Which sea did Moses part?", a: "The Red Sea", options: ["The Dead Sea", "The Red Sea", "The Sea of Galilee", "The Mediterranean"] },
   { q: "Who wrote most of the Psalms?", a: "David", options: ["Solomon", "Moses", "David", "Asaph"] },
-  { q: "What mountain did Moses see the Promised Land from?", a: "Mount Nebo", options: ["Mount Sinai", "Mount Nebo", "Mount Carmel", "Mount Hermon"] },
   { q: "Who was the first martyr in the New Testament?", a: "St. Stephen", options: ["St. James", "St. Stephen", "St. Peter", "St. Paul"] },
   { q: "How many sons did Jacob have?", a: "12", options: ["10", "11", "12", "13"] },
   { q: "Which apostle was a tax collector?", a: "Matthew", options: ["Luke", "Matthew", "Mark", "John"] },
   { q: "What was Paul's name before his conversion?", a: "Saul", options: ["Simon", "Saul", "Stephen", "Silas"] },
-  { q: "Where did Jesus perform His first miracle?", a: "Cana", options: ["Capernaum", "Jerusalem", "Cana", "Bethany"] },
   { q: "Who replaced Judas as the 12th apostle?", a: "Matthias", options: ["Paul", "Barnabas", "Matthias", "Timothy"] },
   { q: "How many days did Jesus fast in the wilderness?", a: "40", options: ["7", "30", "40", "50"] },
   { q: "Who was Moses' sister?", a: "Miriam", options: ["Deborah", "Ruth", "Miriam", "Naomi"] },
-  { q: "What was the name of Abraham's wife?", a: "Sarah", options: ["Rachel", "Rebecca", "Sarah", "Leah"] },
   { q: "Which prophet was taken to heaven in a chariot of fire?", a: "Elijah", options: ["Enoch", "Elijah", "Elisha", "Moses"] },
   { q: "What gift did the Magi NOT bring to Jesus?", a: "Silver", options: ["Gold", "Frankincense", "Myrrh", "Silver"] },
-  { q: "Who was Ruth's mother-in-law?", a: "Naomi", options: ["Sarah", "Naomi", "Hannah", "Deborah"] },
   { q: "Who led the Israelites into the Promised Land after Moses?", a: "Joshua", options: ["Aaron", "Caleb", "Joshua", "Gideon"] },
   { q: "What did Jesus ride into Jerusalem on Palm Sunday?", a: "A donkey", options: ["A horse", "A donkey", "A camel", "A chariot"] },
   { q: "Where did Jesus grow up?", a: "Nazareth", options: ["Bethlehem", "Jerusalem", "Nazareth", "Egypt"] },
-  { q: "How many tribes of Israel were there?", a: "12", options: ["7", "10", "12", "14"] },
   { q: "Which apostle is known as 'the beloved disciple'?", a: "John", options: ["Peter", "John", "James", "Andrew"] },
   { q: "What instrument did David play?", a: "Harp", options: ["Flute", "Trumpet", "Harp", "Drum"] },
-  { q: "Who was the mother of Samuel?", a: "Hannah", options: ["Sarah", "Hannah", "Rachel", "Miriam"] },
   { q: "How many stones did David pick up to fight Goliath?", a: "5", options: ["1", "3", "5", "7"] },
   { q: "What language was most of the New Testament written in?", a: "Greek", options: ["Hebrew", "Aramaic", "Latin", "Greek"] },
   { q: "Who was the first person to see the risen Christ?", a: "Mary Magdalene", options: ["Peter", "Mary Magdalene", "John", "The Virgin Mary"] },
-  { q: "Where was St. Paul when he wrote many of his epistles?", a: "In prison", options: ["In the temple", "In prison", "In a monastery", "On a ship"] },
-  { q: "Which Ecumenical Council affirmed that Christ is fully God and fully man?", a: "Council of Chalcedon/Nicaea", options: ["Council of Nicaea", "Council of Ephesus", "Council of Chalcedon/Nicaea", "Council of Constantinople"] },
-  { q: "What is the Coptic calendar based on?", a: "The Egyptian calendar of martyrs", options: ["The Roman calendar", "The Egyptian calendar of martyrs", "The Jewish calendar", "The Julian calendar"] },
-  { q: "What does 'Theotokos' mean?", a: "Mother of God / God-bearer", options: ["Holy Virgin", "Mother of God / God-bearer", "Queen of Saints", "Mother of the Church"] },
+  // COPTIC & CHURCH HISTORY
+  { q: "What does 'Theotokos' mean?", a: "God-bearer / Mother of God", options: ["Holy Virgin", "God-bearer / Mother of God", "Queen of Saints", "Mother of the Church"] },
   { q: "In which country did monasticism originate?", a: "Egypt", options: ["Israel", "Syria", "Egypt", "Greece"] },
   { q: "How many sacraments does the Coptic Orthodox Church have?", a: "7", options: ["3", "5", "7", "9"] },
-  { q: "What is the name of the Coptic New Year?", a: "Nayrouz", options: ["Nayrouz", "Kiahk", "Toba", "Bashans"] },
+  { q: "What is the Coptic New Year called?", a: "Nayrouz", options: ["Nayrouz", "Kiahk", "Toba", "Bashans"] },
+  { q: "Who is the founder of the Coptic Church?", a: "St. Mark the Apostle", options: ["St. Peter", "St. Mark the Apostle", "St. Paul", "St. Athanasius"] },
+  { q: "What council defended that Christ is fully God?", a: "Council of Nicaea (325 AD)", options: ["Council of Nicaea (325 AD)", "Council of Ephesus (431 AD)", "Council of Chalcedon (451 AD)", "Council of Constantinople (381 AD)"] },
+  { q: "What is the Coptic word for 'cross'?", a: "Stavros", options: ["Christos", "Stavros", "Agios", "Theos"] },
+  { q: "Which Coptic month is devoted to praising the Virgin Mary?", a: "Kiahk", options: ["Toba", "Kiahk", "Bashans", "Paone"] },
+  { q: "Where is the Coptic Pope traditionally chosen?", a: "St. Macarius Monastery", options: ["St. Anthony Monastery", "St. Macarius Monastery", "St. Bishoy Monastery", "The Cathedral in Cairo"] },
+  { q: "What heresy did St. Athanasius fight against?", a: "Arianism", options: ["Nestorianism", "Arianism", "Gnosticism", "Pelagianism"] },
+  { q: "Who was called the Father of All Monks?", a: "St. Anthony the Great", options: ["St. Paul the Hermit", "St. Anthony the Great", "St. Macarius", "St. Pachomius"] },
+  { q: "How many times was St. Athanasius exiled?", a: "5", options: ["3", "4", "5", "7"] },
+  { q: "What is the name of the Coptic liturgy most commonly used?", a: "Liturgy of St. Basil", options: ["Liturgy of St. Mark", "Liturgy of St. Gregory", "Liturgy of St. Basil", "Liturgy of St. Cyril"] },
+  { q: "What mountain moved by faith in Coptic history?", a: "Mokattam Mountain", options: ["Mount Sinai", "Mokattam Mountain", "Mount Carmel", "Mount Tabor"] },
+  { q: "Who moved the Mokattam Mountain through prayer?", a: "St. Simon the Tanner", options: ["Pope Abraham", "St. Simon the Tanner", "St. Mina", "Pope Kyrillos VI"] },
+  { q: "What title is the head of the Coptic Church given?", a: "Pope of Alexandria and Patriarch of All Africa", options: ["Patriarch of Egypt", "Pope of Alexandria and Patriarch of All Africa", "Archbishop of Cairo", "Metropolitan of Egypt"] },
+  { q: "The Council of Ephesus (431 AD) defended what title for the Virgin Mary?", a: "Theotokos", options: ["Theotokos", "Christotokos", "Panagia", "Ever-Virgin"] },
+  { q: "What is the Agpeya?", a: "The Coptic book of hours/prayers", options: ["A hymn book", "The Coptic book of hours/prayers", "A book of saints' lives", "The Coptic Bible"] },
+  { q: "What does 'Coptic' mean?", a: "Egyptian", options: ["Christian", "Egyptian", "Orthodox", "Ancient"] },
+  { q: "What desert region is home to the four ancient Coptic monasteries?", a: "Wadi El Natrun", options: ["Western Desert", "Wadi El Natrun", "Eastern Desert", "Sinai Peninsula"] },
+  { q: "What church father wrote 'On the Incarnation'?", a: "St. Athanasius", options: ["St. Cyril", "St. Athanasius", "St. Basil", "St. John Chrysostom"] },
+  { q: "What is the Synaxarium?", a: "The book of saints' lives read daily in church", options: ["A prayer book", "The book of saints' lives read daily in church", "The Coptic hymn book", "A book of theology"] },
+  { q: "Which saint's body remains incorrupt in Wadi El Natrun?", a: "St. Bishoy", options: ["St. Macarius", "St. Bishoy", "St. Moses", "St. Anthony"] },
+  { q: "What is the Great Lent in the Coptic Church?", a: "55 days of fasting before Easter", options: ["40 days of fasting", "55 days of fasting before Easter", "50 days of fasting", "49 days of fasting"] },
+  { q: "Who organized monks into communal living for the first time?", a: "St. Pachomius", options: ["St. Anthony", "St. Macarius", "St. Pachomius", "St. Paul"] },
+  { q: "What year was the Council of Nicaea?", a: "325 AD", options: ["125 AD", "225 AD", "325 AD", "425 AD"] },
+  { q: "What is the Feast of the Cross called in Coptic?", a: "Eid El Salib", options: ["Eid El Nayrouz", "Eid El Salib", "Eid El Ghitas", "Eid El Qiyama"] },
+  { q: "How many fasting days does the Coptic Church observe per year?", a: "Over 200", options: ["About 100", "About 150", "Over 200", "About 250"] },
+  { q: "What did Arius teach that St. Athanasius opposed?", a: "That Christ was a created being", options: ["That Christ was only human", "That Christ was a created being", "That the Holy Spirit was not God", "That Mary was not the Mother of God"] },
+  { q: "Which pope built St. Mark's Cathedral in Cairo?", a: "Pope Kyrillos VI", options: ["Pope Shenouda III", "Pope Kyrillos VI", "Pope Yousab II", "Pope Christodoulos"] },
+  { q: "What does 'Liturgy' mean?", a: "Work of the people / public service", options: ["Holy prayer", "Work of the people / public service", "Sacred meal", "Divine mystery"] },
+  { q: "Where was St. Paul when he was converted?", a: "Road to Damascus", options: ["Jerusalem", "Road to Damascus", "Antioch", "Tarsus"] },
+  { q: "What was the name of Abraham's son born to Hagar?", a: "Ishmael", options: ["Isaac", "Ishmael", "Esau", "Jacob"] },
+  { q: "Who was the wife of Isaac?", a: "Rebecca", options: ["Sarah", "Rachel", "Rebecca", "Leah"] },
+  { q: "What did Jacob's name become after wrestling with God?", a: "Israel", options: ["Judah", "Israel", "Abraham", "Moses"] },
+  { q: "Who was sold into slavery by his brothers?", a: "Joseph", options: ["Benjamin", "Joseph", "David", "Daniel"] },
+  { q: "How many commandments did God give Moses?", a: "10", options: ["5", "7", "10", "12"] },
+  { q: "What did Samson lose when his hair was cut?", a: "His strength", options: ["His sight", "His strength", "His wisdom", "His faith"] },
+  { q: "Who anointed David as king?", a: "Samuel", options: ["Moses", "Elijah", "Samuel", "Nathan"] },
+  { q: "What prayer did Jesus teach His disciples?", a: "The Lord's Prayer", options: ["The Psalms", "The Lord's Prayer", "The Creed", "The Agpeya"] },
+  { q: "How many books did Paul write in the New Testament?", a: "13-14", options: ["7", "10", "13-14", "21"] },
+  { q: "What was the occupation of Jesus' earthly father Joseph?", a: "Carpenter", options: ["Fisherman", "Carpenter", "Tax collector", "Shepherd"] },
+  { q: "What miracle happened at Pentecost?", a: "The Holy Spirit descended on the apostles", options: ["Jesus was transfigured", "The Holy Spirit descended on the apostles", "The temple veil was torn", "Water turned to wine"] },
+  { q: "What are the three Theological Virtues?", a: "Faith, Hope, and Love", options: ["Faith, Hope, and Love", "Truth, Grace, and Mercy", "Prayer, Fasting, and Almsgiving", "Humility, Obedience, and Chastity"] },
+  { q: "Where is the oldest Christian monastery in the world?", a: "St. Anthony's Monastery, Egypt", options: ["Mount Athos, Greece", "St. Anthony's Monastery, Egypt", "Mar Saba, Palestine", "St. Catherine's, Sinai"] },
+  { q: "What is Pascha?", a: "Easter / the Resurrection Feast", options: ["Christmas", "Easter / the Resurrection Feast", "Pentecost", "Palm Sunday"] },
+  { q: "What is the Trisagion?", a: "Holy God, Holy Mighty, Holy Immortal", options: ["The Lord's Prayer", "Holy God, Holy Mighty, Holy Immortal", "The Nicene Creed", "Glory to God in the highest"] },
 ];
 
 
+
 /* ============================================================
-   GAME 2: WHO SAID IT
+   GAME 2: WHO SAID IT (no ref shown until after answer)
    ============================================================ */
 function WhoSaidItGame({ onBack }) {
   const [questions, setQuestions] = useState([]);
@@ -872,13 +878,12 @@ function WhoSaidItGame({ onBack }) {
     if (correct) {
       setScore(s => s + 1);
       setStreak(s => { const n = s + 1; setBestStreak(b => Math.max(b, n)); return n; });
-    } else {
-      setStreak(0);
-    }
-    setTimeout(() => {
-      if (qi + 1 >= questions.length) { setDone(true); }
-      else { setQi(qi + 1); setSelected(null); setShowResult(false); }
-    }, 1500);
+    } else { setStreak(0); }
+  };
+
+  const handleNext = () => {
+    if (qi + 1 >= questions.length) { setDone(true); }
+    else { setQi(qi + 1); setSelected(null); setShowResult(false); }
   };
 
   if (!questions.length) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
@@ -904,13 +909,12 @@ function WhoSaidItGame({ onBack }) {
             </div>
 
             <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "28px 24px", marginBottom: 24, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", textAlign: "center" }}>
-              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 22, fontWeight: 500, color: "#3e2409", lineHeight: 1.5, fontStyle: "italic", marginBottom: 12 }}>
+              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 22, fontWeight: 500, color: "#3e2409", lineHeight: 1.5, fontStyle: "italic" }}>
                 "{cur.quote}"
               </div>
-              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050" }}>{cur.ref}</div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 16 }}>
               {cur.options.map((opt, i) => {
                 const isCorrect = showResult && opt === cur.speaker;
                 const isWrong = showResult && opt === selected && opt !== cur.speaker;
@@ -928,6 +932,17 @@ function WhoSaidItGame({ onBack }) {
                 );
               })}
             </div>
+
+            {showResult && (
+              <div style={{ textAlign: "center", animation: "fadeInUp 0.3s ease-out" }}>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 16, color: selected === cur.speaker ? "#2d6a3f" : "#842029", fontWeight: 600, marginBottom: 8 }}>
+                  {selected === cur.speaker ? "✓ Correct!" : `✗ It was ${cur.speaker}`}
+                </div>
+                <button onClick={handleNext} style={{ padding: "12px 32px", borderRadius: 12, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, cursor: "pointer", letterSpacing: 1 }}>
+                  {qi + 1 < questions.length ? "NEXT →" : "VIEW RESULTS"}
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
@@ -949,7 +964,7 @@ function WhoSaidItGame({ onBack }) {
 }
 
 /* ============================================================
-   GAME 3: GUESS THE SAINT
+   GAME 3: GUESS THE SAINT (with educational blurb after answer)
    ============================================================ */
 function GuessTheSaintGame({ onBack }) {
   const [saints, setSaints] = useState([]);
@@ -990,17 +1005,15 @@ function GuessTheSaintGame({ onBack }) {
       setScore(s => s + 1);
       setTotalPoints(tp => tp + points);
     }
-    setTimeout(() => {
-      if (si + 1 >= saints.length) { setDone(true); }
-      else {
-        const next = si + 1;
-        setSi(next);
-        setRevealedClues(1);
-        setSelected(null);
-        setShowResult(false);
-        genOptions(saints, next);
-      }
-    }, 2000);
+  };
+
+  const handleNext = () => {
+    if (si + 1 >= saints.length) { setDone(true); }
+    else {
+      const next = si + 1;
+      setSi(next); setRevealedClues(1); setSelected(null); setShowResult(false);
+      genOptions(saints, next);
+    }
   };
 
   if (!saints.length) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
@@ -1025,7 +1038,6 @@ function GuessTheSaintGame({ onBack }) {
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: revealedClues <= 2 ? "#6aae7a" : "#3e2409" }}>{Math.max(1, 6 - revealedClues)}</div><div style={{ fontSize: 11, color: "#a08050" }}>Points if correct</div></div>
             </div>
 
-            {/* Clues */}
             <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)" }}>
               <div style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 14, textTransform: "uppercase", textAlign: "center" }}>Clues</div>
               {cur.clues.slice(0, revealedClues).map((clue, i) => (
@@ -1040,25 +1052,42 @@ function GuessTheSaintGame({ onBack }) {
               )}
             </div>
 
-            {/* Options */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {options.map((opt, i) => {
-                const isCorrect = showResult && opt === cur.name;
-                const isWrong = showResult && opt === selected && opt !== cur.name;
-                return (
+            {!showResult ? (
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                {options.map((opt, i) => (
                   <button key={i} onClick={() => handlePick(opt)} style={{
-                    padding: "14px 18px", borderRadius: 14, border: "none", cursor: showResult ? "default" : "pointer",
+                    padding: "14px 18px", borderRadius: 14, border: "none", cursor: "pointer",
                     fontFamily: "'EB Garamond', serif", fontSize: 17, fontWeight: 500, textAlign: "left",
-                    color: isCorrect ? "#fdf6e3" : isWrong ? "#fdf6e3" : "#3e2409",
-                    background: isCorrect ? "linear-gradient(135deg, #6aae7a, #4d9060)" : isWrong ? "linear-gradient(135deg, #dc7a84, #c0606a)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
-                    boxShadow: isCorrect ? "0 4px 16px rgba(106,174,122,0.3)" : "0 3px 12px rgba(139,90,43,0.1)",
-                    transition: "all 0.2s",
-                    transform: isCorrect ? "scale(1.02)" : isWrong ? "scale(0.98)" : "none",
-                    animation: isWrong ? "shake 0.4s ease-in-out" : "none",
+                    color: "#3e2409", background: "linear-gradient(135deg, #f5e6c8, #edd9b5)",
+                    boxShadow: "0 3px 12px rgba(139,90,43,0.1)", transition: "all 0.2s",
                   }}>{opt}</button>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ animation: "fadeInUp 0.4s ease-out" }}>
+                {/* Correct/wrong indicator */}
+                <div style={{ textAlign: "center", marginBottom: 12 }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: 20, fontWeight: 700, color: selected === cur.name ? "#2d6a3f" : "#842029", marginBottom: 4 }}>
+                    {selected === cur.name ? "✓ Correct!" : "✗ Incorrect"}
+                  </div>
+                  {selected !== cur.name && (
+                    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#5a3a1a" }}>It was <strong>{cur.name}</strong></div>
+                  )}
+                </div>
+
+                {/* Educational blurb */}
+                <div style={{ background: "rgba(139,90,43,0.06)", borderRadius: 16, padding: "18px 18px", marginBottom: 16, border: "1px solid rgba(139,90,43,0.12)" }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 600, color: "#8b6930", letterSpacing: 1, marginBottom: 8 }}>☦ DID YOU KNOW?</div>
+                  <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#3e2409", lineHeight: 1.6 }}>{cur.blurb}</div>
+                </div>
+
+                <div style={{ textAlign: "center" }}>
+                  <button onClick={handleNext} style={{ padding: "12px 32px", borderRadius: 12, border: "none", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, cursor: "pointer", letterSpacing: 1 }}>
+                    {si + 1 < saints.length ? "NEXT SAINT →" : "VIEW RESULTS"}
+                  </button>
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
@@ -1090,15 +1119,13 @@ function BibleTriviaGame({ onBack }) {
   const [selected, setSelected] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [done, setDone] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(90);
   const [started, setStarted] = useState(false);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [answered, setAnswered] = useState(0);
 
-  useEffect(() => {
-    setQuestions(shuffle(TRIVIA_DATA));
-  }, []);
+  useEffect(() => { setQuestions(shuffle(TRIVIA_DATA)); }, []);
 
   useEffect(() => {
     if (!started || done) return;
@@ -1107,18 +1134,12 @@ function BibleTriviaGame({ onBack }) {
     return () => clearTimeout(t);
   }, [timeLeft, started, done]);
 
-  const handleStart = () => setStarted(true);
-
   const handlePick = (opt) => {
     if (showResult || done) return;
-    setSelected(opt);
-    setShowResult(true);
-    setAnswered(a => a + 1);
+    setSelected(opt); setShowResult(true); setAnswered(a => a + 1);
     const correct = opt === questions[qi].a;
-    if (correct) {
-      setScore(s => s + 1);
-      setStreak(s => { const n = s + 1; setBestStreak(b => Math.max(b, n)); return n; });
-    } else { setStreak(0); }
+    if (correct) { setScore(s => s + 1); setStreak(s => { const n = s + 1; setBestStreak(b => Math.max(b, n)); return n; }); }
+    else { setStreak(0); }
     setTimeout(() => {
       if (qi + 1 >= questions.length) { setDone(true); }
       else { setQi(qi + 1); setSelected(null); setShowResult(false); }
@@ -1144,8 +1165,8 @@ function BibleTriviaGame({ onBack }) {
           <div style={{ textAlign: "center", padding: "60px 20px" }}>
             <div style={{ fontSize: 52, marginBottom: 16 }}>⚡</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 24, fontWeight: 700, color: "#3e2409", margin: "0 0 8px" }}>Rapid Fire</h2>
-            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#8b6930", marginBottom: 32, lineHeight: 1.5 }}>Answer as many Bible trivia questions as you can in 60 seconds!</p>
-            <button onClick={handleStart} style={{ padding: "16px 48px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 18, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 20px rgba(106,174,122,0.3)" }}>START</button>
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#8b6930", marginBottom: 32, lineHeight: 1.5 }}>Answer as many Bible &amp; Coptic trivia questions as you can in 90 seconds!</p>
+            <button onClick={() => setStarted(true)} style={{ padding: "16px 48px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 18, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 20px rgba(106,174,122,0.3)" }}>START</button>
           </div>
         ) : !done ? (
           <>
@@ -1154,16 +1175,12 @@ function BibleTriviaGame({ onBack }) {
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: streak >= 3 ? "#6aae7a" : "#3e2409" }}>{streak}{streak >= 3 ? " 🔥" : ""}</div><div style={{ fontSize: 11, color: "#a08050" }}>Streak</div></div>
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{answered}</div><div style={{ fontSize: 11, color: "#a08050" }}>Answered</div></div>
             </div>
-
-            {/* Timer bar */}
             <div style={{ width: "100%", height: 6, background: "rgba(139,90,43,0.1)", borderRadius: 3, marginBottom: 20, overflow: "hidden" }}>
-              <div style={{ width: `${(timeLeft / 60) * 100}%`, height: "100%", background: timerColor, borderRadius: 3, transition: "width 1s linear" }} />
+              <div style={{ width: `${(timeLeft / 90) * 100}%`, height: "100%", background: timerColor, borderRadius: 3, transition: "width 1s linear" }} />
             </div>
-
             <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", textAlign: "center" }}>
               <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 20, fontWeight: 500, color: "#3e2409", lineHeight: 1.5 }}>{cur.q}</div>
             </div>
-
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {cur.options.map((opt, i) => {
                 const isCorrect = showResult && opt === cur.a;
@@ -1174,8 +1191,7 @@ function BibleTriviaGame({ onBack }) {
                     fontFamily: "'EB Garamond', serif", fontSize: 17, fontWeight: 500, textAlign: "left",
                     color: isCorrect ? "#fdf6e3" : isWrong ? "#fdf6e3" : "#3e2409",
                     background: isCorrect ? "linear-gradient(135deg, #6aae7a, #4d9060)" : isWrong ? "linear-gradient(135deg, #dc7a84, #c0606a)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
-                    transition: "all 0.15s",
-                    transform: isCorrect ? "scale(1.02)" : isWrong ? "scale(0.98)" : "none",
+                    transition: "all 0.15s", transform: isCorrect ? "scale(1.02)" : isWrong ? "scale(0.98)" : "none",
                   }}>{opt}</button>
                 );
               })}
@@ -1183,7 +1199,7 @@ function BibleTriviaGame({ onBack }) {
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= 15 ? "🏆" : score >= 10 ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= 20 ? "🏆" : score >= 12 ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Time's Up!</h2>
             <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: 28 }}>
@@ -1201,23 +1217,22 @@ function BibleTriviaGame({ onBack }) {
   );
 }
 
-
 /* ============================================================
    HOME SCREEN
    ============================================================ */
 function HomeScreen({ onSelectGame }) {
   const games = [
-    { id: "verses", icon: "📖", title: "Verse by Verse", desc: "Memorize Scripture with drag & drop", color: "#6aae7a", count: "354 verses" },
-    { id: "whosaid", icon: "💬", title: "Who Said It?", desc: "Guess who spoke this Bible quote", color: "#d4a843", count: `${WHO_SAID_IT_DATA.length} quotes` },
-    { id: "saints", icon: "☦", title: "Guess the Saint", desc: "Identify Coptic saints from clues", color: "#c07a4a", count: `${SAINTS_DATA.length} saints` },
-    { id: "trivia", icon: "⚡", title: "Bible Trivia", desc: "Rapid fire — 60 seconds on the clock", color: "#8b6930", count: `${TRIVIA_DATA.length} questions` },
+    { id: "verses", icon: "\u{1F4D6}", title: "Verse by Verse", desc: "Memorize Scripture with drag & drop", color: "#6aae7a", count: "354 verses" },
+    { id: "whosaid", icon: "\u{1F4AC}", title: "Who Said It?", desc: "Scripture & Church Fathers \u2014 who said this quote?", color: "#d4a843", count: `${WHO_SAID_IT_DATA.length} quotes` },
+    { id: "saints", icon: "\u2626", title: "Guess the Saint", desc: "Learn about Coptic saints from the Synaxarium", color: "#c07a4a", count: `${SAINTS_DATA.length} saints` },
+    { id: "trivia", icon: "\u26A1", title: "Bible Trivia", desc: "Rapid fire \u2014 90 seconds on the clock", color: "#8b6930", count: `${TRIVIA_DATA.length} questions` },
   ];
 
   return (
     <AppShell>
       <div style={{ maxWidth: 540, width: "100%", padding: "36px 24px", animation: "fadeInUp 0.6s ease-out" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ fontSize: 52, marginBottom: 8, filter: "grayscale(0.2)" }}>✝</div>
+          <div style={{ fontSize: 52, marginBottom: 8, filter: "grayscale(0.2)" }}>\u271D</div>
           <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 28, fontWeight: 700, color: "#3e2409", margin: "0 0 4px", letterSpacing: 2 }}>BIBLE GAMES</h1>
           <p style={{ fontSize: 16, color: "#8b6930", fontStyle: "italic", margin: 0 }}>Learn, play, and grow in faith</p>
         </div>
@@ -1249,19 +1264,18 @@ function HomeScreen({ onSelectGame }) {
                 <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#8b6930", marginBottom: 2 }}>{game.desc}</div>
                 <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#a08050" }}>{game.count}</div>
               </div>
-              <div style={{ fontSize: 18, color: "#c0a070" }}>→</div>
+              <div style={{ fontSize: 18, color: "#c0a070" }}>\u2192</div>
             </button>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: 28, fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050", fontStyle: "italic" }}>
-          ☦ Coptic Orthodox Edition
+          \u2626 Coptic Orthodox Edition
         </div>
       </div>
     </AppShell>
   );
 }
-
 
 /* ============================================================
    GAME 1: VERSE BY VERSE (existing, adapted)
@@ -1534,6 +1548,7 @@ function VerseByVerseGame({ onBack }) {
   );
 }
 
+/* ============================================================
 /* ============================================================
    MAIN APP - ROUTER
    ============================================================ */
