@@ -1865,7 +1865,7 @@ function DailyChallenge({ onBack }) {
     const wrongStr = result.wrongCount === 0 ? 'No mistakes!' : `${result.wrongCount} mistake${result.wrongCount > 1 ? 's' : ''}`;
     const streakStr = streak.current >= 2 ? `\n🔥 ${streak.current} day streak` : '';
 
-    return `✝ Daily Verse #${result.day}${nameStr}\n📖 ${result.ref}\n⏱️ ${formatTime(result.time)} · ${wrongStr}\n\n${rows.join('\n')}\n⬜ given · 🟩 first try · 🟨 retried${streakStr}\n\nbva.amsm.fun`;
+    return `✝ Daily Verse #${result.day}${nameStr}\n📖 ${result.ref}\n⏱️ ${formatTime(result.time)} · ${wrongStr}\n\n${rows.join('\n')}\n⬜ given · 🟩 first try · 🟨 retried${streakStr}\n\nversebyverse.fun`;
   };
 
   const handleShare = async () => {
@@ -2288,7 +2288,7 @@ function HolyLinksGame({ onBack, dailyMode }) {
     const streakStr = streak.current >= 2 ? `\n🔥 ${streak.current} day streak` : '';
     const name = localStorage.getItem('daily_name') || '';
     const nameStr = name ? ` (${name})` : '';
-    return `✝ Holy Links #${result.day}${nameStr}\n${lines.join('\n')}\n${result.solved ? `${result.mistakes === 0 ? 'Perfect!' : result.mistakes + ' mistake' + (result.mistakes > 1 ? 's' : '')}` : 'Not solved'}${streakStr}\n\nbva.amsm.fun`;
+    return `✝ Holy Links #${result.day}${nameStr}\n${lines.join('\n')}\n${result.solved ? `${result.mistakes === 0 ? 'Perfect!' : result.mistakes + ' mistake' + (result.mistakes > 1 ? 's' : '')}` : 'Not solved'}${streakStr}\n\nversebyverse.fun`;
   };
 
   const handleShare = async () => {
