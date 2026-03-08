@@ -844,6 +844,451 @@ const TRIVIA_DATA = [
   { q: "What is the Trisagion?", a: "Holy God, Holy Mighty, Holy Immortal", options: ["The Lord's Prayer", "Holy God, Holy Mighty, Holy Immortal", "The Nicene Creed", "Glory to God in the highest"] },
 ];
 
+const CONNECTIONS_DATA = [
+  // 1
+  { groups: [
+    { theme: "Fruits of the Spirit", difficulty: 0, words: ["Joy", "Peace", "Patience", "Kindness"] },
+    { theme: "Rivers in the Bible", difficulty: 1, words: ["Jordan", "Nile", "Euphrates", "Tigris"] },
+    { theme: "Coptic Sacraments", difficulty: 2, words: ["Chrismation", "Confession", "Unction", "Eucharist"] },
+    { theme: "Named angels", difficulty: 3, words: ["Michael", "Gabriel", "Raphael", "Suriel"] },
+  ]},
+  // 2
+  { groups: [
+    { theme: "Books of the Pentateuch", difficulty: 0, words: ["Genesis", "Exodus", "Leviticus", "Deuteronomy"] },
+    { theme: "Plagues of Egypt", difficulty: 1, words: ["Locusts", "Boils", "Hail", "Darkness"] },
+    { theme: "Things in the Ark of the Covenant", difficulty: 2, words: ["Manna", "Tablets", "Rod", "Mercy Seat"] },
+    { theme: "Parables of Jesus", difficulty: 3, words: ["Sower", "Talents", "Mustard", "Prodigal"] },
+  ]},
+  // 3
+  { groups: [
+    { theme: "Sons of Jacob", difficulty: 0, words: ["Reuben", "Judah", "Benjamin", "Naphtali"] },
+    { theme: "Monasteries in Wadi El Natrun", difficulty: 1, words: ["St. Macarius", "St. Bishoy", "El-Suryan", "El-Baramous"] },
+    { theme: "Beatitudes — 'Blessed are the ___'", difficulty: 2, words: ["Meek", "Merciful", "Peacemakers", "Pure in Heart"] },
+    { theme: "Women who saw the empty tomb", difficulty: 3, words: ["Mary Magdalene", "Salome", "Joanna", "Mary of James"] },
+  ]},
+  // 4
+  { groups: [
+    { theme: "Four Gospels", difficulty: 0, words: ["Matthew", "Mark", "Luke", "John"] },
+    { theme: "Armor of God (Ephesians 6)", difficulty: 1, words: ["Shield", "Helmet", "Sword", "Breastplate"] },
+    { theme: "Things God created on Day 1-3", difficulty: 2, words: ["Light", "Sky", "Seas", "Vegetation"] },
+    { theme: "Coptic liturgical seasons", difficulty: 3, words: ["Advent", "Lent", "Pentecost", "Apostles' Fast"] },
+  ]},
+  // 5
+  { groups: [
+    { theme: "Desert Fathers", difficulty: 0, words: ["Anthony", "Pachomius", "Macarius", "Arsenius"] },
+    { theme: "Miracles at the Red Sea", difficulty: 1, words: ["Pillar", "Wind", "Walls", "Dry Ground"] },
+    { theme: "Names for Jesus", difficulty: 2, words: ["Lamb", "Vine", "Shepherd", "Cornerstone"] },
+    { theme: "___ of David", difficulty: 3, words: ["City", "Psalms", "Star", "Root"] },
+  ]},
+  // 6
+  { groups: [
+    { theme: "Tribes of Israel", difficulty: 0, words: ["Dan", "Gad", "Asher", "Levi"] },
+    { theme: "Coptic Popes", difficulty: 1, words: ["Athanasius", "Cyril", "Shenouda", "Kyrillos"] },
+    { theme: "Things in Solomon's Temple", difficulty: 2, words: ["Cherubim", "Bronze Sea", "Lampstands", "Incense Altar"] },
+    { theme: "Paul's missionary companions", difficulty: 3, words: ["Barnabas", "Silas", "Timothy", "Titus"] },
+  ]},
+  // 7
+  { groups: [
+    { theme: "Books of poetry/wisdom", difficulty: 0, words: ["Psalms", "Proverbs", "Ecclesiastes", "Song of Songs"] },
+    { theme: "Stations of the Exodus", difficulty: 1, words: ["Marah", "Elim", "Sinai", "Kadesh"] },
+    { theme: "Seven 'I AM' statements of Jesus", difficulty: 2, words: ["Bread", "Light", "Door", "Resurrection"] },
+    { theme: "Coptic hours of prayer (Agpeya)", difficulty: 3, words: ["Prime", "Terce", "Sext", "Compline"] },
+  ]},
+  // 8
+  { groups: [
+    { theme: "Things Noah brought on the Ark", difficulty: 0, words: ["Dove", "Raven", "Olive Branch", "Animals"] },
+    { theme: "Judges of Israel", difficulty: 1, words: ["Gideon", "Samson", "Deborah", "Ehud"] },
+    { theme: "Parts of the Coptic liturgy", difficulty: 2, words: ["Offertory", "Anaphora", "Fraction", "Communion"] },
+    { theme: "Letters to the Seven Churches (Revelation)", difficulty: 3, words: ["Ephesus", "Smyrna", "Laodicea", "Pergamos"] },
+  ]},
+  // 9
+  { groups: [
+    { theme: "Things in the Nativity", difficulty: 0, words: ["Manger", "Star", "Shepherds", "Swaddling"] },
+    { theme: "Major prophets", difficulty: 1, words: ["Isaiah", "Jeremiah", "Ezekiel", "Daniel"] },
+    { theme: "Fasts in the Coptic Church", difficulty: 2, words: ["Jonah", "Advent", "Apostles", "Wednesday"] },
+    { theme: "Places Jesus prayed", difficulty: 3, words: ["Gethsemane", "Wilderness", "Mountain", "Upper Room"] },
+  ]},
+  // 10
+  { groups: [
+    { theme: "Disciples who were fishermen", difficulty: 0, words: ["Peter", "Andrew", "James", "John"] },
+    { theme: "Colors of priestly vestments", difficulty: 1, words: ["White", "Gold", "Blue", "Scarlet"] },
+    { theme: "Titles of the Virgin Mary", difficulty: 2, words: ["Theotokos", "Ever-Virgin", "Queen", "Ark"] },
+    { theme: "Churches in Old Cairo", difficulty: 3, words: ["Abu Sefein", "El-Muallaqa", "St. Sergius", "St. Barbara"] },
+  ]},
+  // 11
+  { groups: [
+    { theme: "Miracles of Jesus involving food", difficulty: 0, words: ["Water to Wine", "Five Loaves", "Fig Tree", "Fish"] },
+    { theme: "Kings of Israel", difficulty: 1, words: ["Saul", "David", "Solomon", "Jeroboam"] },
+    { theme: "Symbols of the Evangelists", difficulty: 2, words: ["Lion", "Ox", "Eagle", "Man"] },
+    { theme: "Coptic months", difficulty: 3, words: ["Tout", "Kiahk", "Baramhat", "Mesra"] },
+  ]},
+  // 12
+  { groups: [
+    { theme: "Ten Commandments topics", difficulty: 0, words: ["Murder", "Adultery", "Theft", "Idols"] },
+    { theme: "OT women of faith", difficulty: 1, words: ["Ruth", "Esther", "Rahab", "Hannah"] },
+    { theme: "Parts of the Tabernacle", difficulty: 2, words: ["Holy of Holies", "Curtain", "Table", "Basin"] },
+    { theme: "Early Church councils", difficulty: 3, words: ["Nicaea", "Constantinople", "Ephesus", "Jerusalem"] },
+  ]},
+  // 13
+  { groups: [
+    { theme: "Things at the Crucifixion", difficulty: 0, words: ["Cross", "Nails", "Vinegar", "Crown of Thorns"] },
+    { theme: "Gifts of the Holy Spirit", difficulty: 1, words: ["Wisdom", "Knowledge", "Faith", "Healing"] },
+    { theme: "Monastic garments", difficulty: 2, words: ["Tonya", "Ballin", "Eskeem", "Hood"] },
+    { theme: "Coptic musical instruments", difficulty: 3, words: ["Triangle", "Cymbals", "Tambourine", "Drum"] },
+  ]},
+  // 14
+  { groups: [
+    { theme: "Miracles of Elijah", difficulty: 0, words: ["Fire from Heaven", "Rain", "Widow's Oil", "Ravens Fed"] },
+    { theme: "NT letters by Paul", difficulty: 1, words: ["Romans", "Galatians", "Philippians", "Colossians"] },
+    { theme: "Holy Family sites in Egypt", difficulty: 2, words: ["Matariyah", "Zeitoun", "Assiut", "Maadi"] },
+    { theme: "Things Jesus said on the Cross", difficulty: 3, words: ["Forgive Them", "My God", "I Thirst", "It Is Finished"] },
+  ]},
+  // 15
+  { groups: [
+    { theme: "Animals in the Bible", difficulty: 0, words: ["Serpent", "Donkey", "Whale", "Ram"] },
+    { theme: "Deacons' ranks in the Coptic Church", difficulty: 1, words: ["Aghnostos", "Anagnostes", "Epideacon", "Archdeacon"] },
+    { theme: "OT covenants", difficulty: 2, words: ["Rainbow", "Circumcision", "Law", "Land"] },
+    { theme: "Things Elisha did", difficulty: 3, words: ["Healed Naaman", "Raised Child", "Parted Water", "Poisoned Pot"] },
+  ]},
+  // 16
+  { groups: [
+    { theme: "Psalms topics", difficulty: 0, words: ["Shepherd", "Praise", "Refuge", "Forgiveness"] },
+    { theme: "Cities Paul visited", difficulty: 1, words: ["Corinth", "Ephesus", "Thessalonica", "Philippi"] },
+    { theme: "Theophany icons", difficulty: 2, words: ["Baptism", "Dove", "Voice", "River"] },
+    { theme: "Coptic saints with 'Abu' title", difficulty: 3, words: ["Abu Seifein", "Abu Fam", "Abu Makar", "Abu Nub"] },
+  ]},
+  // 17
+  { groups: [
+    { theme: "People who fasted 40 days", difficulty: 0, words: ["Moses", "Elijah", "Jesus", "David"] },
+    { theme: "Precious stones on the High Priest's breastplate", difficulty: 1, words: ["Sapphire", "Emerald", "Topaz", "Ruby"] },
+    { theme: "Liturgical responses", difficulty: 2, words: ["Amen", "Lord Have Mercy", "Alleluia", "Axios"] },
+    { theme: "Hymns sung during Kiahk", difficulty: 3, words: ["Seven and Four", "Psali", "Theotokia", "Adam"] },
+  ]},
+  // 18
+  { groups: [
+    { theme: "People raised from the dead", difficulty: 0, words: ["Lazarus", "Jairus' Daughter", "Widow's Son", "Tabitha"] },
+    { theme: "Coptic Church vestment colors", difficulty: 1, words: ["White", "Red", "Purple", "Black"] },
+    { theme: "Books named after women", difficulty: 2, words: ["Ruth", "Esther", "Judith", "Susanna"] },
+    { theme: "OT types of Christ", difficulty: 3, words: ["Isaac", "Joseph", "Jonah", "Melchizedek"] },
+  ]},
+  // 19
+  { groups: [
+    { theme: "Things in the Garden of Eden", difficulty: 0, words: ["Tree of Life", "Tree of Knowledge", "River", "Serpent"] },
+    { theme: "Apostolic Fathers", difficulty: 1, words: ["Clement", "Ignatius", "Polycarp", "Hermas"] },
+    { theme: "Titles of God in the Psalms", difficulty: 2, words: ["Rock", "Fortress", "Shield", "Deliverer"] },
+    { theme: "Coptic calendar feasts", difficulty: 3, words: ["Nayrouz", "Epiphany", "Sham El-Nessim", "Palm Sunday"] },
+  ]},
+  // 20
+  { groups: [
+    { theme: "Healing miracles of Jesus", difficulty: 0, words: ["Blind Man", "Leper", "Paralytic", "Deaf Man"] },
+    { theme: "Desert places in the Bible", difficulty: 1, words: ["Sinai", "Negev", "Wilderness of Zin", "Paran"] },
+    { theme: "Ranks of Coptic clergy", difficulty: 2, words: ["Pope", "Metropolitan", "Bishop", "Hegumen"] },
+    { theme: "Musical terms in Psalms", difficulty: 3, words: ["Selah", "Hallelujah", "Maschil", "Miktam"] },
+  ]},
+  // 21
+  { groups: [
+    { theme: "Jesus' inner circle", difficulty: 0, words: ["Peter", "James", "John", "Andrew"] },
+    { theme: "Things Moses did", difficulty: 1, words: ["Parted Sea", "Struck Rock", "Burning Bush", "Golden Calf"] },
+    { theme: "Coptic hymn tunes", difficulty: 2, words: ["Adam", "Watos", "Batos", "Singari"] },
+    { theme: "NT books with numbers", difficulty: 3, words: ["1 Corinthians", "2 Timothy", "3 John", "1 Peter"] },
+  ]},
+  // 22
+  { groups: [
+    { theme: "Conversion stories in Acts", difficulty: 0, words: ["Paul", "Ethiopian", "Cornelius", "Lydia"] },
+    { theme: "Trumpets in the Bible", difficulty: 1, words: ["Jericho", "Jubilee", "Last Trump", "Revelation"] },
+    { theme: "Coptic icons always show ___", difficulty: 2, words: ["Halo", "Eyes", "Cross", "Name"] },
+    { theme: "NT books attributed to John", difficulty: 3, words: ["Gospel", "1 John", "2 John", "Revelation"] },
+  ]},
+  // 23
+  { groups: [
+    { theme: "Abraham's family", difficulty: 0, words: ["Sarah", "Isaac", "Ishmael", "Hagar"] },
+    { theme: "Materials in the Tabernacle", difficulty: 1, words: ["Acacia Wood", "Linen", "Bronze", "Gold"] },
+    { theme: "Coptic wedding traditions", difficulty: 2, words: ["Crowns", "Oil", "Ring", "Procession"] },
+    { theme: "People who wrestled or argued with God", difficulty: 3, words: ["Jacob", "Job", "Habakkuk", "Jeremiah"] },
+  ]},
+  // 24
+  { groups: [
+    { theme: "Miracles in Acts", difficulty: 0, words: ["Tongues of Fire", "Prison Earthquake", "Healing Lame", "Raised Dead"] },
+    { theme: "Minor prophets", difficulty: 1, words: ["Hosea", "Amos", "Micah", "Malachi"] },
+    { theme: "Instruments of the Passion", difficulty: 2, words: ["Whip", "Spear", "Reed", "Sponge"] },
+    { theme: "Monks who lived past 100", difficulty: 3, words: ["Anthony", "Paul the Hermit", "Shenouda", "Macarius"] },
+  ]},
+  // 25
+  { groups: [
+    { theme: "Words Jesus said", difficulty: 0, words: ["Talitha Cumi", "Ephphatha", "Eli Eli", "Abba"] },
+    { theme: "Dreams in the Bible", difficulty: 1, words: ["Jacob's Ladder", "Pharaoh's Cows", "Nebuchadnezzar's Statue", "Joseph's Sheaves"] },
+    { theme: "Coptic greetings", difficulty: 2, words: ["Ⲭⲣⲓⲥⲧⲟⲥ", "Nayrouz", "Christ is Risen", "Peace to You"] },
+    { theme: "Mountains in the Bible", difficulty: 3, words: ["Sinai", "Carmel", "Tabor", "Olives"] },
+  ]},
+  // 26
+  { groups: [
+    { theme: "Things at Pentecost", difficulty: 0, words: ["Wind", "Fire", "Tongues", "Three Thousand"] },
+    { theme: "Famous prayers in the Bible", difficulty: 1, words: ["Lord's Prayer", "Hannah's Song", "Magnificat", "Jabez"] },
+    { theme: "Coptic Church architecture", difficulty: 2, words: ["Iconostasis", "Sanctuary", "Nave", "Narthex"] },
+    { theme: "Trees in the Bible", difficulty: 3, words: ["Fig", "Cedar", "Olive", "Sycamore"] },
+  ]},
+  // 27
+  { groups: [
+    { theme: "Virtues", difficulty: 0, words: ["Humility", "Charity", "Temperance", "Diligence"] },
+    { theme: "Deadly sins", difficulty: 1, words: ["Pride", "Greed", "Sloth", "Wrath"] },
+    { theme: "Offerings in Leviticus", difficulty: 2, words: ["Burnt", "Grain", "Peace", "Sin"] },
+    { theme: "Coptic fasting rules — cannot eat", difficulty: 3, words: ["Meat", "Dairy", "Eggs", "Fish"] },
+  ]},
+  // 28
+  { groups: [
+    { theme: "People who had visions of heaven", difficulty: 0, words: ["Isaiah", "Ezekiel", "Stephen", "John"] },
+    { theme: "Wells in the Bible", difficulty: 1, words: ["Beer-sheba", "Jacob's Well", "Hagar's Well", "Marah"] },
+    { theme: "Coptic art symbols", difficulty: 2, words: ["Ankh-Cross", "Fish", "Dove", "Vine"] },
+    { theme: "Things with the number 7 in Scripture", difficulty: 3, words: ["Days", "Churches", "Seals", "Trumpets"] },
+  ]},
+  // 29
+  { groups: [
+    { theme: "Jesus' post-Resurrection appearances", difficulty: 0, words: ["Mary Magdalene", "Emmaus Road", "Thomas", "Sea of Tiberias"] },
+    { theme: "Levitical feasts", difficulty: 1, words: ["Passover", "Tabernacles", "Firstfruits", "Trumpets"] },
+    { theme: "Coptic monasteries in Egypt", difficulty: 2, words: ["St. Anthony", "St. Paul", "El-Muharraq", "St. Mina"] },
+    { theme: "Things measured 12 in the Bible", difficulty: 3, words: ["Tribes", "Apostles", "Gates", "Foundations"] },
+  ]},
+  // 30
+  { groups: [
+    { theme: "Bread imagery in the Bible", difficulty: 0, words: ["Manna", "Showbread", "Last Supper", "Five Loaves"] },
+    { theme: "Walls in the Bible", difficulty: 1, words: ["Jericho", "Jerusalem", "Nehemiah", "Babylon"] },
+    { theme: "Coptic vestments", difficulty: 2, words: ["Epitrachelion", "Sticharion", "Cuffs", "Girdle"] },
+    { theme: "___ of God", difficulty: 3, words: ["Lamb", "Word", "Son", "Kingdom"] },
+  ]},
+  // 31
+  { groups: [
+    { theme: "Daniel's companions", difficulty: 0, words: ["Shadrach", "Meshach", "Abednego", "Daniel"] },
+    { theme: "Seeds and planting parables", difficulty: 1, words: ["Sower", "Wheat and Tares", "Mustard Seed", "Growing Seed"] },
+    { theme: "Coptic musical modes", difficulty: 2, words: ["Annual", "Kiahki", "Joyful", "Sorrowful"] },
+    { theme: "Hebrew names of God", difficulty: 3, words: ["Elohim", "Adonai", "El Shaddai", "Yahweh"] },
+  ]},
+  // 32
+  { groups: [
+    { theme: "Things at Jesus' baptism", difficulty: 0, words: ["Water", "Dove", "Voice", "John"] },
+    { theme: "Promises to Abraham", difficulty: 1, words: ["Land", "Descendants", "Blessing", "Nations"] },
+    { theme: "Parts of the Agpeya", difficulty: 2, words: ["First Hour", "Third Hour", "Sixth Hour", "Ninth Hour"] },
+    { theme: "Prophets thrown into things", difficulty: 3, words: ["Jonah-Sea", "Daniel-Lions", "Three Youth-Fire", "Jeremiah-Pit"] },
+  ]},
+  // 33
+  { groups: [
+    { theme: "Miracles involving water", difficulty: 0, words: ["Walking on Water", "Water to Wine", "Parting Sea", "Flood"] },
+    { theme: "People with name changes", difficulty: 1, words: ["Abram to Abraham", "Jacob to Israel", "Saul to Paul", "Simon to Peter"] },
+    { theme: "Coptic funeral traditions", difficulty: 2, words: ["Three Days", "Psalm 51", "White Cloth", "Incense"] },
+    { theme: "Things numbered 40 in the Bible", difficulty: 3, words: ["Days of Rain", "Years in Desert", "Days of Temptation", "Days to Nineveh"] },
+  ]},
+  // 34
+  { groups: [
+    { theme: "David's life events", difficulty: 0, words: ["Shepherd", "Goliath", "King", "Psalms"] },
+    { theme: "NT prison stories", difficulty: 1, words: ["Peter's Chains", "Paul in Rome", "John the Baptist", "Joseph in Egypt"] },
+    { theme: "Coptic calendar months (winter)", difficulty: 2, words: ["Kiahk", "Tobi", "Amshir", "Baramhat"] },
+    { theme: "Stones in the Bible", difficulty: 3, words: ["Jacob's Pillow", "David's Sling", "Tablets", "Rolled Away"] },
+  ]},
+  // 35
+  { groups: [
+    { theme: "Things Jesus taught about", difficulty: 0, words: ["Love", "Forgiveness", "Prayer", "Faith"] },
+    { theme: "Ships in the Bible", difficulty: 1, words: ["Noah's Ark", "Jonah's Ship", "Paul's Shipwreck", "Disciples' Boat"] },
+    { theme: "Coptic saints from Upper Egypt", difficulty: 2, words: ["St. Mina", "St. Abanoub", "St. Shenouda", "St. Bishoy"] },
+    { theme: "Greek words used in church", difficulty: 3, words: ["Kyrie", "Agios", "Eucharistia", "Logos"] },
+  ]},
+  // 36
+  { groups: [
+    { theme: "Resurrection details", difficulty: 0, words: ["Stone", "Angel", "Linen", "Garden"] },
+    { theme: "Samson's story", difficulty: 1, words: ["Riddle", "Foxes", "Jawbone", "Pillars"] },
+    { theme: "Coptic doxologies", difficulty: 2, words: ["Watos", "Adam", "Annual", "Joyful"] },
+    { theme: "Pairs in the Bible", difficulty: 3, words: ["Cain and Abel", "Jacob and Esau", "Moses and Aaron", "Peter and Paul"] },
+  ]},
+  // 37
+  { groups: [
+    { theme: "Things in Revelation", difficulty: 0, words: ["Dragon", "Throne", "Scroll", "Horsemen"] },
+    { theme: "Covenants — signed with", difficulty: 1, words: ["Rainbow", "Blood", "Bread", "Fire"] },
+    { theme: "Coptic Church in diaspora", difficulty: 2, words: ["New Jersey", "Los Angeles", "Melbourne", "London"] },
+    { theme: "People who were hidden as babies", difficulty: 3, words: ["Moses", "Jesus", "Samuel", "Joash"] },
+  ]},
+  // 38
+  { groups: [
+    { theme: "Wisdom literature advice", difficulty: 0, words: ["Fear God", "Trust Lord", "Guard Heart", "Seek Wisdom"] },
+    { theme: "Garments in the Bible", difficulty: 1, words: ["Joseph's Coat", "Elijah's Mantle", "Priestly Ephod", "Robe of Christ"] },
+    { theme: "Coptic saints who were physicians", difficulty: 2, words: ["Cosmas", "Damian", "Luke", "Panteleimon"] },
+    { theme: "Things measured in cubits", difficulty: 3, words: ["Ark", "Temple", "Goliath", "City Walls"] },
+  ]},
+  // 39
+  { groups: [
+    { theme: "Sermon on the Mount teachings", difficulty: 0, words: ["Salt", "Light", "Lilies", "Narrow Gate"] },
+    { theme: "Exile locations", difficulty: 1, words: ["Babylon", "Egypt", "Patmos", "Tarsus"] },
+    { theme: "Coptic music instruments", difficulty: 2, words: ["Cymbals", "Triangle", "Sistrum", "Naqqarah"] },
+    { theme: "People blinded", difficulty: 3, words: ["Paul", "Samson", "Bartimaeus", "Tobit"] },
+  ]},
+  // 40
+  { groups: [
+    { theme: "Last Supper elements", difficulty: 0, words: ["Bread", "Wine", "Basin", "Towel"] },
+    { theme: "Joseph (OT) events", difficulty: 1, words: ["Coat", "Pit", "Dreams", "Egypt"] },
+    { theme: "Coptic saints' symbols", difficulty: 2, words: ["Dragon-George", "Lion-Mark", "Camel-Mina", "Tower-Barbara"] },
+    { theme: "Sevens in Revelation", difficulty: 3, words: ["Seals", "Trumpets", "Bowls", "Stars"] },
+  ]},
+  // 41
+  { groups: [
+    { theme: "Creation — Day 4 items", difficulty: 0, words: ["Sun", "Moon", "Stars", "Seasons"] },
+    { theme: "Elders of the Church", difficulty: 1, words: ["Presbyter", "Priest", "Elder", "Father"] },
+    { theme: "Coptic words used in English", difficulty: 2, words: ["Oasis", "Adobe", "Ebony", "Chemistry"] },
+    { theme: "Biblical meals", difficulty: 3, words: ["Passover", "Wedding at Cana", "Feeding 5000", "Emmaus"] },
+  ]},
+  // 42
+  { groups: [
+    { theme: "Shepherd imagery", difficulty: 0, words: ["Rod", "Staff", "Pasture", "Fold"] },
+    { theme: "People who prayed all night", difficulty: 1, words: ["Jesus", "Jacob", "Samuel", "Daniel"] },
+    { theme: "Coptic Orthodox patriarchates", difficulty: 2, words: ["Alexandria", "Addis Ababa", "Asmara", "Sudan"] },
+    { theme: "___ Gate / Door", difficulty: 3, words: ["Beautiful", "Sheep", "Narrow", "Eastern"] },
+  ]},
+  // 43
+  { groups: [
+    { theme: "Things at the Transfiguration", difficulty: 0, words: ["Moses", "Elijah", "Cloud", "Glory"] },
+    { theme: "Psalms by number — themes", difficulty: 1, words: ["23-Shepherd", "51-Mercy", "91-Protection", "150-Praise"] },
+    { theme: "Coptic art motifs", difficulty: 2, words: ["Cross", "Vine", "Fish", "Peacock"] },
+    { theme: "Women who were queens", difficulty: 3, words: ["Esther", "Sheba", "Jezebel", "Athaliah"] },
+  ]},
+  // 44
+  { groups: [
+    { theme: "NT letters to cities", difficulty: 0, words: ["Rome", "Corinth", "Galatia", "Colossae"] },
+    { theme: "Sacrificial animals in OT", difficulty: 1, words: ["Lamb", "Bull", "Goat", "Dove"] },
+    { theme: "Parts of the Tasbeha", difficulty: 2, words: ["First Hoos", "Lobsh", "Third Hoos", "Psali"] },
+    { theme: "Things spoken from a bush, cloud, or flame", difficulty: 3, words: ["I AM", "This is My Son", "Holy Ground", "Do Not Fear"] },
+  ]},
+  // 45
+  { groups: [
+    { theme: "Lazarus story elements", difficulty: 0, words: ["Bethany", "Martha", "Four Days", "Weeping"] },
+    { theme: "Ruth story elements", difficulty: 1, words: ["Naomi", "Boaz", "Gleaning", "Moab"] },
+    { theme: "Vestments of the bishop", difficulty: 2, words: ["Mitre", "Staff", "Panagia", "Omophorion"] },
+    { theme: "Number 3 in the Bible", difficulty: 3, words: ["Trinity", "Denial", "Temptation", "Jonah"] },
+  ]},
+  // 46
+  { groups: [
+    { theme: "Palm Sunday items", difficulty: 0, words: ["Donkey", "Branches", "Hosanna", "Cloaks"] },
+    { theme: "Things Peter did", difficulty: 1, words: ["Walked on Water", "Cut Ear", "Denied", "Preached Pentecost"] },
+    { theme: "Coptic Church in ancient times", difficulty: 2, words: ["Catechetical School", "Desert Fathers", "Nicaea", "Theotokos"] },
+    { theme: "Doors/Gates in Scripture", difficulty: 3, words: ["Eden-Cherubim", "Passover-Blood", "Tomb-Stone", "Heaven-Open"] },
+  ]},
+  // 47
+  { groups: [
+    { theme: "Manna descriptions", difficulty: 0, words: ["White", "Sweet", "Morning", "Melted"] },
+    { theme: "Moses' family", difficulty: 1, words: ["Aaron", "Miriam", "Zipporah", "Jochebed"] },
+    { theme: "Coptic Theological Seminary subjects", difficulty: 2, words: ["Patrology", "Liturgics", "Hymnology", "Apologetics"] },
+    { theme: "Things that were torn/rent", difficulty: 3, words: ["Veil", "Garments", "Heavens", "Kingdom"] },
+  ]},
+  // 48
+  { groups: [
+    { theme: "Psalm 23 imagery", difficulty: 0, words: ["Shepherd", "Valley", "Table", "Cup"] },
+    { theme: "Walls that fell or opened", difficulty: 1, words: ["Jericho", "Prison-Acts", "Red Sea", "Jordan"] },
+    { theme: "Coptic Advent traditions", difficulty: 2, words: ["43 Days", "Vegan Fast", "Kiahk Praises", "Nativity"] },
+    { theme: "People swallowed or consumed", difficulty: 3, words: ["Jonah", "Korah", "Nadab", "Ananias"] },
+  ]},
+  // 49
+  { groups: [
+    { theme: "Feeding of the 5000", difficulty: 0, words: ["Five Loaves", "Two Fish", "Twelve Baskets", "Boy"] },
+    { theme: "Prophets' symbolic acts", difficulty: 1, words: ["Hosea-Marriage", "Ezekiel-Bones", "Isaiah-Naked", "Jeremiah-Yoke"] },
+    { theme: "Coptic Diocese regions in USA", difficulty: 2, words: ["Southern US", "Los Angeles", "New York", "New Jersey"] },
+    { theme: "Thrones in the Bible", difficulty: 3, words: ["David", "Solomon", "God", "Judgment"] },
+  ]},
+  // 50
+  { groups: [
+    { theme: "Fire in the Bible", difficulty: 0, words: ["Burning Bush", "Pillar", "Elijah", "Pentecost"] },
+    { theme: "People who doubted", difficulty: 1, words: ["Thomas", "Gideon", "Zechariah", "Sarah"] },
+    { theme: "Things in a Coptic church building", difficulty: 2, words: ["Iconostasis", "Altar", "Font", "Lectern"] },
+    { theme: "Opened in the Bible", difficulty: 3, words: ["Eyes", "Womb", "Heavens", "Graves"] },
+  ]},
+  // 51
+  { groups: [
+    { theme: "Wedding at Cana details", difficulty: 0, words: ["Water", "Wine", "Jars", "Mother"] },
+    { theme: "Things God sealed or shut", difficulty: 1, words: ["Ark Door", "Lions' Mouths", "Tomb", "Womb"] },
+    { theme: "Coptic hymns during Holy Week", difficulty: 2, words: ["Golgotha", "Tai Shori", "Pi Oik", "Fai Eta Faf"] },
+    { theme: "Biblical gardens", difficulty: 3, words: ["Eden", "Gethsemane", "Song of Songs", "King's Garden"] },
+  ]},
+  // 52
+  { groups: [
+    { theme: "Prodigal Son elements", difficulty: 0, words: ["Pigs", "Ring", "Robe", "Feast"] },
+    { theme: "People sold or betrayed", difficulty: 1, words: ["Joseph", "Jesus", "Samson", "Esau"] },
+    { theme: "Coptic baptism elements", difficulty: 2, words: ["Immersion", "Chrism", "Oil", "White Garment"] },
+    { theme: "Things counted as 12 in Revelation", difficulty: 3, words: ["Stars", "Gates", "Apostles", "Tribes"] },
+  ]},
+  // 53
+  { groups: [
+    { theme: "Zacchaeus story", difficulty: 0, words: ["Tree", "Short", "Tax Collector", "Jericho"] },
+    { theme: "People who fled", difficulty: 1, words: ["Jonah", "Elijah", "David", "Holy Family"] },
+    { theme: "Liturgy of St. Basil parts", difficulty: 2, words: ["Institution", "Epiclesis", "Intercessions", "Commemoration"] },
+    { theme: "Stones — role in the story", difficulty: 3, words: ["Sling-David", "Tablets-Moses", "Tomb-Jesus", "Pillow-Jacob"] },
+  ]},
+  // 54
+  { groups: [
+    { theme: "Good Samaritan items", difficulty: 0, words: ["Oil", "Bandages", "Donkey", "Inn"] },
+    { theme: "People renamed by God or angel", difficulty: 1, words: ["Abraham", "Israel", "Peter", "Jesus"] },
+    { theme: "Coptic Lent practices", difficulty: 2, words: ["55 Days", "Vegan", "Prostrations", "Pascha"] },
+    { theme: "Things multiplied miraculously", difficulty: 3, words: ["Oil-Widow", "Bread-5000", "Wine-Cana", "Manna-Desert"] },
+  ]},
+  // 55
+  { groups: [
+    { theme: "Nativity visitors", difficulty: 0, words: ["Shepherds", "Magi", "Angels", "Star"] },
+    { theme: "Wicked kings", difficulty: 1, words: ["Pharaoh", "Herod", "Ahab", "Nebuchadnezzar"] },
+    { theme: "Coptic funeral hymns/prayers", difficulty: 2, words: ["Psalm 23", "Trisagion", "Absolution", "Gospel"] },
+    { theme: "People who ascended to heaven", difficulty: 3, words: ["Elijah", "Enoch", "Jesus", "Mary"] },
+  ]},
+  // 56
+  { groups: [
+    { theme: "John 15 imagery — the Vine", difficulty: 0, words: ["Vine", "Branches", "Fruit", "Pruning"] },
+    { theme: "Things in Ezekiel's vision", difficulty: 1, words: ["Wheels", "Four Creatures", "Throne", "Bones"] },
+    { theme: "Coptic icons — colors meaning", difficulty: 2, words: ["Gold-Divinity", "Blue-Heaven", "Red-Sacrifice", "White-Purity"] },
+    { theme: "People who wept", difficulty: 3, words: ["Jesus-Lazarus", "Peter-Denial", "David-Absalom", "Rachel-Children"] },
+  ]},
+  // 57
+  { groups: [
+    { theme: "Road to Emmaus details", difficulty: 0, words: ["Two Disciples", "Bread", "Eyes Opened", "Vanished"] },
+    { theme: "Objects that parted water", difficulty: 1, words: ["Staff-Moses", "Mantle-Elijah", "Ark-Jordan", "Wind-Creation"] },
+    { theme: "Coptic responses during liturgy", difficulty: 2, words: ["Amen", "Kyrie Eleison", "Axios", "Alleluia"] },
+    { theme: "Unnamed people in the Gospels", difficulty: 3, words: ["Woman at Well", "Rich Young Ruler", "Good Thief", "Centurion"] },
+  ]},
+  // 58
+  { groups: [
+    { theme: "Gideon's story", difficulty: 0, words: ["Fleece", "Three Hundred", "Torches", "Trumpets"] },
+    { theme: "NT household codes topics", difficulty: 1, words: ["Husbands", "Wives", "Children", "Servants"] },
+    { theme: "Coptic saints from Alexandria", difficulty: 2, words: ["Athanasius", "Cyril", "Clement", "Didymus"] },
+    { theme: "Things that shook in Scripture", difficulty: 3, words: ["Mountain-Sinai", "Prison-Acts", "Earth-Cross", "Walls-Jericho"] },
+  ]},
+  // 59
+  { groups: [
+    { theme: "Burning objects in the Bible", difficulty: 0, words: ["Bush", "Lamp", "Incense", "Offering"] },
+    { theme: "Esther story elements", difficulty: 1, words: ["Haman", "Mordecai", "Scepter", "Purim"] },
+    { theme: "Types of Coptic chant", difficulty: 2, words: ["Annual", "Advent", "Lenten", "Paschal"] },
+    { theme: "People who built altars", difficulty: 3, words: ["Noah", "Abraham", "Moses", "Elijah"] },
+  ]},
+  // 60
+  { groups: [
+    { theme: "Peter's confession elements", difficulty: 0, words: ["Christ", "Son", "Living God", "Rock"] },
+    { theme: "Things in the New Jerusalem", difficulty: 1, words: ["No Temple", "No Sun", "River of Life", "Tree of Life"] },
+    { theme: "Coptic calendar seasons", difficulty: 2, words: ["Akhet-Flood", "Peret-Growth", "Shemu-Harvest", "Nasi-Little"] },
+    { theme: "Fish stories in Scripture", difficulty: 3, words: ["Jonah's Whale", "Peter's Coin", "153 Fish", "Tobias"] },
+  ]},
+  // 61
+  { groups: [
+    { theme: "Things Jesus touched to heal", difficulty: 0, words: ["Eyes", "Ears", "Hand", "Tongue"] },
+    { theme: "OT judges who were unlikely leaders", difficulty: 1, words: ["Deborah", "Gideon", "Jephthah", "Ehud"] },
+    { theme: "Coptic Theophany (Epiphany) traditions", difficulty: 2, words: ["Lakaan", "Blessing Water", "Jordan", "Dove"] },
+    { theme: "Things poured out in Scripture", difficulty: 3, words: ["Spirit", "Blood", "Oil", "Wrath"] },
+  ]},
+  // 62
+  { groups: [
+    { theme: "Tabernacle furnishings", difficulty: 0, words: ["Lampstand", "Table", "Altar", "Ark"] },
+    { theme: "John the Baptist details", difficulty: 1, words: ["Locusts", "Camel Hair", "Jordan", "Beheading"] },
+    { theme: "Coptic clergy titles", difficulty: 2, words: ["Abouna", "Anba", "Hegumen", "Archdeacon"] },
+    { theme: "Things growing from small beginnings", difficulty: 3, words: ["Mustard Seed", "Leaven", "Faith", "Kingdom"] },
+  ]},
+  // 63
+  { groups: [
+    { theme: "Communion elements", difficulty: 0, words: ["Bread", "Wine", "Body", "Blood"] },
+    { theme: "Isaiah's messianic titles", difficulty: 1, words: ["Wonderful", "Counselor", "Mighty God", "Prince of Peace"] },
+    { theme: "Things in a Coptic monastery", difficulty: 2, words: ["Keep", "Church", "Refectory", "Cells"] },
+    { theme: "Coats/Garments in the Bible", difficulty: 3, words: ["Joseph's Coat", "Elijah's Mantle", "Robe-Jesus", "Skins-Adam"] },
+  ]},
+];
+
+
 
 
 /* ============================================================
@@ -1221,51 +1666,900 @@ function BibleTriviaGame({ onBack }) {
 /* ============================================================
    HOME SCREEN
    ============================================================ */
+/* ============================================================
+   DAILY CHALLENGE (Wordle-style daily verse)
+   ============================================================ */
+const DAILY_EPOCH = new Date('2025-02-25').getTime(); // Day 1
+
+function getDailyNumber() {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  return Math.floor((today - DAILY_EPOCH) / 86400000) + 1;
+}
+
+function seededRandom(seed) {
+  let s = seed;
+  return function() {
+    s = (s * 16807 + 0) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+function getDailyVerse(dayNum) {
+  const eligible = VERSE_DATA.filter(v => v.testament === "NT" || v.ref.startsWith("Psalm"));
+  const rng = seededRandom(dayNum * 7919 + 1337);
+  const idx = Math.floor(rng() * eligible.length);
+  return eligible[idx];
+}
+
+
+
+function DailyChallenge({ onBack }) {
+  const dayNum = getDailyNumber();
+  const verse = getDailyVerse(dayNum);
+  const words = verse.text.split(/\s+/);
+
+  // Check if already completed today
+  const [completed, setCompleted] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('daily_result') || '{}');
+      return saved.day === dayNum ? saved : null;
+    } catch { return null; }
+  });
+
+  // Name
+  const [playerName, setPlayerName] = useState(() => localStorage.getItem('daily_name') || '');
+  const [nameInput, setNameInput] = useState('');
+  const [showNameInput, setShowNameInput] = useState(false);
+
+  // Game state
+  const [puzzle, setPuzzle] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [elapsed, setElapsed] = useState(0);
+  const [correctSlots, setCorrectSlots] = useState(new Set());
+  const [wrongCount, setWrongCount] = useState(0);
+  const [wrongPerSlot, setWrongPerSlot] = useState({});
+  const [selectedBank, setSelectedBank] = useState(null);
+  const [bankPlaced, setBankPlaced] = useState({});
+  const [done, setDone] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  // Timer
+  useEffect(() => {
+    if (!startTime || done) return;
+    const id = setInterval(() => setElapsed(Math.floor((Date.now() - startTime) / 1000)), 200);
+    return () => clearInterval(id);
+  }, [startTime, done]);
+
+  // Init puzzle (medium: ~50% blanks)
+  useEffect(() => {
+    if (completed) return;
+    const allIndices = words.map((_, i) => i);
+    const count = Math.max(2, Math.round(words.length * 0.5));
+    const shuffledIndices = [...allIndices].sort(() => Math.random() - 0.5);
+    const blankIndices = shuffledIndices.slice(0, count).sort((a, b) => a - b);
+    const blankSet = new Set(blankIndices);
+    const dragWords = [...blankIndices].sort(() => Math.random() - 0.5).map(i => words[i]);
+    const placed = Array(words.length).fill(null);
+    // Pre-fill non-blank slots as correct
+    const preCorrect = new Set();
+    allIndices.forEach(i => { if (!blankSet.has(i)) { placed[i] = words[i]; preCorrect.add(i); } });
+    setPuzzle({ blanks: blankIndices, dragWords, placed, blankSet });
+    setCorrectSlots(preCorrect);
+    setStartTime(Date.now());
+  }, []);
+
+  // Place word
+  const handleDrop = (slotIndex, data) => {
+    if (!puzzle || correctSlots.has(slotIndex)) return;
+    const { word, bankIndex } = data;
+    if (word.toLowerCase() === words[slotIndex].toLowerCase()) {
+      const np = { ...puzzle, placed: [...puzzle.placed] };
+      np.placed[slotIndex] = word;
+      setPuzzle(np);
+      const cs = new Set(correctSlots);
+      cs.add(slotIndex);
+      setCorrectSlots(cs);
+      setBankPlaced(prev => ({ ...prev, [bankIndex]: true }));
+      if (cs.size === words.length) {
+        finishGame(cs.size);
+      }
+    } else {
+      setWrongCount(c => c + 1);
+      setWrongPerSlot(prev => ({ ...prev, [slotIndex]: (prev[slotIndex] || 0) + 1 }));
+    }
+  };
+
+  const handleTapBank = (bankIndex) => {
+    if (bankPlaced[bankIndex]) return;
+    setSelectedBank(selectedBank === bankIndex ? null : bankIndex);
+  };
+
+  const handleTapSlot = (slotIndex) => {
+    if (!puzzle || correctSlots.has(slotIndex)) return;
+    if (selectedBank === null) return;
+    handleDrop(slotIndex, { word: puzzle.dragWords[selectedBank], bankIndex: selectedBank });
+    setSelectedBank(null);
+  };
+
+  const finishGame = (totalCorrect) => {
+    const totalTime = Math.floor((Date.now() - startTime) / 1000);
+    setDone(true);
+    setElapsed(totalTime);
+
+    // Build per-word result: white = given, green = blank filled first try, yellow = blank with retries
+    const blankSet = puzzle ? puzzle.blankSet : new Set();
+    const wordGrid = words.map((_, i) => {
+      if (!blankSet.has(i)) return 'given';
+      return (wrongPerSlot[i] || 0) === 0 ? 'perfect' : 'struggled';
+    });
+    const blanksCount = blankSet.size;
+
+    const result = { day: dayNum, time: totalTime, wrongCount, ref: verse.ref, wordCount: words.length, blanksCount, name: playerName, wordGrid };
+    localStorage.setItem('daily_result', JSON.stringify(result));
+    setCompleted(result);
+
+    // Update streak
+    try {
+      const streakData = JSON.parse(localStorage.getItem('daily_streak') || '{"current":0,"lastDay":0,"best":0}');
+      if (streakData.lastDay === dayNum - 1) {
+        streakData.current += 1;
+      } else if (streakData.lastDay !== dayNum) {
+        streakData.current = 1;
+      }
+      streakData.lastDay = dayNum;
+      streakData.best = Math.max(streakData.best, streakData.current);
+      localStorage.setItem('daily_streak', JSON.stringify(streakData));
+    } catch {}
+
+    // Update personal best
+    try {
+      const bestData = JSON.parse(localStorage.getItem('daily_bests') || '{}');
+      const prev = bestData[dayNum];
+      if (!prev || totalTime < prev.time) {
+        bestData[dayNum] = { time: totalTime, wrongCount, name: playerName };
+        localStorage.setItem('daily_bests', JSON.stringify(bestData));
+      }
+    } catch {}
+
+    // If no name yet, prompt
+    if (!playerName) setShowNameInput(true);
+  };
+
+  const handleSaveName = () => {
+    const name = nameInput.trim();
+    if (!name) return;
+    localStorage.setItem('daily_name', name);
+    setPlayerName(name);
+    setShowNameInput(false);
+    // Update result with name
+    if (completed) {
+      const updated = { ...completed, name };
+      localStorage.setItem('daily_result', JSON.stringify(updated));
+      setCompleted(updated);
+    }
+    try {
+      const bestData = JSON.parse(localStorage.getItem('daily_bests') || '{}');
+      if (bestData[dayNum]) { bestData[dayNum].name = name; localStorage.setItem('daily_bests', JSON.stringify(bestData)); }
+    } catch {}
+  };
+
+  const getStreak = () => {
+    try {
+      return JSON.parse(localStorage.getItem('daily_streak') || '{"current":0,"lastDay":0,"best":0}');
+    } catch { return { current: 0, lastDay: 0, best: 0 }; }
+  };
+
+  const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
+
+  const generateShareText = (result) => {
+    const streak = getStreak();
+    const grid = (result.wordGrid || []).map(r => r === 'given' ? '⬜' : r === 'perfect' ? '🟩' : '🟨');
+    const rows = [];
+    for (let i = 0; i < grid.length; i += 10) rows.push(grid.slice(i, i + 10).join(''));
+
+    const nameStr = result.name ? ` (${result.name})` : '';
+    const wrongStr = result.wrongCount === 0 ? 'No mistakes!' : `${result.wrongCount} mistake${result.wrongCount > 1 ? 's' : ''}`;
+    const streakStr = streak.current >= 2 ? `\n🔥 ${streak.current} day streak` : '';
+
+    return `✝ Daily Verse #${result.day}${nameStr}\n📖 ${result.ref}\n⏱️ ${formatTime(result.time)} · ${wrongStr}\n\n${rows.join('\n')}\n⬜ given · 🟩 first try · 🟨 retried${streakStr}\n\nbva.amsm.fun`;
+  };
+
+  const handleShare = async () => {
+    const text = generateShareText(completed);
+    try {
+      if (navigator.share) {
+        await navigator.share({ text });
+      } else {
+        await navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    } catch {
+      try {
+        await navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } catch {}
+    }
+  };
+
+  const streak = getStreak();
+
+  // ---- RESULTS VIEW ----
+  if (completed) {
+    const grid = (completed.wordGrid || []).map(r => r === 'given' ? '⬜' : r === 'perfect' ? '🟩' : '🟨');
+    const gridRows = [];
+    for (let i = 0; i < grid.length; i += 10) gridRows.push(grid.slice(i, i + 10).join(' '));
+
+    return (
+      <AppShell>
+        <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+            <BackButton onClick={onBack} />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#2d6a3f", letterSpacing: 1 }}>DAILY CHALLENGE</span>
+            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#2d6a3f" }}>#{dayNum}</span>
+          </div>
+
+          <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
+            <div style={{ fontSize: 52, marginBottom: 8 }}>{completed.wrongCount === 0 ? "🏆" : completed.time < 60 ? "⭐" : "📖"}</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 24, fontWeight: 700, color: "#3e2409", margin: "0 0 4px" }}>Daily Verse #{dayNum}</h2>
+            {playerName && <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: "#5a3a1a", margin: "0 0 4px" }}>{playerName}</p>}
+            <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#8b6930", margin: "0 0 20px" }}>{completed.ref}</p>
+          </div>
+
+          {/* Stats */}
+          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.12)" }}>
+            <div style={{ display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: "#3e2409" }}>{formatTime(completed.time)}</div><div style={{ fontSize: 12, color: "#a08050" }}>Time</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: completed.wrongCount === 0 ? "#2d6a3f" : "#d4a843" }}>{completed.wrongCount}</div><div style={{ fontSize: 12, color: "#a08050" }}>Mistakes</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: "#3e2409" }}>{completed.blanksCount || Math.round(words.length * 0.5)}</div><div style={{ fontSize: 12, color: "#a08050" }}>Blanks Filled</div></div>
+              <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: streak.current >= 3 ? "#d4a843" : "#3e2409" }}>{streak.current}</div><div style={{ fontSize: 12, color: "#a08050" }}>{streak.current >= 3 ? "🔥 Streak" : "Streak"}</div></div>
+            </div>
+          </div>
+
+          {/* Emoji grid preview */}
+          <div style={{ background: "rgba(45,106,63,0.04)", borderRadius: 16, padding: "16px 20px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.1)", textAlign: "center" }}>
+            {gridRows.map((row, i) => (
+              <div key={i} style={{ fontFamily: "monospace", fontSize: 20, letterSpacing: 4, lineHeight: 1.6 }}>{row}</div>
+            ))}
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#5a7a5a", marginTop: 8 }}>⬜ given · 🟩 first try · 🟨 retried</div>
+          </div>
+
+          {/* Name prompt (first time) */}
+          {showNameInput && (
+            <div style={{ background: "rgba(255,255,255,0.6)", borderRadius: 16, padding: "18px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.15)", textAlign: "center" }}>
+              <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: "#3e2409", marginBottom: 10 }}>Enter your name to share your score:</div>
+              <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+                <input
+                  type="text" value={nameInput} onChange={e => setNameInput(e.target.value)}
+                  placeholder="Your name" maxLength={20} autoFocus
+                  onKeyDown={e => e.key === 'Enter' && handleSaveName()}
+                  style={{ padding: "10px 14px", borderRadius: 10, border: "1.5px solid rgba(45,106,63,0.3)", background: "rgba(255,255,255,0.8)", fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#3e2409", width: 160, outline: "none" }}
+                />
+                <button onClick={handleSaveName} style={{ padding: "10px 18px", borderRadius: 10, border: "none", background: "#2d6a3f", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>SAVE</button>
+              </div>
+            </div>
+          )}
+
+          {/* Change name (if already has one) */}
+          {playerName && !showNameInput && (
+            <div style={{ textAlign: "center", marginBottom: 12 }}>
+              <button onClick={() => { setNameInput(playerName); setShowNameInput(true); }} style={{
+                background: "none", border: "none", color: "#8b6930", fontFamily: "'EB Garamond', serif", fontSize: 13,
+                cursor: "pointer", textDecoration: "underline", opacity: 0.7,
+              }}>Change name</button>
+            </div>
+          )}
+
+          {/* Share */}
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 20 }}>
+            <button onClick={handleShare} style={{
+              padding: "14px 32px", borderRadius: 14, border: "none", cursor: "pointer",
+              background: "linear-gradient(135deg, #2d6a3f, #1e5530)", color: "#fff",
+              fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, letterSpacing: 1.5,
+              boxShadow: "0 4px 20px rgba(45,106,63,0.25)", transition: "all 0.2s",
+            }}>
+              {copied ? "✓ COPIED!" : "SHARE RESULT"}
+            </button>
+          </div>
+
+          {/* Next verse countdown */}
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <DailyCountdown />
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <button onClick={onBack} style={{ padding: "12px 28px", borderRadius: 12, border: "1.5px solid rgba(139,90,43,0.25)", background: "transparent", color: "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 600, cursor: "pointer", letterSpacing: 1 }}>
+              BACK TO MENU
+            </button>
+          </div>
+        </div>
+      </AppShell>
+    );
+  }
+
+  // ---- GAME VIEW ----
+  if (!puzzle) return <AppShell><div style={{ padding: 40, color: "#8b6930" }}>Loading...</div></AppShell>;
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <BackButton onClick={onBack} />
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#2d6a3f", letterSpacing: 1 }}>DAILY #{dayNum}</span>
+          <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, fontWeight: 600, color: "#3e2409", fontVariantNumeric: "tabular-nums" }}>{formatTime(elapsed)}</span>
+        </div>
+
+        {/* Progress bar */}
+        <div style={{ height: 6, borderRadius: 3, background: "rgba(45,106,63,0.08)", marginBottom: 16, overflow: "hidden" }}>
+          <div style={{ height: "100%", borderRadius: 3, background: "linear-gradient(90deg, #6aae7a, #2d6a3f)", width: `${puzzle.blankSet ? ((correctSlots.size - (words.length - puzzle.blankSet.size)) / puzzle.blankSet.size) * 100 : (correctSlots.size / words.length) * 100}%`, transition: "width 0.3s" }} />
+        </div>
+
+        {/* Reference */}
+        <div style={{ textAlign: "center", marginBottom: 16 }}>
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, color: "#2d6a3f" }}>{verse.ref}</span>
+          <span style={{ marginLeft: 8, fontSize: 11, padding: "2px 8px", borderRadius: 6, background: verse.testament === "OT" ? "rgba(106,174,122,0.15)" : "rgba(139,105,48,0.15)", color: verse.testament === "OT" ? "#3d7a4a" : "#8b6930" }}>{verse.testament === "OT" ? "LXX" : "NKJV"}</span>
+        </div>
+
+        {/* Mistakes counter */}
+        {wrongCount > 0 && (
+          <div style={{ textAlign: "center", marginBottom: 12, fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a07040" }}>
+            {wrongCount} mistake{wrongCount !== 1 ? 's' : ''}
+          </div>
+        )}
+
+        {/* Verse blanks */}
+        <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 18px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.08)", boxShadow: "0 4px 24px rgba(45,106,63,0.04)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+            {words.map((word, i) => {
+              const isCorrect = correctSlots.has(i);
+              return (
+                <div
+                  key={i}
+                  onClick={() => handleTapSlot(i)}
+                  style={{
+                    minWidth: 44, padding: "6px 12px", borderRadius: 10, textAlign: "center",
+                    fontFamily: "'EB Garamond', serif", fontSize: 17,
+                    cursor: isCorrect ? "default" : "pointer",
+                    background: isCorrect ? "rgba(45,106,63,0.12)" : selectedBank !== null ? "rgba(45,106,63,0.06)" : "rgba(139,90,43,0.04)",
+                    border: isCorrect ? "2px solid rgba(45,106,63,0.3)" : "2px dashed rgba(139,90,43,0.2)",
+                    color: isCorrect ? "#2d6a3f" : "transparent",
+                    fontWeight: isCorrect ? 600 : 400,
+                    animation: selectedBank !== null && !isCorrect ? "pulse 1.5s infinite" : "none",
+                    transition: "all 0.2s",
+                  }}
+                >
+                  {isCorrect ? word : "\u00A0\u00A0\u00A0\u00A0"}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Word bank */}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+          {puzzle.dragWords.map((word, i) => {
+            if (bankPlaced[i]) return null;
+            return (
+              <button
+                key={i}
+                onClick={() => handleTapBank(i)}
+                style={{
+                  padding: "8px 14px", borderRadius: 10, border: "none", cursor: "pointer",
+                  fontFamily: "'EB Garamond', serif", fontSize: 16, fontWeight: 500,
+                  background: selectedBank === i ? "linear-gradient(135deg, #2d6a3f, #1e5530)" : "linear-gradient(135deg, #f5e6c8, #edd9b5)",
+                  color: selectedBank === i ? "#fff" : "#3e2409",
+                  boxShadow: selectedBank === i ? "0 4px 16px rgba(45,106,63,0.3)" : "0 2px 8px rgba(139,90,43,0.1)",
+                  transform: selectedBank === i ? "scale(1.08)" : "scale(1)",
+                  transition: "all 0.15s",
+                }}
+              >
+                {word}
+              </button>
+            );
+          })}
+        </div>
+
+        <div style={{ textAlign: "center", marginTop: 16, fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#5a7a5a" }}>
+          {puzzle.blankSet ? correctSlots.size - (words.length - puzzle.blankSet.size) : correctSlots.size}/{puzzle.blankSet ? puzzle.blankSet.size : words.length} blanks filled
+        </div>
+      </div>
+    </AppShell>
+  );
+}
+
+/* Countdown to next daily verse */
+function DailyCountdown() {
+  const [timeLeft, setTimeLeft] = useState('');
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      const diff = tomorrow - now;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      setTimeLeft(`${h}h ${m}m ${s}s`);
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>
+      Next verse in <span style={{ fontWeight: 600, color: "#3e2409" }}>{timeLeft}</span>
+    </div>
+  );
+}
+
+
+
+/* ============================================================
+   GAME 5: HOLY LINKS (Connections-style)
+   ============================================================ */
+const DIFFICULTY_COLORS = ['#d4a843', '#6aae7a', '#5a8abf', '#9b6b9e'];
+const DIFFICULTY_LABELS = ['yellow', 'green', 'blue', 'purple'];
+const DIFFICULTY_EMOJI = ['🟨', '🟩', '🟦', '🟪'];
+
+function getDailyConnections(dayNum) {
+  const rng = seededRandom(dayNum * 5381 + 2971);
+  const idx = Math.floor(rng() * CONNECTIONS_DATA.length);
+  return CONNECTIONS_DATA[idx];
+}
+
+function HolyLinksGame({ onBack, dailyMode }) {
+  const dayNum = dailyMode ? getDailyNumber() : null;
+
+  // For daily: check if already done
+  const [dailyResult, setDailyResult] = useState(() => {
+    if (!dailyMode) return null;
+    try {
+      const saved = JSON.parse(localStorage.getItem('hl_daily_result') || '{}');
+      return saved.day === dayNum ? saved : null;
+    } catch { return null; }
+  });
+
+  // Pick puzzle
+  const [puzzleData] = useState(() => {
+    if (dailyMode) return getDailyConnections(dayNum);
+    const idx = Math.floor(Math.random() * CONNECTIONS_DATA.length);
+    return CONNECTIONS_DATA[idx];
+  });
+
+  // Build shuffled grid of 16 words
+  const [allWords] = useState(() => {
+    const words = [];
+    puzzleData.groups.forEach((g, gi) => {
+      g.words.forEach(w => words.push({ word: w, groupIndex: gi }));
+    });
+    // Shuffle
+    for (let i = words.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [words[i], words[j]] = [words[j], words[i]];
+    }
+    return words;
+  });
+
+  const [selected, setSelected] = useState(new Set());
+  const [solvedGroups, setSolvedGroups] = useState([]);
+  const [mistakes, setMistakes] = useState(0);
+  const maxMistakes = 4;
+  const [gameOver, setGameOver] = useState(false);
+  const [shakeWords, setShakeWords] = useState(false);
+  const [oneAway, setOneAway] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [guessOrder, setGuessOrder] = useState([]);
+
+  // If daily and already completed, show results
+  useEffect(() => {
+    if (dailyResult) setGameOver(true);
+  }, []);
+
+  const solvedGroupIndices = new Set(solvedGroups.map(g => g.groupIndex));
+  const remainingWords = allWords.filter(w => !solvedGroupIndices.has(w.groupIndex));
+
+  const toggleWord = (word) => {
+    if (gameOver) return;
+    const s = new Set(selected);
+    if (s.has(word)) { s.delete(word); }
+    else if (s.size < 4) { s.add(word); }
+    setSelected(s);
+    setOneAway(false);
+  };
+
+  const handleSubmit = () => {
+    if (selected.size !== 4) return;
+    const selectedArr = Array.from(selected);
+    const selectedWords = selectedArr;
+
+    // Check if all 4 belong to same group
+    let matchedGroup = null;
+    for (const group of puzzleData.groups) {
+      const groupSet = new Set(group.words);
+      if (selectedWords.every(w => groupSet.has(w))) {
+        matchedGroup = group;
+        break;
+      }
+    }
+
+    if (matchedGroup) {
+      const gi = puzzleData.groups.indexOf(matchedGroup);
+      setSolvedGroups(prev => [...prev, { ...matchedGroup, groupIndex: gi }]);
+      setGuessOrder(prev => [...prev, gi]);
+      setSelected(new Set());
+      setOneAway(false);
+
+      // Check if game won
+      if (solvedGroups.length + 1 === puzzleData.groups.length) {
+        finishGame(mistakes, [...guessOrder, gi]);
+      }
+    } else {
+      // Check if 3 of 4 belong to same group (one away)
+      let isOneAway = false;
+      for (const group of puzzleData.groups) {
+        const groupSet = new Set(group.words);
+        const overlap = selectedWords.filter(w => groupSet.has(w)).length;
+        if (overlap === 3) { isOneAway = true; break; }
+      }
+
+      const newMistakes = mistakes + 1;
+      setMistakes(newMistakes);
+      setShakeWords(true);
+      setOneAway(isOneAway);
+      setTimeout(() => setShakeWords(false), 500);
+
+      if (newMistakes >= maxMistakes) {
+        // Reveal all remaining groups
+        const remaining = puzzleData.groups
+          .map((g, i) => ({ ...g, groupIndex: i }))
+          .filter(g => !solvedGroupIndices.has(g.groupIndex) && !solvedGroups.some(sg => sg.groupIndex === g.groupIndex));
+        setSolvedGroups(prev => [...prev, ...remaining]);
+        setGuessOrder(prev => [...prev, ...remaining.map(g => g.groupIndex)]);
+        finishGame(newMistakes, [...guessOrder, ...remaining.map(g => g.groupIndex)]);
+      }
+    }
+  };
+
+  const finishGame = (finalMistakes, finalOrder) => {
+    setGameOver(true);
+    setSelected(new Set());
+
+    if (dailyMode) {
+      const result = { day: dayNum, mistakes: finalMistakes, solved: finalMistakes < maxMistakes, order: finalOrder };
+      localStorage.setItem('hl_daily_result', JSON.stringify(result));
+      setDailyResult(result);
+
+      // Update streak
+      try {
+        const streakData = JSON.parse(localStorage.getItem('hl_streak') || '{"current":0,"lastDay":0,"best":0}');
+        if (finalMistakes < maxMistakes) {
+          if (streakData.lastDay === dayNum - 1) { streakData.current += 1; }
+          else if (streakData.lastDay !== dayNum) { streakData.current = 1; }
+        } else {
+          streakData.current = 0;
+        }
+        streakData.lastDay = dayNum;
+        streakData.best = Math.max(streakData.best, streakData.current);
+        localStorage.setItem('hl_streak', JSON.stringify(streakData));
+      } catch {}
+    }
+  };
+
+  const handleDeselectAll = () => { setSelected(new Set()); setOneAway(false); };
+
+  const handleShuffle = () => {
+    // Shuffle remaining words in place — we can't truly shuffle state of allWords easily,
+    // so we shuffle the display order
+  };
+
+  const getStreak = () => {
+    try { return JSON.parse(localStorage.getItem('hl_streak') || '{"current":0,"lastDay":0,"best":0}'); }
+    catch { return { current: 0, lastDay: 0, best: 0 }; }
+  };
+
+  const generateShareText = () => {
+    const result = dailyResult || { day: dayNum, mistakes, solved: mistakes < maxMistakes, order: guessOrder };
+    const streak = getStreak();
+    const lines = (result.order || guessOrder).map(gi => {
+      const diff = puzzleData.groups[gi]?.difficulty ?? gi;
+      return DIFFICULTY_EMOJI[diff].repeat(4);
+    });
+    const streakStr = streak.current >= 2 ? `\n🔥 ${streak.current} day streak` : '';
+    const name = localStorage.getItem('daily_name') || '';
+    const nameStr = name ? ` (${name})` : '';
+    return `✝ Holy Links #${result.day}${nameStr}\n${lines.join('\n')}\n${result.solved ? `${result.mistakes === 0 ? 'Perfect!' : result.mistakes + ' mistake' + (result.mistakes > 1 ? 's' : '')}` : 'Not solved'}${streakStr}\n\nbva.amsm.fun`;
+  };
+
+  const handleShare = async () => {
+    const text = generateShareText();
+    try {
+      if (navigator.share) { await navigator.share({ text }); }
+      else { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2500); }
+    } catch {
+      try { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch {}
+    }
+  };
+
+  const streak = getStreak();
+
+  // ---- RESULTS ----
+  if (gameOver && dailyMode && dailyResult && solvedGroups.length === 0) {
+    // Returning to completed daily — show results only
+    const result = dailyResult;
+    return (
+      <AppShell>
+        <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+            <BackButton onClick={onBack} />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>HOLY LINKS</span>
+            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>#{dayNum}</span>
+          </div>
+          <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
+            <div style={{ fontSize: 52, marginBottom: 8 }}>{result.mistakes === 0 ? "🏆" : result.solved ? "⭐" : "📖"}</div>
+            <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 22, fontWeight: 700, color: "#3e2409", margin: "0 0 16px" }}>Holy Links #{dayNum}</h2>
+          </div>
+
+          {/* Show solved grid */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+            {(result.order || []).map((gi, i) => {
+              const group = puzzleData.groups[gi];
+              if (!group) return null;
+              return (
+                <div key={i} style={{ background: `${DIFFICULTY_COLORS[group.difficulty]}22`, borderRadius: 14, padding: "12px 16px", border: `2px solid ${DIFFICULTY_COLORS[group.difficulty]}44`, textAlign: "center" }}>
+                  <div style={{ fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 700, color: DIFFICULTY_COLORS[group.difficulty], letterSpacing: 1, marginBottom: 4 }}>{group.theme.toUpperCase()}</div>
+                  <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#5a3a1a" }}>{group.words.join(", ")}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: result.solved ? "#2d6a3f" : "#842029", fontWeight: 600 }}>
+              {result.solved ? (result.mistakes === 0 ? "Perfect — no mistakes!" : `${result.mistakes} mistake${result.mistakes > 1 ? 's' : ''}`) : "Better luck tomorrow!"}
+            </div>
+            {streak.current >= 2 && <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#d4a843", marginTop: 4 }}>🔥 {streak.current} day streak</div>}
+          </div>
+
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 16 }}>
+            <button onClick={handleShare} style={{ padding: "14px 32px", borderRadius: 14, border: "none", cursor: "pointer", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, letterSpacing: 1.5, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>
+              {copied ? "✓ COPIED!" : "SHARE"}
+            </button>
+          </div>
+          <div style={{ textAlign: "center" }}><DailyCountdown /></div>
+          <div style={{ textAlign: "center", marginTop: 16 }}>
+            <button onClick={onBack} style={{ padding: "12px 28px", borderRadius: 12, border: "1.5px solid rgba(139,90,43,0.25)", background: "transparent", color: "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 600, cursor: "pointer", letterSpacing: 1 }}>BACK TO MENU</button>
+          </div>
+        </div>
+      </AppShell>
+    );
+  }
+
+  return (
+    <AppShell>
+      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <BackButton onClick={onBack} />
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>
+            {dailyMode ? `HOLY LINKS #${dayNum}` : "HOLY LINKS"}
+          </span>
+          <div style={{ display: "flex", gap: 6 }}>
+            {Array.from({ length: maxMistakes }).map((_, i) => (
+              <div key={i} style={{ width: 10, height: 10, borderRadius: "50%", background: i < mistakes ? "#842029" : "rgba(139,90,43,0.15)", transition: "background 0.3s" }} />
+            ))}
+          </div>
+        </div>
+
+        <div style={{ textAlign: "center", marginBottom: 12, fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>
+          Find 4 groups of 4 words that share a connection
+        </div>
+
+        {/* Solved groups */}
+        {solvedGroups.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 12 }}>
+            {solvedGroups.map((group, i) => (
+              <div key={i} style={{
+                background: `${DIFFICULTY_COLORS[group.difficulty]}22`, borderRadius: 14, padding: "12px 16px",
+                border: `2px solid ${DIFFICULTY_COLORS[group.difficulty]}44`, textAlign: "center",
+                animation: "fadeInUp 0.3s ease-out",
+              }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 700, color: DIFFICULTY_COLORS[group.difficulty], letterSpacing: 1, marginBottom: 4 }}>{group.theme.toUpperCase()}</div>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#5a3a1a" }}>{group.words.join(", ")}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Word grid */}
+        {!gameOver && (
+          <>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16 }}>
+              {remainingWords.map((item, i) => {
+                const isSelected = selected.has(item.word);
+                return (
+                  <button
+                    key={item.word}
+                    onClick={() => toggleWord(item.word)}
+                    style={{
+                      padding: "14px 6px", borderRadius: 12, border: "none", cursor: "pointer",
+                      fontFamily: "'EB Garamond', serif", fontSize: 14, fontWeight: isSelected ? 700 : 500,
+                      background: isSelected ? "linear-gradient(135deg, #3e2409, #5a3a1a)" : "rgba(255,255,255,0.6)",
+                      color: isSelected ? "#fdf6e3" : "#3e2409",
+                      boxShadow: isSelected ? "0 4px 16px rgba(62,36,9,0.25)" : "0 2px 8px rgba(139,90,43,0.08)",
+                      transform: isSelected ? "scale(1.04)" : "scale(1)",
+                      animation: shakeWords && isSelected ? "shake 0.4s" : "none",
+                      transition: "all 0.15s", textAlign: "center", lineHeight: 1.2, minHeight: 52,
+                      display: "flex", alignItems: "center", justifyContent: "center", wordBreak: "break-word",
+                    }}
+                  >
+                    {item.word}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* One away message */}
+            {oneAway && (
+              <div style={{ textAlign: "center", marginBottom: 10, fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#d4a843", fontWeight: 600, animation: "fadeInUp 0.3s" }}>
+                One away!
+              </div>
+            )}
+
+            {/* Action buttons */}
+            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+              <button onClick={handleDeselectAll} style={{
+                padding: "10px 20px", borderRadius: 12, border: "1.5px solid rgba(139,90,43,0.25)",
+                background: "transparent", color: "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 12,
+                fontWeight: 600, cursor: "pointer", letterSpacing: 1,
+              }}>DESELECT</button>
+              <button onClick={handleSubmit} disabled={selected.size !== 4} style={{
+                padding: "10px 24px", borderRadius: 12, border: "none", cursor: selected.size === 4 ? "pointer" : "default",
+                background: selected.size === 4 ? "linear-gradient(135deg, #8b6930, #6a4f20)" : "rgba(139,90,43,0.15)",
+                color: selected.size === 4 ? "#fdf6e3" : "#a08050", fontFamily: "'Cinzel', serif", fontSize: 12,
+                fontWeight: 600, letterSpacing: 1, opacity: selected.size === 4 ? 1 : 0.6,
+              }}>SUBMIT</button>
+            </div>
+
+            <div style={{ textAlign: "center", marginTop: 12, fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#a08050" }}>
+              {mistakes} of {maxMistakes} mistakes used
+            </div>
+          </>
+        )}
+
+        {/* Game over (just finished) */}
+        {gameOver && solvedGroups.length > 0 && (
+          <div style={{ textAlign: "center", marginTop: 16, animation: "fadeInUp 0.4s ease-out" }}>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: mistakes < maxMistakes ? "#2d6a3f" : "#842029", fontWeight: 600, marginBottom: 8 }}>
+              {mistakes === 0 ? "Perfect — no mistakes!" : mistakes < maxMistakes ? `Solved with ${mistakes} mistake${mistakes > 1 ? 's' : ''}!` : "Out of guesses!"}
+            </div>
+            {streak.current >= 2 && dailyMode && <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#d4a843", marginBottom: 12 }}>🔥 {streak.current} day streak</div>}
+
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 16, flexWrap: "wrap" }}>
+              {dailyMode && (
+                <button onClick={handleShare} style={{ padding: "12px 28px", borderRadius: 12, border: "none", cursor: "pointer", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, letterSpacing: 1, boxShadow: "0 4px 20px rgba(139,90,43,0.25)" }}>
+                  {copied ? "✓ COPIED!" : "SHARE"}
+                </button>
+              )}
+              {!dailyMode && (
+                <button onClick={onBack} style={{ padding: "12px 28px", borderRadius: 12, border: "none", cursor: "pointer", background: "linear-gradient(135deg, #8b6930, #6a4f20)", color: "#fdf6e3", fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 600, letterSpacing: 1 }}>
+                  PLAY AGAIN
+                </button>
+              )}
+              <button onClick={onBack} style={{ padding: "12px 28px", borderRadius: 12, border: "1.5px solid rgba(139,90,43,0.25)", background: "transparent", color: "#8b6930", fontFamily: "'Cinzel', serif", fontSize: 13, fontWeight: 600, cursor: "pointer", letterSpacing: 1 }}>MENU</button>
+            </div>
+            {dailyMode && <DailyCountdown />}
+          </div>
+        )}
+      </div>
+    </AppShell>
+  );
+}
+
 function HomeScreen({ onSelectGame }) {
+  const dayNum = getDailyNumber();
+  const verseDone = (() => { try { const s = JSON.parse(localStorage.getItem('daily_result') || '{}'); return s.day === dayNum; } catch { return false; } })();
+  const verseStreak = (() => { try { return JSON.parse(localStorage.getItem('daily_streak') || '{"current":0}'); } catch { return { current: 0 }; } })();
+  const linksDone = (() => { try { const s = JSON.parse(localStorage.getItem('hl_daily_result') || '{}'); return s.day === dayNum; } catch { return false; } })();
+  const linksStreak = (() => { try { return JSON.parse(localStorage.getItem('hl_streak') || '{"current":0}'); } catch { return { current: 0 }; } })();
+
   const games = [
     { id: "verses", icon: "📖", title: "Verse by Verse", desc: "Memorize Scripture with drag & drop", color: "#6aae7a", count: "354 verses" },
     { id: "whosaid", icon: "💬", title: "Who Said It?", desc: "Scripture & Church Fathers — who said this quote?", color: "#d4a843", count: `${WHO_SAID_IT_DATA.length} quotes` },
     { id: "saints", icon: "☦", title: "Guess the Saint", desc: "Learn about Coptic saints from the Synaxarium", color: "#c07a4a", count: `${SAINTS_DATA.length} saints` },
     { id: "trivia", icon: "⚡", title: "Bible Trivia", desc: "Rapid fire — 90 seconds on the clock", color: "#8b6930", count: `${TRIVIA_DATA.length} questions` },
+    { id: "holylinks", icon: "🔗", title: "Holy Links", desc: "Find 4 groups of 4 — Bible Connections", color: "#5a8abf", count: `${CONNECTIONS_DATA.length} puzzles` },
   ];
+
+  const DailyCard = ({ onClick, icon, iconBg, title, tag, subtitle, streak, accentColor, delay }) => (
+    <button
+      onClick={onClick}
+      style={{
+        display: "block", width: "100%", padding: "16px 18px", borderRadius: 18, border: `2px solid ${accentColor}33`,
+        cursor: "pointer", background: `linear-gradient(135deg, ${accentColor}0D, ${accentColor}05)`,
+        boxShadow: `0 4px 20px ${accentColor}1A`, textAlign: "left",
+        transition: "transform 0.2s, box-shadow 0.2s", animation: `fadeInUp ${delay}s ease-out`,
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{
+          width: 48, height: 48, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center",
+          fontSize: 24, background: iconBg, color: "#fff", flexShrink: 0,
+        }}>{icon}</div>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 700, color: accentColor }}>{title}</span>
+            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#fff", background: accentColor, borderRadius: 7, padding: "1px 7px" }}>{tag}</span>
+          </div>
+          <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 13, color: `${accentColor}BB` }}>{subtitle}</div>
+          {streak >= 2 && <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#d4a843", marginTop: 1 }}>🔥 {streak} day streak</div>}
+        </div>
+        <div style={{ fontSize: 16, color: accentColor }}>→</div>
+      </div>
+    </button>
+  );
 
   return (
     <AppShell>
       <div style={{ maxWidth: 540, width: "100%", padding: "36px 24px", animation: "fadeInUp 0.6s ease-out" }}>
-        <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <div style={{ textAlign: "center", marginBottom: 24 }}>
           <div style={{ fontSize: 52, marginBottom: 8, filter: "grayscale(0.2)" }}>✝</div>
           <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 28, fontWeight: 700, color: "#3e2409", margin: "0 0 4px", letterSpacing: 2 }}>BIBLE GAMES</h1>
           <p style={{ fontSize: 16, color: "#8b6930", fontStyle: "italic", margin: 0 }}>Learn, play, and grow in faith</p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        {/* Daily challenges header */}
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>TODAY'S CHALLENGES</div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
+          <DailyCard
+            onClick={() => onSelectGame("daily")}
+            icon="📖" iconBg="linear-gradient(135deg, #2d6a3f, #1e5530)"
+            title="DAILY VERSE" tag={`#${dayNum}`}
+            subtitle={verseDone ? "✓ Completed!" : "Fill in the blanks — NT & Psalms"}
+            streak={verseStreak.current} accentColor="#2d6a3f" delay={0.25}
+          />
+          <DailyCard
+            onClick={() => onSelectGame("daily-links")}
+            icon="🔗" iconBg="linear-gradient(135deg, #5a4a9e, #3d3570)"
+            title="HOLY LINKS" tag={`#${dayNum}`}
+            subtitle={linksDone ? "✓ Completed!" : "Find 4 groups of 4"}
+            streak={linksStreak.current} accentColor="#5a4a9e" delay={0.35}
+          />
+        </div>
+
+        {/* Games header */}
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>PRACTICE GAMES</div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {games.map((game, i) => (
             <button
               key={game.id}
               onClick={() => onSelectGame(game.id)}
               style={{
                 display: "flex", alignItems: "center", gap: 16,
-                padding: "20px 20px", borderRadius: 18, border: "none", cursor: "pointer",
+                padding: "18px 18px", borderRadius: 16, border: "none", cursor: "pointer",
                 background: "rgba(255,255,255,0.5)",
                 boxShadow: "0 4px 20px rgba(139,90,43,0.1)",
                 transition: "transform 0.2s, box-shadow 0.2s",
                 textAlign: "left", width: "100%",
-                animation: `fadeInUp ${0.3 + i * 0.1}s ease-out`,
+                animation: `fadeInUp ${0.4 + i * 0.08}s ease-out`,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.18)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.18)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 20px rgba(139,90,43,0.1)"; }}
             >
               <div style={{
-                width: 56, height: 56, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 28, background: `linear-gradient(135deg, ${game.color}22, ${game.color}11)`,
+                width: 50, height: 50, borderRadius: 13, display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 26, background: `linear-gradient(135deg, ${game.color}22, ${game.color}11)`,
                 border: `2px solid ${game.color}33`, flexShrink: 0,
               }}>{game.icon}</div>
               <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 16, fontWeight: 600, color: "#3e2409", marginBottom: 2 }}>{game.title}</div>
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#8b6930", marginBottom: 2 }}>{game.desc}</div>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, color: "#3e2409", marginBottom: 2 }}>{game.title}</div>
+                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#8b6930", marginBottom: 2 }}>{game.desc}</div>
                 <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#a08050" }}>{game.count}</div>
               </div>
-              <div style={{ fontSize: 18, color: "#c0a070" }}>→</div>
+              <div style={{ fontSize: 16, color: "#c0a070" }}>→</div>
             </button>
           ))}
         </div>
@@ -1555,14 +2849,19 @@ function VerseByVerseGame({ onBack }) {
    ============================================================ */
 export default function App() {
   const [currentGame, setCurrentGame] = useState("home");
+  const [gameKey, setGameKey] = useState(0);
 
   const goHome = () => setCurrentGame("home");
+  const selectGame = (id) => { setCurrentGame(id); setGameKey(k => k + 1); };
 
   switch (currentGame) {
-    case "verses": return <VerseByVerseGame onBack={goHome} />;
-    case "whosaid": return <WhoSaidItGame onBack={goHome} />;
-    case "saints": return <GuessTheSaintGame onBack={goHome} />;
-    case "trivia": return <BibleTriviaGame onBack={goHome} />;
-    default: return <HomeScreen onSelectGame={setCurrentGame} />;
+    case "daily": return <DailyChallenge key={gameKey} onBack={goHome} />;
+    case "daily-links": return <HolyLinksGame key={gameKey} onBack={goHome} dailyMode={true} />;
+    case "holylinks": return <HolyLinksGame key={gameKey} onBack={goHome} dailyMode={false} />;
+    case "verses": return <VerseByVerseGame key={gameKey} onBack={goHome} />;
+    case "whosaid": return <WhoSaidItGame key={gameKey} onBack={goHome} />;
+    case "saints": return <GuessTheSaintGame key={gameKey} onBack={goHome} />;
+    case "trivia": return <BibleTriviaGame key={gameKey} onBack={goHome} />;
+    default: return <HomeScreen onSelectGame={selectGame} />;
   }
 }
