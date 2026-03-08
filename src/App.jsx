@@ -14,7 +14,9 @@ const GLOBAL_CSS = `
   @keyframes revealIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
   @keyframes countIn { from { transform: scale(1.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .cross-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 0h4v18h18v4H22v18h-4V22H0v-4h18V0z' fill='%235a3a1a'/%3E%3C/svg%3E"); }
-  * { -webkit-tap-highlight-color: transparent; }
+  * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+  html, body, #root { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+  body { overscroll-behavior: none; }
 `;
 
 function shuffle(arr) {
@@ -28,11 +30,13 @@ function shuffle(arr) {
 
 function AppShell({ children }) {
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative", overflow: "hidden" }}>
+    <div style={{ height: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative", overflow: "hidden" }}>
       <link href={FONTS_LINK} rel="stylesheet" />
       <style>{GLOBAL_CSS}</style>
       <div className="cross-pattern" />
-      {children}
+      <div style={{ flex: 1, width: "100%", overflowY: "auto", overflowX: "hidden", display: "flex", flexDirection: "column", alignItems: "center", WebkitOverflowScrolling: "touch" }}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -1339,7 +1343,7 @@ function WhoSaidItGame({ onBack }) {
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+      <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
           <BackButton onClick={onBack} />
           <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>WHO SAID IT?</span>
@@ -1392,9 +1396,9 @@ function WhoSaidItGame({ onBack }) {
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 40, marginBottom: 8 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Complete!</h2>
-            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "16px 14px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}/{total}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
@@ -1469,7 +1473,7 @@ function GuessTheSaintGame({ onBack }) {
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+      <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
           <BackButton onClick={onBack} />
           <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>GUESS THE SAINT</span>
@@ -1484,7 +1488,7 @@ function GuessTheSaintGame({ onBack }) {
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: revealedClues <= 2 ? "#6aae7a" : "#3e2409" }}>{Math.max(1, 6 - revealedClues)}</div><div style={{ fontSize: 11, color: "#a08050" }}>Points if correct</div></div>
             </div>
 
-            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)" }}>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 20px", marginBottom: 14, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)" }}>
               <div style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 14, textTransform: "uppercase", textAlign: "center" }}>Clues</div>
               {cur.clues.slice(0, revealedClues).map((clue, i) => (
                 <div key={i} style={{ padding: "10px 0", borderBottom: i < revealedClues - 1 ? "1px solid rgba(139,90,43,0.08)" : "none", fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#3e2409", lineHeight: 1.5, animation: "revealIn 0.4s ease-out" }}>
@@ -1537,9 +1541,9 @@ function GuessTheSaintGame({ onBack }) {
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= NUM_SAINTS * 0.9 ? "🏆" : score >= NUM_SAINTS * 0.7 ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 40, marginBottom: 8 }}>{score >= NUM_SAINTS * 0.9 ? "🏆" : score >= NUM_SAINTS * 0.7 ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Complete!</h2>
-            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "16px 14px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}/{saints.length}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{totalPoints}</div><div style={{ fontSize: 13, color: "#a08050" }}>Points</div></div>
@@ -1600,7 +1604,7 @@ function BibleTriviaGame({ onBack }) {
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+      <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
           <BackButton onClick={onBack} />
           <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>BIBLE TRIVIA</span>
@@ -1609,7 +1613,7 @@ function BibleTriviaGame({ onBack }) {
 
         {!started ? (
           <div style={{ textAlign: "center", padding: "60px 20px" }}>
-            <div style={{ fontSize: 52, marginBottom: 16 }}>⚡</div>
+            <div style={{ fontSize: 40, marginBottom: 10 }}>⚡</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 24, fontWeight: 700, color: "#3e2409", margin: "0 0 8px" }}>Rapid Fire</h2>
             <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 18, color: "#8b6930", marginBottom: 32, lineHeight: 1.5 }}>Answer as many Bible &amp; Coptic trivia questions as you can in 90 seconds!</p>
             <button onClick={() => setStarted(true)} style={{ padding: "16px 48px", borderRadius: 14, border: "none", background: "linear-gradient(135deg, #6aae7a, #4d9060)", color: "#fff", fontFamily: "'Cinzel', serif", fontSize: 18, fontWeight: 600, cursor: "pointer", letterSpacing: 1, boxShadow: "0 4px 20px rgba(106,174,122,0.3)" }}>START</button>
@@ -1624,7 +1628,7 @@ function BibleTriviaGame({ onBack }) {
             <div style={{ width: "100%", height: 6, background: "rgba(139,90,43,0.1)", borderRadius: 3, marginBottom: 20, overflow: "hidden" }}>
               <div style={{ width: `${(timeLeft / 90) * 100}%`, height: "100%", background: timerColor, borderRadius: 3, transition: "width 1s linear" }} />
             </div>
-            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", textAlign: "center" }}>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "16px 14px", marginBottom: 14, border: "1px solid rgba(139,90,43,0.1)", textAlign: "center" }}>
               <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 20, fontWeight: 500, color: "#3e2409", lineHeight: 1.5 }}>{cur.q}</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -1645,9 +1649,9 @@ function BibleTriviaGame({ onBack }) {
           </>
         ) : (
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>{score >= 20 ? "🏆" : score >= 12 ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 40, marginBottom: 8 }}>{score >= 20 ? "🏆" : score >= 12 ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Time's Up!</h2>
-            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
+            <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "16px 14px", margin: "24px 0", border: "1px solid rgba(139,90,43,0.1)" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: 28 }}>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
                 <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
@@ -1894,7 +1898,7 @@ function DailyChallenge({ onBack }) {
 
     return (
       <AppShell>
-        <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
             <BackButton onClick={onBack} />
             <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#2d6a3f", letterSpacing: 1 }}>DAILY CHALLENGE</span>
@@ -1902,14 +1906,14 @@ function DailyChallenge({ onBack }) {
           </div>
 
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 8 }}>{completed.wrongCount === 0 ? "🏆" : completed.time < 60 ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 40, marginBottom: 6 }}>{completed.wrongCount === 0 ? "🏆" : completed.time < 60 ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 24, fontWeight: 700, color: "#3e2409", margin: "0 0 4px" }}>Daily Verse #{dayNum}</h2>
             {playerName && <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: "#5a3a1a", margin: "0 0 4px" }}>{playerName}</p>}
             <p style={{ fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#8b6930", margin: "0 0 20px" }}>{completed.ref}</p>
           </div>
 
           {/* Stats */}
-          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.12)" }}>
+          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "14px", marginBottom: 14, border: "1px solid rgba(45,106,63,0.12)" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 28, flexWrap: "wrap" }}>
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: "#3e2409" }}>{formatTime(completed.time)}</div><div style={{ fontSize: 12, color: "#a08050" }}>Time</div></div>
               <div style={{ textAlign: "center" }}><div style={{ fontSize: 28, fontWeight: 700, color: completed.wrongCount === 0 ? "#2d6a3f" : "#d4a843" }}>{completed.wrongCount}</div><div style={{ fontSize: 12, color: "#a08050" }}>Mistakes</div></div>
@@ -1919,7 +1923,7 @@ function DailyChallenge({ onBack }) {
           </div>
 
           {/* Emoji grid preview */}
-          <div style={{ background: "rgba(45,106,63,0.04)", borderRadius: 16, padding: "16px 20px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.1)", textAlign: "center" }}>
+          <div style={{ background: "rgba(45,106,63,0.04)", borderRadius: 16, padding: "16px 20px", marginBottom: 14, border: "1px solid rgba(45,106,63,0.1)", textAlign: "center" }}>
             {gridRows.map((row, i) => (
               <div key={i} style={{ fontFamily: "monospace", fontSize: 20, letterSpacing: 4, lineHeight: 1.6 }}>{row}</div>
             ))}
@@ -1928,7 +1932,7 @@ function DailyChallenge({ onBack }) {
 
           {/* Name prompt (first time) */}
           {showNameInput && (
-            <div style={{ background: "rgba(255,255,255,0.6)", borderRadius: 16, padding: "18px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.15)", textAlign: "center" }}>
+            <div style={{ background: "rgba(255,255,255,0.6)", borderRadius: 16, padding: "18px", marginBottom: 14, border: "1px solid rgba(45,106,63,0.15)", textAlign: "center" }}>
               <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: "#3e2409", marginBottom: 10 }}>Enter your name to share your score:</div>
               <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
                 <input
@@ -1984,7 +1988,7 @@ function DailyChallenge({ onBack }) {
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+      <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <BackButton onClick={onBack} />
           <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#2d6a3f", letterSpacing: 1 }}>DAILY #{dayNum}</span>
@@ -2010,28 +2014,45 @@ function DailyChallenge({ onBack }) {
         )}
 
         {/* Verse blanks */}
-        <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 18px", marginBottom: 20, border: "1px solid rgba(45,106,63,0.08)", boxShadow: "0 4px 24px rgba(45,106,63,0.04)" }}>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+        <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "20px 18px", marginBottom: 14, border: "1px solid rgba(45,106,63,0.08)", boxShadow: "0 4px 24px rgba(45,106,63,0.04)" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", alignItems: "center" }}>
             {words.map((word, i) => {
-              const isCorrect = correctSlots.has(i);
+              const isBlank = puzzle.blankSet && puzzle.blankSet.has(i);
+              const isFilled = isBlank && correctSlots.has(i);
+              const isGiven = !isBlank;
+
+              if (isGiven) {
+                // Given word — plain text, no box
+                return <span key={i} style={{ fontFamily: "'EB Garamond', serif", fontSize: 17, color: "#5a3a1a", padding: "6px 4px" }}>{word}</span>;
+              }
+
+              if (isFilled) {
+                // Blank correctly filled — green box
+                return (
+                  <div key={i} style={{
+                    minWidth: 44, padding: "6px 12px", borderRadius: 10, textAlign: "center",
+                    fontFamily: "'EB Garamond', serif", fontSize: 17, fontWeight: 600,
+                    background: "rgba(45,106,63,0.15)", border: "2px solid rgba(45,106,63,0.35)",
+                    color: "#2d6a3f", animation: "fadeInUp 0.2s ease-out",
+                  }}>{word}</div>
+                );
+              }
+
+              // Unfilled blank — dashed box
               return (
                 <div
                   key={i}
                   onClick={() => handleTapSlot(i)}
                   style={{
-                    minWidth: 44, padding: "6px 12px", borderRadius: 10, textAlign: "center",
-                    fontFamily: "'EB Garamond', serif", fontSize: 17,
-                    cursor: isCorrect ? "default" : "pointer",
-                    background: isCorrect ? "rgba(45,106,63,0.12)" : selectedBank !== null ? "rgba(45,106,63,0.06)" : "rgba(139,90,43,0.04)",
-                    border: isCorrect ? "2px solid rgba(45,106,63,0.3)" : "2px dashed rgba(139,90,43,0.2)",
-                    color: isCorrect ? "#2d6a3f" : "transparent",
-                    fontWeight: isCorrect ? 600 : 400,
-                    animation: selectedBank !== null && !isCorrect ? "pulse 1.5s infinite" : "none",
+                    minWidth: 52, padding: "6px 12px", borderRadius: 10, textAlign: "center",
+                    fontFamily: "'EB Garamond', serif", fontSize: 15, cursor: "pointer",
+                    background: selectedBank !== null ? "rgba(45,106,63,0.08)" : "rgba(139,90,43,0.05)",
+                    border: selectedBank !== null ? "2px dashed rgba(45,106,63,0.4)" : "2px dashed rgba(139,90,43,0.25)",
+                    color: "#a08050",
+                    animation: selectedBank !== null ? "pulse 1.5s infinite" : "none",
                     transition: "all 0.2s",
                   }}
-                >
-                  {isCorrect ? word : "\u00A0\u00A0\u00A0\u00A0"}
-                </div>
+                >{"___"}</div>
               );
             })}
           </div>
@@ -2289,14 +2310,14 @@ function HolyLinksGame({ onBack, dailyMode }) {
     const result = dailyResult;
     return (
       <AppShell>
-        <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+        <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
             <BackButton onClick={onBack} />
             <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>HOLY LINKS</span>
             <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 15, color: "#8b6930" }}>#{dayNum}</span>
           </div>
           <div style={{ textAlign: "center", animation: "celebrateIn 0.5s ease-out" }}>
-            <div style={{ fontSize: 52, marginBottom: 8 }}>{result.mistakes === 0 ? "🏆" : result.solved ? "⭐" : "📖"}</div>
+            <div style={{ fontSize: 40, marginBottom: 6 }}>{result.mistakes === 0 ? "🏆" : result.solved ? "⭐" : "📖"}</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 22, fontWeight: 700, color: "#3e2409", margin: "0 0 16px" }}>Holy Links #{dayNum}</h2>
           </div>
 
@@ -2337,7 +2358,7 @@ function HolyLinksGame({ onBack, dailyMode }) {
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 560, width: "100%", padding: "24px 20px", animation: "fadeInUp 0.5s ease-out" }}>
+      <div style={{ maxWidth: 480, width: "100%", padding: "16px 14px", animation: "fadeInUp 0.5s ease-out" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <BackButton onClick={onBack} />
           <span style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#8b6930", letterSpacing: 1 }}>
@@ -2373,7 +2394,7 @@ function HolyLinksGame({ onBack, dailyMode }) {
         {/* Word grid */}
         {!gameOver && (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 6, marginBottom: 16 }}>
               {remainingWords.map((item, i) => {
                 const isSelected = selected.has(item.word);
                 return (
@@ -2381,8 +2402,8 @@ function HolyLinksGame({ onBack, dailyMode }) {
                     key={item.word}
                     onClick={() => toggleWord(item.word)}
                     style={{
-                      padding: "14px 6px", borderRadius: 12, border: "none", cursor: "pointer",
-                      fontFamily: "'EB Garamond', serif", fontSize: 14, fontWeight: isSelected ? 700 : 500,
+                      padding: "10px 4px", borderRadius: 12, border: "none", cursor: "pointer",
+                      fontFamily: "'EB Garamond', serif", fontSize: 13, fontWeight: isSelected ? 700 : 500,
                       background: isSelected ? "linear-gradient(135deg, #3e2409, #5a3a1a)" : "rgba(255,255,255,0.6)",
                       color: isSelected ? "#fdf6e3" : "#3e2409",
                       boxShadow: isSelected ? "0 4px 16px rgba(62,36,9,0.25)" : "0 2px 8px rgba(139,90,43,0.08)",
@@ -2463,108 +2484,88 @@ function HomeScreen({ onSelectGame }) {
   const linksStreak = (() => { try { return JSON.parse(localStorage.getItem('hl_streak') || '{"current":0}'); } catch { return { current: 0 }; } })();
 
   const games = [
-    { id: "verses", icon: "📖", title: "Verse by Verse", desc: "Memorize Scripture with drag & drop", color: "#6aae7a", count: "354 verses" },
-    { id: "whosaid", icon: "💬", title: "Who Said It?", desc: "Scripture & Church Fathers — who said this quote?", color: "#d4a843", count: `${WHO_SAID_IT_DATA.length} quotes` },
-    { id: "saints", icon: "☦", title: "Guess the Saint", desc: "Learn about Coptic saints from the Synaxarium", color: "#c07a4a", count: `${SAINTS_DATA.length} saints` },
-    { id: "trivia", icon: "⚡", title: "Bible Trivia", desc: "Rapid fire — 90 seconds on the clock", color: "#8b6930", count: `${TRIVIA_DATA.length} questions` },
-    { id: "holylinks", icon: "🔗", title: "Holy Links", desc: "Find 4 groups of 4 — Bible Connections", color: "#5a8abf", count: `${CONNECTIONS_DATA.length} puzzles` },
+    { id: "verses", icon: "📖", title: "Verse by Verse", color: "#6aae7a" },
+    { id: "whosaid", icon: "💬", title: "Who Said It?", color: "#d4a843" },
+    { id: "saints", icon: "☦", title: "Guess the Saint", color: "#c07a4a" },
+    { id: "trivia", icon: "⚡", title: "Bible Trivia", color: "#8b6930" },
+    { id: "holylinks", icon: "🔗", title: "Holy Links", color: "#5a8abf" },
   ];
-
-  const DailyCard = ({ onClick, icon, iconBg, title, tag, subtitle, streak, accentColor, delay }) => (
-    <button
-      onClick={onClick}
-      style={{
-        display: "block", width: "100%", padding: "16px 18px", borderRadius: 18, border: `2px solid ${accentColor}33`,
-        cursor: "pointer", background: `linear-gradient(135deg, ${accentColor}0D, ${accentColor}05)`,
-        boxShadow: `0 4px 20px ${accentColor}1A`, textAlign: "left",
-        transition: "transform 0.2s, box-shadow 0.2s", animation: `fadeInUp ${delay}s ease-out`,
-      }}
-      onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.transform = ""; }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{
-          width: 48, height: 48, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 24, background: iconBg, color: "#fff", flexShrink: 0,
-        }}>{icon}</div>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
-            <span style={{ fontFamily: "'Cinzel', serif", fontSize: 14, fontWeight: 700, color: accentColor }}>{title}</span>
-            <span style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#fff", background: accentColor, borderRadius: 7, padding: "1px 7px" }}>{tag}</span>
-          </div>
-          <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 13, color: `${accentColor}BB` }}>{subtitle}</div>
-          {streak >= 2 && <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#d4a843", marginTop: 1 }}>🔥 {streak} day streak</div>}
-        </div>
-        <div style={{ fontSize: 16, color: accentColor }}>→</div>
-      </div>
-    </button>
-  );
 
   return (
     <AppShell>
-      <div style={{ maxWidth: 540, width: "100%", padding: "36px 24px", animation: "fadeInUp 0.6s ease-out" }}>
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <div style={{ fontSize: 52, marginBottom: 8, filter: "grayscale(0.2)" }}>✝</div>
-          <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 28, fontWeight: 700, color: "#3e2409", margin: "0 0 4px", letterSpacing: 2 }}>BIBLE GAMES</h1>
-          <p style={{ fontSize: 16, color: "#8b6930", fontStyle: "italic", margin: 0 }}>Learn, play, and grow in faith</p>
+      <div style={{ maxWidth: 480, width: "100%", padding: "20px 16px 16px", animation: "fadeInUp 0.5s ease-out" }}>
+        {/* Compact header */}
+        <div style={{ textAlign: "center", marginBottom: 18 }}>
+          <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: 22, fontWeight: 700, color: "#3e2409", margin: "0 0 2px", letterSpacing: 2 }}>✝ BIBLE GAMES</h1>
+          <p style={{ fontSize: 13, color: "#8b6930", fontStyle: "italic", margin: 0 }}>Learn, play, and grow in faith</p>
         </div>
 
-        {/* Daily challenges header */}
-        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>TODAY'S CHALLENGES</div>
+        {/* Daily challenges */}
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 10, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 8 }}>TODAY'S CHALLENGES</div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 24 }}>
-          <DailyCard
-            onClick={() => onSelectGame("daily")}
-            icon="📖" iconBg="linear-gradient(135deg, #2d6a3f, #1e5530)"
-            title="DAILY VERSE" tag={`#${dayNum}`}
-            subtitle={verseDone ? "✓ Completed!" : "Fill in the blanks — NT & Psalms"}
-            streak={verseStreak.current} accentColor="#2d6a3f" delay={0.25}
-          />
-          <DailyCard
-            onClick={() => onSelectGame("daily-links")}
-            icon="🔗" iconBg="linear-gradient(135deg, #5a4a9e, #3d3570)"
-            title="HOLY LINKS" tag={`#${dayNum}`}
-            subtitle={linksDone ? "✓ Completed!" : "Find 4 groups of 4"}
-            streak={linksStreak.current} accentColor="#5a4a9e" delay={0.35}
-          />
+        <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
+          {/* Daily Verse card */}
+          <button onClick={() => onSelectGame("daily")} style={{
+            flex: 1, padding: "14px 12px", borderRadius: 14, border: "2px solid rgba(45,106,63,0.2)",
+            cursor: "pointer", background: "linear-gradient(135deg, rgba(45,106,63,0.08), rgba(45,106,63,0.02))",
+            textAlign: "center", transition: "transform 0.15s",
+          }}>
+            <div style={{ fontSize: 24, marginBottom: 4 }}>📖</div>
+            <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 700, color: "#2d6a3f", letterSpacing: 1 }}>DAILY VERSE</div>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#2d6a3f", opacity: 0.7 }}>#{dayNum}</div>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 11, color: verseDone ? "#2d6a3f" : "#8b6930", marginTop: 4 }}>
+              {verseDone ? "✓ Done" : "Play"}
+            </div>
+            {verseStreak.current >= 2 && <div style={{ fontSize: 11, color: "#d4a843" }}>🔥 {verseStreak.current}</div>}
+          </button>
+
+          {/* Daily Holy Links card */}
+          <button onClick={() => onSelectGame("daily-links")} style={{
+            flex: 1, padding: "14px 12px", borderRadius: 14, border: "2px solid rgba(90,74,158,0.2)",
+            cursor: "pointer", background: "linear-gradient(135deg, rgba(90,74,158,0.08), rgba(90,74,158,0.02))",
+            textAlign: "center", transition: "transform 0.15s",
+          }}>
+            <div style={{ fontSize: 24, marginBottom: 4 }}>🔗</div>
+            <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 700, color: "#5a4a9e", letterSpacing: 1 }}>HOLY LINKS</div>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#5a4a9e", opacity: 0.7 }}>#{dayNum}</div>
+            <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 11, color: linksDone ? "#5a4a9e" : "#8b6930", marginTop: 4 }}>
+              {linksDone ? "✓ Done" : "Play"}
+            </div>
+            {linksStreak.current >= 2 && <div style={{ fontSize: 11, color: "#d4a843" }}>🔥 {linksStreak.current}</div>}
+          </button>
         </div>
 
-        {/* Games header */}
-        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 11, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 10, textTransform: "uppercase" }}>PRACTICE GAMES</div>
+        {/* Practice games */}
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: 10, fontWeight: 600, color: "#a08050", letterSpacing: 2, marginBottom: 8 }}>PRACTICE GAMES</div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
           {games.map((game, i) => (
             <button
               key={game.id}
               onClick={() => onSelectGame(game.id)}
               style={{
-                display: "flex", alignItems: "center", gap: 16,
-                padding: "18px 18px", borderRadius: 16, border: "none", cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 10,
+                padding: "14px 12px", borderRadius: 14, border: "none", cursor: "pointer",
                 background: "rgba(255,255,255,0.5)",
-                boxShadow: "0 4px 20px rgba(139,90,43,0.1)",
-                transition: "transform 0.2s, box-shadow 0.2s",
+                boxShadow: "0 2px 12px rgba(139,90,43,0.08)",
+                transition: "transform 0.15s",
                 textAlign: "left", width: "100%",
-                animation: `fadeInUp ${0.4 + i * 0.08}s ease-out`,
+                gridColumn: i === games.length - 1 && games.length % 2 !== 0 ? "1 / -1" : "auto",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(139,90,43,0.18)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 20px rgba(139,90,43,0.1)"; }}
             >
               <div style={{
-                width: 50, height: 50, borderRadius: 13, display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 26, background: `linear-gradient(135deg, ${game.color}22, ${game.color}11)`,
-                border: `2px solid ${game.color}33`, flexShrink: 0,
+                width: 40, height: 40, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 22, background: `linear-gradient(135deg, ${game.color}22, ${game.color}11)`,
+                border: `1.5px solid ${game.color}33`, flexShrink: 0,
               }}>{game.icon}</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 15, fontWeight: 600, color: "#3e2409", marginBottom: 2 }}>{game.title}</div>
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#8b6930", marginBottom: 2 }}>{game.desc}</div>
-                <div style={{ fontFamily: "'EB Garamond', serif", fontSize: 12, color: "#a08050" }}>{game.count}</div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontFamily: "'Cinzel', serif", fontSize: 12, fontWeight: 600, color: "#3e2409" }}>{game.title}</div>
               </div>
-              <div style={{ fontSize: 16, color: "#c0a070" }}>→</div>
             </button>
           ))}
         </div>
 
-        <div style={{ textAlign: "center", marginTop: 28, fontFamily: "'EB Garamond', serif", fontSize: 14, color: "#a08050", fontStyle: "italic" }}>
+        <div style={{ textAlign: "center", marginTop: 18, fontFamily: "'EB Garamond', serif", fontSize: 13, color: "#a08050", fontStyle: "italic" }}>
           ☦ Coptic Orthodox Edition
         </div>
       </div>
@@ -2798,7 +2799,7 @@ function VerseByVerseGame({ onBack }) {
             <div style={{ textAlign: "center" }}><div style={{ fontSize: 20, fontWeight: 600, color: "#3e2409" }}>{correctSlots.size}/{puzzle.totalBlanks}</div><div style={{ fontSize: 11, color: "#a08050" }}>Placed</div></div>
           </div>
           <div style={{ textAlign: "center", marginBottom: 12, fontFamily: "'Cinzel', serif", fontSize: 19, fontWeight: 600, color: "#5a3a1a", letterSpacing: 1 }}>{puzzle.verse.ref}</div>
-          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "12px 16px", marginBottom: 20, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", animation: completed ? "glow 1.5s ease-in-out infinite" : "none" }}>
+          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "12px 16px", marginBottom: 14, border: "1px solid rgba(139,90,43,0.1)", boxShadow: "0 4px 24px rgba(139,90,43,0.06)", animation: completed ? "glow 1.5s ease-in-out infinite" : "none" }}>
             <VerseDisplay puzzle={puzzle} onDrop={handleDrop} onRemove={handleRemove} wrongSlot={wrongSlot} correctSlots={correctSlots} onTapSlot={handleTapSlot} hasSelection={selectedBank !== null} />
           </div>
           {!completed && showHint && <div style={{ textAlign: "center", marginBottom: 16, padding: "12px 16px", background: "rgba(106,174,122,0.08)", borderRadius: 12, border: "1px solid rgba(106,174,122,0.2)", fontFamily: "'EB Garamond', serif", fontSize: 16, color: "#2d6a3f", fontStyle: "italic", lineHeight: 1.6 }}>{puzzle.verse.text}</div>}
@@ -2826,10 +2827,10 @@ function VerseByVerseGame({ onBack }) {
 
       {screen === "results" && (
         <div style={{ maxWidth: 480, width: "100%", padding: "40px 24px", textAlign: "center", animation: "fadeInUp 0.6s ease-out" }}>
-          <div style={{ fontSize: 52, marginBottom: 12 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
+          <div style={{ fontSize: 40, marginBottom: 8 }}>{accuracy >= 90 ? "🏆" : accuracy >= 70 ? "⭐" : "📖"}</div>
           <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: 26, fontWeight: 700, color: "#3e2409", margin: "0 0 6px" }}>Session Complete</h2>
           <p style={{ fontSize: 16, color: "#8b6930", marginBottom: 28 }}>{DIFFICULTIES[difficulty].label} Mode · {filter === "all" ? "All Scripture" : filter === "OT" ? "OT (LXX)" : "NT (NKJV)"}</p>
-          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "24px 20px", marginBottom: 28, border: "1px solid rgba(139,90,43,0.1)" }}>
+          <div style={{ background: "rgba(255,255,255,0.5)", borderRadius: 20, padding: "16px 14px", marginBottom: 28, border: "1px solid rgba(139,90,43,0.1)" }}>
             <div style={{ display: "flex", justifyContent: "center", gap: 36 }}>
               <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{accuracy}%</div><div style={{ fontSize: 13, color: "#a08050" }}>Accuracy</div></div>
               <div><div style={{ fontSize: 36, fontWeight: 700, color: "#3e2409" }}>{score.correct}</div><div style={{ fontSize: 13, color: "#a08050" }}>Correct</div></div>
