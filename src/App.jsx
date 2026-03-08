@@ -15,8 +15,6 @@ const GLOBAL_CSS = `
   @keyframes countIn { from { transform: scale(1.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .cross-pattern { position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.03; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 0h4v18h18v4H22v18h-4V22H0v-4h18V0z' fill='%235a3a1a'/%3E%3C/svg%3E"); }
   * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-  html, body, #root { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-  body { overscroll-behavior: none; }
 `;
 
 function shuffle(arr) {
@@ -30,7 +28,7 @@ function shuffle(arr) {
 
 function AppShell({ children }) {
   return (
-    <div style={{ height: "100dvh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative", overflow: "hidden" }}>
+    <div style={{ minHeight: "100vh", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(170deg, #fdf6e3 0%, #f5e6c8 35%, #eddcb3 65%, #e8d4a4 100%)", fontFamily: "'EB Garamond', serif", position: "relative" }}>
       <link href={FONTS_LINK} rel="stylesheet" />
       <style>{GLOBAL_CSS}</style>
       <div className="cross-pattern" />
@@ -406,6 +404,7 @@ const NT_VERSES = [
 ];
 
 const ALL_VERSES = [...OT_VERSES, ...NT_VERSES];
+const VERSE_DATA = ALL_VERSES;
 
 /* ============================================================
    WHO SAID IT - DATA
